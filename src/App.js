@@ -1,15 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import Login from './components/Login';
+import Main from './components/Main';
+import Movies from './components/Movies';
+import Profile from './components/Profile';
+import Register from './components/Register';
+import SavedMovies from './components/SavedMovies';
+import Header from './components/Header/Header';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-         Тут еще ничего нет,но возможно скоро будет!
-        </p>
-      </header>
+    <div className="page">
+      <Header />
+    
+      <Routes>
+          <Route path="/signin" element = {<Login />}/>
+          <Route path="/signup" element = {<Register />}/>
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path="/main" element={<Main />} />
+          <Route path='/' element={<Navigate to="/main" replace />} />
+        </Routes>
     </div>
   );
 }

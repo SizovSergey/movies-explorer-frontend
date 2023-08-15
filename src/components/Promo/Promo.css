@@ -1,0 +1,52 @@
+.promo {
+    background-color: #073042;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 75px;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.promo__title {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    margin: 0;
+    padding: 0;
+    max-width: 640px;
+    white-space: normal;
+   
+}
+
+.promo__caption {
+    margin-top: 36px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.5;
+    max-width: 310px;
+}
+
+.promo__title-container {
+    display: block;
+}
+
+.promo__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.promo__logo {
+    width: 310px;
+    height: 304px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
