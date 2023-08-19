@@ -1,11 +1,9 @@
 .page {
-    font-family: 'Inter', Arial, sans-serif;
+    width: 100%;
+    max-width: 1280px;
     background-color: white;
     margin: 0 auto;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    max-width: 1280px;
-    padding: 0px;
+    font-family: Inter, Arial, sans-serif;
     box-sizing: border-box;
-  }
+    position: relative;
+}

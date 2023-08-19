@@ -1,21 +1,10 @@
 .header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    background-color: #073042;
     padding-bottom: 18px;
-    width: 100%;
-    padding-left: 70px;
-    padding-right: 70px;
-}
-
-.header__container {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 30px;
+    width: calc(100% - 140px);
+   margin: 0 auto;
+   max-width: 1280px;
 }
 
 .header__logo {
@@ -24,23 +13,7 @@
     box-sizing: border-box;
 }
 
-.header__buton {
-    border-radius: 3px;
-    background: #2BE080;
-    width: 76px;
-    height: 32px;
-    flex-shrink: 0;
-}
 
-.header__link {
-    color: #FFF;
-    text-align: right;
-    font-family: Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-}
 
 
  

@@ -10,9 +10,12 @@ import Header from './components/Header/Header';
 
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = React.useState(true);
+
   return (
     <div className="page">
-      <Header />
+      <Header loggedIn={loggedIn} />
     
       <Routes>
           <Route path="/signin" element = {<Login />}/>
