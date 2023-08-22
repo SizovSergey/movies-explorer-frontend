@@ -1,8 +1,4 @@
 .page {
-    max-width: 1280px;
     background-color: white;
-    margin: 0 auto;
     font-family: Inter, Arial, sans-serif;
-    box-sizing: border-box;
-    position: relative;
 }

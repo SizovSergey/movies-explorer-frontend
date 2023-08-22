@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Burger from '../Burger/Burger';
 import headerLogo from '../../images/header__logo.svg';
@@ -16,11 +16,12 @@ const Header = ({ loggedIn }) => {
         setIsBurgerOpen(false);
     }
 
-    const currentPath = window.location.pathname;
+    const location = useLocation();
 
     return (
         <>
-            <header className={currentPath === '/' ? 'header header__main-theme' : 'header'}>
+            <header className={location.pathname === '/main' ? 'header header__main-theme' : 'header'}>
+                <div className='header__container'>
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="header__logo" />
                 </Link>
@@ -50,6 +51,7 @@ const Header = ({ loggedIn }) => {
                     <button className='header__button_burger' onClick={handleBurgerClick} />
                 ) : <Burger onClose={closeBurger} />
                 }
+                </div>
             </header>
         </>
     );
