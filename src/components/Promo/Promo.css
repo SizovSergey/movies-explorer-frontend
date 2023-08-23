@@ -1,7 +1,6 @@
 .promo {
     background-color: #073042;
-    padding-top: 75px;
-    height: 100%;
+    min-height: 524px;
 }
 
 .promo__title {
@@ -17,42 +16,45 @@
 }
 
 .promo__caption {
+    grid-row: 2 / 3;
     margin-top: 36px;
     color: #FFF;
     font-family: Inter;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
     opacity: 0.5;
     max-width: 310px;
 }
 
 .promo__title-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto auto auto; 
+    align-items: start;
 }
 
 .promo__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1280px;
+    padding-top: 75px;
+    padding-bottom: 75px;
     padding-left: 70px;
     padding-right: 70px;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: end;
+    justify-content: space-between;
+    max-width: 1280px;
+    min-height: 100%;
     margin: 0 auto;
 }
 
 .promo__logo {
-    max-width: 310px;
-    height: 304px;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    object-fit: cover;
 }
 
 .promo__button {
+    margin-top: 146px;
+    grid-row: 3 / 3;
     border-radius: 3px;
     border: 1px solid #FFF;
     opacity: 0.6;
@@ -65,4 +67,13 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
+    cursor: pointer;
 }
+
+@media screen and (max-width: 420px) {
+  
+    .promo__title {
+      font-size: 30px;
+      line-height: 39px;
+    }
+  }

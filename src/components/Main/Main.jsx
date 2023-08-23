@@ -1,11 +1,18 @@
 import React from 'react';
 import Promo from '../Promo/Promo';
+import AboutProject from '../AboutProject/AboutProject';
+import Tech from '../Techs/Tech';
+import AboutMe from '../AboutMe/AboutMe';
+
 
 const Main = () => {
     return (
-        <section className='main'>
+        <main className='main'>
             <Promo />
-        </section> 
+            <AboutProject />
+            <Tech />
+            <AboutMe />
+        </main> 
     );
 }
 
