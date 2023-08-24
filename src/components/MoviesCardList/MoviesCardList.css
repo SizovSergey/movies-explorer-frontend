@@ -1,0 +1,11 @@
+.MoviesCardList {
+    margin: 0 auto;
+    max-width: 1280px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 270px));
+    grid-template-rows: auto;
+    justify-content: center;
+    grid-column-gap: 20px;
+    grid-row-gap: 38px;
+    padding-top: 70px;
+}

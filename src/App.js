@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Login from './components/Login';
 import Main from './components/Main/Main';
-import Movies from './components/Movies';
+import Movies from './components/Movies/Movies';
 import Profile from './components/Profile';
 import Register from './components/Register';
 import SavedMovies from './components/SavedMovies';
