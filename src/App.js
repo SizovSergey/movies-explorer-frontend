@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import Register from './components/Register';
 import SavedMovies from './components/SavedMovies';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path='/' element={<Navigate to="/main" replace />} />
         </Routes>
+      <Footer />
     </div>
   );
 }
