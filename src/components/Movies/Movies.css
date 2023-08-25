@@ -1,0 +1,17 @@
+.movies {
+    width: 100%;
+    background-color: #FFF;
+}
+
+.movies__button-more {
+    border-radius: 6px;
+    background: #F9F9F9;
+    width: 320px;
+    height: 36px;
+    margin: 60px auto 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}

@@ -1,11 +1,23 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
+const MoviesCardList = ({ movies }) => {
+    const location = useLocation();
 
-const MoviesCardList = () => {
+    const filteredMovies = location.pathname === '/saved-movies'
+        ? movies.filter((movie) => movie.isFavorite)
+        : movies;
+
     return (
         <section className='MoviesCardList'>
-
-        </section> 
+            {filteredMovies.map((movie) => (
+                <MoviesCard
+                    key={movie.id}
+                    movie={movie}
+                />
+            ))}
+        </section>
     );
 }
 

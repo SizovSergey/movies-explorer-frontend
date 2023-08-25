@@ -13,7 +13,7 @@
 
 .about-project__title {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 400;
@@ -43,7 +43,7 @@
 
 .about-project__column-title {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -54,7 +54,7 @@
 
 .about-project__column-description {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -85,7 +85,7 @@
     background-color: #2BE080;
     color: #000;
     text-align: center;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -99,7 +99,7 @@
     background-color: #F2F2F2;
     color: #000;
     text-align: center;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -109,7 +109,7 @@
 .about-project__timeline-title {
     color: #A0A0A0;
     text-align: center;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

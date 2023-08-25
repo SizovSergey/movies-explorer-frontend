@@ -1,11 +1,11 @@
 import React from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Main from './components/Main/Main';
 import Movies from './components/Movies/Movies';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
 import Register from './components/Register';
-import SavedMovies from './components/SavedMovies';
+import SavedMovies from './components/SavedMovies/SavedMovies';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
