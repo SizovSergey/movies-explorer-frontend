@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Login from './components/Login';
+import Login from "./components/Login/Login";
 import Main from './components/Main/Main';
 import Movies from './components/Movies/Movies';
 import Profile from './components/Profile/Profile';
-import Register from './components/Register';
+import Register from "./components/Register/Register";
 import SavedMovies from './components/SavedMovies/SavedMovies';
+import NotFound from "./components/NotFound/NotFound";
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -16,7 +17,6 @@ function App() {
 
   return (
     <div className="page">
-      <Header loggedIn={loggedIn} />
     
       <Routes>
           <Route path="/signin" element = {<Login />}/>
@@ -25,9 +25,10 @@ function App() {
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='/profile' element={<Profile />} />
           <Route path="/main" element={<Main />} />
+          <Route path="*" element={<NotFound />} />
           <Route path='/' element={<Navigate to="/main" replace />} />
         </Routes>
-      <Footer />
+
     </div>
   );
 }

@@ -23,7 +23,7 @@ const Header = ({ loggedIn }) => {
             <header className={location.pathname === '/main' ? 'header header__main-theme' : 'header'}>
                 <div className='header__container'>
                 <Link to="/" className="header__link">
-                    <img src={headerLogo} alt="Логотип" className="header__logo" />
+                    <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
                 <Navigation loggedIn={loggedIn} />
                 {loggedIn ? (

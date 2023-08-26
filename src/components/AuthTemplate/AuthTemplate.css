@@ -1,0 +1,114 @@
+.authTemplate {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.authTemplate__container {
+    flex-direction: column;
+    display: flex;
+    max-width: 396px;
+    align-items: flex-start;
+}
+
+.authTemplate__form {
+    flex-direction: column;
+    display: flex;
+    margin: 0 auto;
+}
+
+.authTemplate__title {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    max-width: 396px;
+    margin: 40px 0px 40px;
+}
+
+.authTemplate__placeholder {
+    display: block;
+    margin-bottom: 10px;
+    color: #A0A0A0;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 29px;
+}
+
+.authTemplate__placeholder:first-child {
+    margin-top: 0px;
+}
+
+.authTemplate__line {
+    border-bottom: 1px solid #E8E8E8;
+    width: 100%;
+}
+
+.authTemplate__input {
+    color: #000;
+    font-family: Inter;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: 0;
+    width: 377px;
+    outline: 0;
+    margin: 0;
+}
+
+.authTemplate__button {
+    border-radius: 3px;
+    background: #3456F3;
+    cursor: pointer;
+    width: 396px;
+    height: 45px;
+    color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: 0;
+    transition: opacity .2s ease;
+}
+
+.authTemplate__button:hover {
+    opacity: 0.7;
+}
+
+.authTemplate__text {
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.authTemplate__link {
+    color: #3456F3;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: 0;
+    margin: 0;
+}
+
+.authTemplate__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
