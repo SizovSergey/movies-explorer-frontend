@@ -3,6 +3,7 @@
     flex-direction: row;
     gap: 14px;
     margin-top: 32px;
+    align-items: center;
 }
 
 .FilterCheckbox__container {
@@ -55,5 +56,10 @@
     font-weight: 400;
     line-height: 18px;
     margin-left: 14px;
-    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .FilterCheckbox {
+        justify-content: flex-end;
+    }
 }
