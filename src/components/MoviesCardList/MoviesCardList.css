@@ -9,3 +9,16 @@
     grid-row-gap: 38px;
     padding-top: 70px;
 }
+
+@media screen and (max-width: 768px) {
+    .MoviesCardList {
+        padding: 70px 30px 90px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .MoviesCardList {
+
+    }
+}

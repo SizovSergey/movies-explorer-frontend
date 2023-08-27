@@ -1,6 +1,5 @@
 .header {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    width: 100%;
 }
 
 .header__main-theme {
@@ -12,8 +11,7 @@
     flex-direction: row;
     max-width: 1280px;
     margin: 0 auto;
-    padding-right: 70px;
-    padding-left: 70px;
+    padding: 18px 70px 18px;
 }
 
 .logo {
@@ -23,24 +21,39 @@
 }
 
 .header__link {
-    color: #000;
+    color: #fff;
     text-align: right;
     font-family: 'Inter', Arial, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
+    text-decoration: none;
 }
 
-.header__link-white {
-    color: #fff;
-}
-
-.header__button-logout {
+.header__button-login {
     width: 76px;
     height: 32px;
     border-radius: 3px;
     background: #2BE080;
+    transition: opacity .2s ease;
+    cursor: pointer;
+    border: 0;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.header__button-login:hover {
+    opacity: 0.7;
+}
+
+.header__container_auth {
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 
 .header__button_profile {
@@ -65,7 +78,7 @@
 
 .header__button_profile-container {
     display: flex;
-    background-color: #F9F9F9;
+    background-color: #F5F5F5;
     border-radius: 50%;
     width: 26px;
     height: 26px;
@@ -92,5 +105,16 @@
 
     .header__button_burger {
         display: block;
+    }
+
+    .header__container {
+        padding: 18px 30px 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    .header__container {
+        padding: 18px 14px 18px;
     }
 }

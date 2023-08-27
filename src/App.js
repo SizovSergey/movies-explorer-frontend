@@ -21,12 +21,12 @@ function App() {
       <Routes>
           <Route path="/signin" element = {<Login />}/>
           <Route path="/signup" element = {<Register />}/>
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path='/movies' element={<Movies isLogin={loggedIn}/>} />
+          <Route path='/saved-movies' element={<SavedMovies isLogin={loggedIn}/>} />
+          <Route path='/profile' element={<Profile isLogin={loggedIn}/>} />
+          <Route path="/main" element={<Main isLogin={loggedIn}/>} />
           <Route path='/' element={<Navigate to="/main" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
     </div>
