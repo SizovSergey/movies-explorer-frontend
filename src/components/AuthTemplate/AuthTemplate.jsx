@@ -12,7 +12,7 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                 <h2 className='authTemplate__title'>{title}</h2>
                 <form onSubmit={handleSubmit} className='authTemplate__form'>
                     {children}
-                    <div className='authTemplate__footer'>
+                    <div className={name === 'register' ? `authTemplate__registr-footer` : `authTemplate__login-footer`}>
                         <button className="authTemplate__button">{buttonText}</button >
                         {name === 'register' &&
                             <p className='authTemplate__text'>Уже зарегистрированы? <Link to="/signin" className="authTemplate__link">Войти</Link></p>

@@ -1,6 +1,7 @@
 import React from 'react';
+import Header from '../Header/Header';
 
-const Profile = () => {
+const Profile = ({isLogin}) => {
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -20,6 +21,7 @@ const Profile = () => {
 
   return (
     <section className='profile'>
+      <Header isLogin={isLogin}/>
       <div className='profile__container'>
         <h2 className='profile__title'>Привет, Виталий!</h2>
         <form className='profile__form'>
@@ -27,20 +29,19 @@ const Profile = () => {
             <input value={name} onChange={handleChangeName} type="text" className="profile__input" id="name" name="name" minLength="2" maxLength="40"
               required />
           </label>
-        <div className='profile__line'></div>
+          <div className='profile__line'></div>
           <label className='profile__placeholder'>Email
             <input value={email} onChange={handleChangeDescription} type="email" className="profile__input" id="email" name="email"
               required />
           </label>
         </form>
-        <div className='profile__button-container'>
-          {!showSaveBtn ?
-              (<>
-                  <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
-                  <a className='profile__link profile__logout'>Выйти из аккаунта</a>
-              </>) : (<button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>)
-          }
-        </div>
+
+        {!showSaveBtn ?
+          (<div className='profile__button-container'>
+            <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
+            <a className='profile__link profile__logout'>Выйти из аккаунта</a>
+          </div>) : (<button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>)
+        }
       </div>
     </section>
   );

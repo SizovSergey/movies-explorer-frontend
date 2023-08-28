@@ -1,7 +1,8 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
+import Preloader from '../Preloader/Preloader';
 
-const Register = ({handleRegister}) => {
+const Register = ({ handleRegister }) => {
 
     const [formValue, setFormValue] = React.useState({
         userName: '',
@@ -10,7 +11,7 @@ const Register = ({handleRegister}) => {
     })
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         setFormValue({
             ...formValue,
@@ -30,9 +31,10 @@ const Register = ({handleRegister}) => {
             title="Добро пожаловать!"
             name="register"
             buttonText="Зарегистрироваться"
-            handleSubmit = {handleSubmit}
+            handleSubmit={handleSubmit}
         >
-            <label className="authTemplate__placeholder" htmlFor="userName">Имя
+            <label className="authTemplate__input-container" htmlFor="userName">
+                <span className='authTemplate__placeholder'>Имя</span>
                 <input
                     onChange={handleChange}
                     value={formValue.userName}
@@ -44,7 +46,8 @@ const Register = ({handleRegister}) => {
                 />
             </label>
             <div className='authTemplate__line'></div>
-            <label className="authTemplate__placeholder" htmlFor="regEmail">Email
+            <label className="authTemplate__input-container" htmlFor="regEmail">
+                <span className='authTemplate__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
                     value={formValue.email}
@@ -56,7 +59,8 @@ const Register = ({handleRegister}) => {
                 />
             </label>
             <div className='authTemplate__line'></div>
-            <label className="authTemplate__placeholder" htmlFor="regPass">Пароль
+            <label className="authTemplate__input-container" htmlFor="regPass">
+                <span className='authTemplate__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
                     value={formValue.password}
@@ -70,6 +74,7 @@ const Register = ({handleRegister}) => {
                 />
             </label>
             <div className='authTemplate__line'></div>
+            <span className='authTemplate__error'>Что-то пошло не так...</span>
         </AuthTemplate>
     );
 

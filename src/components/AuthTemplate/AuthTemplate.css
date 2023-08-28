@@ -33,31 +33,36 @@
     margin: 40px 0px 40px;
 }
 
+.authTemplate__input-container {
+    display: block;
+    margin-top: 24px;
+}
+
+.authTemplate__input-container:first-child {
+    margin-top: 0px;
+}
+
 .authTemplate__placeholder {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #A0A0A0;
     font-family: Inter;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 29px;
-}
-
-.authTemplate__placeholder:first-child {
-    margin-top: 0px;
 }
 
 .authTemplate__line {
     border-bottom: 1px solid #E8E8E8;
     width: 100%;
+    margin-top: 10px;
 }
 
 .authTemplate__input {
     color: #000;
     font-family: Inter;
-    font-size: 11px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -108,10 +113,60 @@
     margin: 0;
 }
 
-.authTemplate__footer {
+.authTemplate__error {
+    margin-top: 6px;
+    color: #FF3055;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.authTemplate__registr-footer {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    position: absolute;
-    bottom: 70px;
+    margin-top: 134px;
+}
+
+.authTemplate__login-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 221px;
+}
+
+@media screen and (max-width: 440px) {
+    .authTemplate {
+        padding-top: 56px 30px 30px;
+    }
+    .authTemplate__container {
+        align-items: center;
+    }
+
+    .authTemplate__input {
+        width: 260px;
+    }
+
+    .authTemplate__button { 
+        width: 260px;
+    }
+
+    .authTemplate__button {
+        font-size: 12px;
+    }
+
+    .authTemplate__text {
+        font-size: 12px;
+    }
+
+    .authTemplate__link {
+        font-size: 12px;
+    }
+
+    .authTemplate__login-footer {
+        margin-top: 309px;
+    }
+
 }

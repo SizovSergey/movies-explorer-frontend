@@ -35,13 +35,12 @@
     text-decoration: none;
     border: none;
     background: transparent;
-}
+    cursor: pointer;}
 
-.not-found__link:hover {
-    cursor: pointer;
-}
 
-@media screen and (max-width: 1279px) {
+
+@media screen and (max-width: 1024px) {
+
     .not-found__title {
         margin-top: 408px;
     }
@@ -52,6 +51,7 @@
 }
 
 @media screen and (max-width: 767px) {
+
     .not-found__title {
         margin-top: 329px;
         font-size: 80px;

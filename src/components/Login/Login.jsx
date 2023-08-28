@@ -31,7 +31,8 @@ const Login = ({handleRegister}) => {
             buttonText="Войти"
             handleSubmit = {handleSubmit}
         >
-            <label className="authTemplate__placeholder" htmlFor="regEmail">Email
+            <label className="authTemplate__input-container" htmlFor="regEmail">
+            <span className='authTemplate__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
                     value={formValue.email}
@@ -43,7 +44,8 @@ const Login = ({handleRegister}) => {
                 />
             </label>
             <div className='authTemplate__line'></div>
-            <label className="authTemplate__placeholder" htmlFor="regPass">Пароль
+            <label className="authTemplate__input-container" htmlFor="regPass">
+            <span className='authTemplate__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
                     value={formValue.password}

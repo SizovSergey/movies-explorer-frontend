@@ -9,6 +9,7 @@ import Footer from "../Footer/Footer";
 
 
 const Main = ({isLogin}) => {
+
     return (
         <main className='main'>
             <Header isLogin = {isLogin}/>

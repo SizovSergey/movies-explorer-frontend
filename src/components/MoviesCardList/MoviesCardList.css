@@ -12,13 +12,17 @@
 
 @media screen and (max-width: 768px) {
     .MoviesCardList {
-        padding: 70px 30px 90px;
+        padding: 60px 30px 10px;
+        grid-template-columns: repeat(auto-fill, minmax(min-content, 339px));
+        grid-row-gap: 30px;
     }
 
 }
 
 @media screen and (max-width: 400px) {
     .MoviesCardList {
-
+        padding: 40px 10px 10px;
+        grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+        grid-row-gap: 30px;
     }
 }

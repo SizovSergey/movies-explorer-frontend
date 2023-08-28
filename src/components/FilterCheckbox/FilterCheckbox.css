@@ -60,6 +60,32 @@
 
 @media screen and (max-width: 768px) {
     .FilterCheckbox {
-        justify-content: flex-end;
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+        margin-top: 14px;
+        gap: 14px;
     }
+
+    .FilterCheckbox__container {
+        width: 34px;
+        height: 13px;
+    }
+
+    .FilterCheckbox__slider:before {
+        height: 10px;
+        width: 10px;
+    }
+
+    .FilterCheckbox__checkbox:checked+.FilterCheckbox__slider:before {
+        transform: translateX(20px);
+    }
+}
+
+@media screen and (max-width: 320px) { 
+    .FilterCheckbox {
+        justify-content: center;
+        gap: 13px;
+        margin-top: 40px;
+    }
+
 }

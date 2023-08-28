@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link,useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Burger from '../Burger/Burger';
 import headerLogo from '../../images/header__logo.svg';
@@ -27,7 +27,7 @@ const Header = ({ isLogin }) => {
                 <Navigation loggedIn={isLogin} />
                 {isLogin ? (
                     <Link to='/profile'>
-                        <button className='header__button_profile'>
+                        <button className={location.pathname === '/main' ? 'header__button_profile' : `header__button_profile header__button_profile-white`}>
                             Аккаунт
                             <div className='header__button_profile-container'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
