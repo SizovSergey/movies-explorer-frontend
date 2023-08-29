@@ -77,7 +77,7 @@
     background: #3456F3;
     cursor: pointer;
     width: 396px;
-    height: 45px;
+    min-height: 45px;
     color: #FFF;
     text-align: center;
     font-size: 14px;

@@ -5,14 +5,14 @@ import movies from '../../utils/movies';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-const SavedMovies = ({isLogin}) => {
+const SavedMovies = ({ isLogin }) => {
     return (
         <section className='saved-movies'>
-            <Header isLogin={isLogin}/>
+            <Header isLogin={isLogin} />
             <SearchForm />
             <MoviesCardList movies={movies} />
             <Footer />
-        </section> 
+        </section>
     );
 }
 

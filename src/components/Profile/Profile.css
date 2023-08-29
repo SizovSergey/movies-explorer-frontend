@@ -1,7 +1,8 @@
 .profile {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
+    flex-direction: column;
+    display: flex;
+    box-sizing: border-box;
+    min-height: 100vh;
 }
 
 .profile__container {
@@ -11,6 +12,7 @@
     margin: 0 auto;
     padding-top: 72px;
     padding-bottom: 70px;
+    flex: 1;
 }
 
 .profile__title {
@@ -68,7 +70,9 @@
 .profile__button-container {
     display: flex;
     flex-direction: column;
-    margin: 90px auto;
+    margin: auto auto 0;
+    flex-shrink: 0;
+
 }
 
 .profile__link {
@@ -101,7 +105,7 @@
     background: #3456F3;
     cursor: pointer;
     width: 410px;
-    height: 45px;
+    min-height: 45px;
     color: #FFF;
     text-align: center;
     font-family: Inter;
@@ -118,39 +122,18 @@
 
 @media screen and (max-width: 768px) {
     .profile__container {
-        padding: 236px 179px 0px;
+        padding: 230px 179px 269px;
     }
 
     .profile__form {
         margin: 95px auto;
     }
 
-    .profile__button-container {
-        margin: 112px auto;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .profile__input {
-        font-size: 14px;
-        font-weight: 500;
-        width: 280px;
-    }
-
-    .profile__container {
-        padding: 236px 50px 40px;
-    }
-}
-
-@media screen and (max-width: 660px) {
-    .profile__input {
-        width: 260px;
-    }
 }
 
 @media screen and (max-width: 400px) {
     .profile__container {
-        padding: 70px 30px 40px;
+        padding: 65px 30px 40px;
     }
 
     .profile__form {
@@ -169,7 +152,4 @@
         color: #A0A0A0;
     }
 
-    .profile__button-container {
-        margin: 295px auto;
-    }
 }

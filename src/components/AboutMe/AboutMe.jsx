@@ -6,10 +6,10 @@ const AboutMe = () => {
     return (
         <section className="about-me">
             <div className='about-me__container'>
-            <h2 className='about-me__title'>Студент</h2>
+            <h1 className='about-me__title'>Студент</h1>
             <div className='about-me__student-info'>
                 <div className='about-me__text'>
-                    <p className='about-me__student'>Сергей</p>
+                    <h3 className='about-me__student'>Сергей</h3>
                     <p className='about-me__info'>Недоразработчик, недавно 39 стукнуло</p>
                     <p className='about-me__about'>
                         Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена

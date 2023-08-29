@@ -9,7 +9,7 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
-                <h2 className='authTemplate__title'>{title}</h2>
+                <h1 className='authTemplate__title'>{title}</h1>
                 <form onSubmit={handleSubmit} className='authTemplate__form'>
                     {children}
                 

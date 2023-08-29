@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 
-const Profile = ({isLogin}) => {
+const Profile = ({ isLogin }) => {
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -21,7 +22,7 @@ const Profile = ({isLogin}) => {
 
   return (
     <section className='profile'>
-      <Header isLogin={isLogin}/>
+      <Header isLogin={isLogin} />
       <div className='profile__container'>
         <h2 className='profile__title'>Привет, Виталий!</h2>
         <form className='profile__form'>
@@ -39,7 +40,7 @@ const Profile = ({isLogin}) => {
         {!showSaveBtn ?
           (<div className='profile__button-container'>
             <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
-            <a className='profile__link profile__logout'>Выйти из аккаунта</a>
+            <Link to="/" className="profile__link profile__logout">Выйти из аккаунта</Link>
           </div>) : (<button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>)
         }
       </div>

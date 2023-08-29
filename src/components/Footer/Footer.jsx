@@ -4,9 +4,9 @@ function Footer() {
     return (
         <footer className="footer">
             <div className="footer__container">
-                <p className="footer__title">
+                <h2 className="footer__title">
                     Учебный проект Яндекс.Практикум х BeatFilm.
-                </p>
+                </h2>
                 <div className="footer__content">
                     <p className="footer__year">© {new Date().getFullYear()}</p>
                     <ul className="footer__links">

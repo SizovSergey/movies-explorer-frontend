@@ -125,7 +125,6 @@
     .about-me__photo {
         width: 255px;
         height: 307px;
-        align-self: end;
     }
 
     .about-me__link {
@@ -142,12 +141,12 @@
     }
 
     .about-me__photo {
-        width: 292px;
+        width: 280px;
         height: 352px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 350px) {
     .about-me__container {
         padding: 70px 14px 70px;
     }

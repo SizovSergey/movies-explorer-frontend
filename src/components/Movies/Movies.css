@@ -10,7 +10,7 @@
     border-radius: 6px;
     background: #F9F9F9;
     width: 320px;
-    height: 36px;
+    min-height: 36px;
     margin: 50px auto 95px;
     font-size: 12px;
     display: flex;
