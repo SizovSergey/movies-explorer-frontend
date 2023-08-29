@@ -31,7 +31,7 @@
     grid-area: photo;
 }
 
-.about-me__student-info{
+.about-me__student-info {
     margin-top: 66px;
     display: grid;
     grid-template-columns: auto auto;
@@ -74,7 +74,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 22px;
-    margin: 18px 0 0 0;
+    margin: 29px 0 0 0;
 }
 
 .about-me__link {
@@ -89,7 +89,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .about-me__student-info{
+    .about-me__student-info {
         grid-column-gap: 49px;
     }
 }
@@ -119,11 +119,13 @@
         font-size: 12px;
         line-height: 18px;
         max-width: 364px;
+        margin: 18px 0 0;
     }
 
     .about-me__photo {
         width: 255px;
         height: 307px;
+        align-self: end;
     }
 
     .about-me__link {
@@ -132,11 +134,11 @@
 }
 
 @media screen and (max-width: 500px) {
-    .about-me__student-info{
+    .about-me__student-info {
         display: grid;
         grid-template-columns: auto;
         grid-template-areas: "photo"
-                              "text";
+            "text";
     }
 
     .about-me__photo {
@@ -157,12 +159,13 @@
     .about-me__title {
         font-size: 18px;
         letter-spacing: -0.72px;
+        padding-bottom: 28px;
     }
 
     .about-me__student {
         font-size: 30px;
         letter-spacing: -1.2px;
-        margin: 40px 0 0;
+        margin: 30px 0 0;
     }
 
     .about-me__photo {
@@ -170,11 +173,15 @@
     }
 
     .about-me__info {
-        margin: 20px 0 0;
+        margin: 8px 0 0;
+        font-size: 11px;
+        line-height: 16px;
     }
 
     .about-me__about {
         margin: 20px 0 0;
+        font-size: 11px;
+        line-height: 16px;
     }
 
     .about-me__link {

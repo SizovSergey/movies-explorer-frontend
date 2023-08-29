@@ -33,8 +33,8 @@
     width: 32px;
     height: 32px;
     position: absolute;
-    top: 23px;
-    right: 23px;
+    top: 13px;
+    right: 18px;
     padding: 0;
 }
 
@@ -74,7 +74,7 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
-    
+
 }
 
 .burger__menu_link {
@@ -96,12 +96,23 @@
     padding-bottom: 4px;
     border-bottom: 2px solid #000;
     transition: 0.3s ease;
-  }
+}
 
 
 
 @media screen and (min-width: 769px) {
     .burger {
         display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .burger__menu {
+        margin-top: 144px;
+        gap: 23px;
+    }
+
+    .burger__button_profile {
+        margin-bottom: 110px;
     }
 }

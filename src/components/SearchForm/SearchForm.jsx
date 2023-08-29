@@ -6,7 +6,7 @@ const SearchForm = () => {
         <div className='search-form'>
             <div className='search-form__container'>
                 <input className='search-form__input' type="text" placeholder='Фильм'></input>
-                <button type="button" className='search-form__button'>Поиск</button>
+                <button type="button" className='search-form__button'>Найти</button>
             </div>
             < FilterCheckbox />
         </div>

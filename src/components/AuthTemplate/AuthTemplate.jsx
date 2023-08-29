@@ -12,7 +12,10 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                 <h2 className='authTemplate__title'>{title}</h2>
                 <form onSubmit={handleSubmit} className='authTemplate__form'>
                     {children}
-                    <div className={name === 'register' ? `authTemplate__registr-footer` : `authTemplate__login-footer`}>
+                
+                </form>
+                </div>
+                <div className='authTemplate__footer'>
                         <button className="authTemplate__button">{buttonText}</button >
                         {name === 'register' &&
                             <p className='authTemplate__text'>Уже зарегистрированы? <Link to="/signin" className="authTemplate__link">Войти</Link></p>
@@ -21,8 +24,7 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                             <p className='authTemplate__text'>Ещё не зарегистрированы? <Link to="/signup" className="authTemplate__link">Регистрация</Link></p>
                         }
                     </div>
-                </form>
-            </div>
+            
         </div>
     );
 }

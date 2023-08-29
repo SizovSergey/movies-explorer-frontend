@@ -2,10 +2,9 @@
     flex-direction: column;
     display: flex;
     align-items: center;
-    height: 100%;
     box-sizing: border-box;
     padding-top: 70px;
-    padding-bottom: 70px;
+    min-height: 100vh;
 }
 
 .authTemplate__container {
@@ -13,6 +12,7 @@
     display: flex;
     max-width: 396px;
     align-items: flex-start;
+    flex: 1;
 }
 
 .authTemplate__form {
@@ -126,23 +126,31 @@
 .authTemplate__registr-footer {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    margin-top: auto;
     gap: 16px;
-    margin-top: 134px;
+    padding-bottom: 30px;
 }
 
-.authTemplate__login-footer {
+.authTemplate__footer {
     display: flex;
+    flex-shrink: 0;
+    margin-top: auto;
     flex-direction: column;
     gap: 16px;
-    margin-top: 221px;
+    padding-bottom: 30px;
 }
 
 @media screen and (max-width: 440px) {
     .authTemplate {
-        padding-top: 56px 30px 30px;
+        padding: 60px 30px 0;
     }
     .authTemplate__container {
         align-items: center;
+    }
+
+    .authTemplate__title {
+        margin: 40px 0px 80px;
     }
 
     .authTemplate__input {
@@ -163,10 +171,6 @@
 
     .authTemplate__link {
         font-size: 12px;
-    }
-
-    .authTemplate__login-footer {
-        margin-top: 309px;
     }
 
 }

@@ -109,6 +109,10 @@
     display: none;
 }
 
+.header__button_white {
+    background-image: url('../../images/Burger__icon-white.svg');
+}
+
 
 @media screen and (max-width: 768px) {
     .header__button_profile {

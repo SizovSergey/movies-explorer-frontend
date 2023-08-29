@@ -1,6 +1,9 @@
 .movies {
     width: 100%;
     background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .movies__button-more {
@@ -8,7 +11,7 @@
     background: #F9F9F9;
     width: 320px;
     height: 36px;
-    margin: 60px auto 80px;
+    margin: 50px auto 95px;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -29,10 +32,10 @@
     }
 }
 
-
 @media screen and (max-width: 320px) { 
     .movies__button-more {
-        width: 200px;
+        width: 240px;
         font-size: 12px;
+        margin: 50px auto 100px;
     }
 }

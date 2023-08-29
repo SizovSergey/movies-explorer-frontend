@@ -47,7 +47,7 @@ const Header = ({ isLogin }) => {
                     </div>
                 )}
                 {!isBurgerOpen && isLogin ? (
-                    <button className='header__button_burger' onClick={handleBurgerClick} />
+                     <button className={location.pathname === '/main' ? `header__button_burger header__button_white` : `header__button_burger`} onClick={handleBurgerClick} />
                 ) : <Burger onClose={closeBurger} />
                 }
                 </div>

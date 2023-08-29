@@ -33,7 +33,7 @@
     color: #fff;
 }
 
-.navigation__movies-link:last-of-type {
+.navigation__movies-link:last-child {
     margin-right: 0;
 }
 
@@ -42,6 +42,10 @@
     text-decoration: none;
     color: #000000;
     margin-right: 16px;
+}
+
+.navigation__movies-link_active:last-child {
+    margin-right: 0;
 }
 
 .navigation__link {
