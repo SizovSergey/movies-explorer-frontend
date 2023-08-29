@@ -56,6 +56,9 @@
     margin-top: 146px;
     grid-row: 3 / 3;
     border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #FFF;
     opacity: 0.6;
     width: 129px;
@@ -68,19 +71,18 @@
     font-weight: 500;
     line-height: 16px;
     cursor: pointer;
-    text-align: center;
     text-decoration: none;
 
 }
 
 
 @media screen and (max-width: 810px) {
-  
+
     .promo__container {
         grid-template-columns: 1fr;
         grid-template-areas:
-                "logo"
-                "content";
+            "logo"
+            "content";
         justify-items: center;
         padding: 134px 44px 76px;
         grid-row-gap: 50px;
@@ -107,7 +109,7 @@
     .promo__button {
         margin: 92px 0 0;
     }
-  }
+}
 
 @media screen and (max-width: 400px) {
     .promo__logo {
