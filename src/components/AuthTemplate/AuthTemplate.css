@@ -7,7 +7,7 @@
     min-height: 100vh;
 }
 
-.authTemplate__container {
+.auth-template__container {
     flex-direction: column;
     display: flex;
     max-width: 396px;
@@ -15,21 +15,21 @@
     flex: 1;
 }
 
-.authTemplate__form {
+.auth-template__form {
     flex-direction: column;
     display: flex;
     margin: 0 auto;
     flex: 1;
 }
 
-.authTemplate__form-contant {
+.auth-template__form-contant {
     display: flex;
     flex-direction: column;
 }
 
-.authTemplate__title {
+.auth-template__title {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -38,29 +38,29 @@
     margin: 40px 0px 40px;
 }
 
-.authTemplate__input-container {
+.auth-template__input-container {
     display: block;
     margin-top: 14px;
 }
 
-.authTemplate__input-container:first-child {
+.auth-template__input-container:first-child {
     margin-top: 0px;
 }
 
-.authTemplate__placeholder {
+.auth-template__placeholder {
     display: block;
     margin-bottom: 5px;
     color: #A0A0A0;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.authTemplate__input {
+.auth-template__input {
     color: #000;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -80,7 +80,7 @@ input:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-.authTemplate__button {
+.auth-template__button {
     border-radius: 3px;
     background: #3456F3;
     cursor: pointer;
@@ -96,11 +96,11 @@ input:focus {
     transition: opacity .2s ease;
 }
 
-.authTemplate__button:hover {
+.auth-template__button:hover {
     opacity: 0.7;
 }
 
-.authTemplate__text {
+.auth-template__text {
     color: #A0A0A0;
     text-align: center;
     font-size: 14px;
@@ -110,7 +110,7 @@ input:focus {
     margin: 0;
 }
 
-.authTemplate__link {
+.auth-template__link {
     color: #3456F3;
     text-align: center;
     font-size: 14px;
@@ -121,7 +121,7 @@ input:focus {
     margin: 0;
 }
 
-.authTemplate__error {
+.auth-template__error {
     margin-top: 6px;
     color: #FF3055;
     font-family: Inter;
@@ -132,7 +132,7 @@ input:focus {
 }
 
 
-.authTemplate__footer {
+.auth-template__footer {
     display: flex;
     flex-shrink: 0;
     margin-top: auto;
