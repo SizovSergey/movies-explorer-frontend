@@ -12,7 +12,7 @@ import NotFound from "./components/NotFound/NotFound";
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
 
   return (
