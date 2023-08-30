@@ -27,13 +27,30 @@ const Profile = ({ isLogin }) => {
         <h2 className='profile__title'>Привет, Виталий!</h2>
         <form className='profile__form'>
           <label className='profile__placeholder'>Имя
-            <input value={name} onChange={handleChangeName} type="text" className="profile__input" id="name" name="name" minLength="2" maxLength="40"
-              required />
+            <input value={name} 
+            onChange={handleChangeName} 
+            type="text" 
+            className="profile__input" 
+            id="name" 
+            name="name" 
+            minLength="2" 
+            maxLength="40"
+            defaultValue={'Виталий'}
+            disabled
+            required 
+              />
           </label>
           <div className='profile__line'></div>
           <label className='profile__placeholder'>Email
-            <input value={email} onChange={handleChangeDescription} type="email" className="profile__input" id="email" name="email"
-              required />
+            <input value={email} 
+            onChange={handleChangeDescription} 
+            type="email" 
+            className="profile__input" 
+            id="email" 
+            name="email"
+            defaultValue={'pochta@yandex.ru'}
+            disabled
+            required />
           </label>
         </form>
 
@@ -41,7 +58,10 @@ const Profile = ({ isLogin }) => {
           (<div className='profile__button-container'>
             <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
             <Link to="/" className="profile__link profile__logout">Выйти из аккаунта</Link>
-          </div>) : (<button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>)
+          </div>) : (
+          <div className='profile__button-container'>
+            <button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>
+            </div>)
         }
       </div>
     </section>

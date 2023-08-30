@@ -1,15 +1,17 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 
-const Login = ({handleRegister}) => {
+const Login = () => {
 
-    const [formValue, setFormValue] = React.useState({
+    const [formValue, setFormValue] = React.useState ({
         email: '',
         password: ''
-    })
+    });
+
+    const [errors, setErrors] = React.useState({});
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         setFormValue({
             ...formValue,
@@ -17,11 +19,25 @@ const Login = ({handleRegister}) => {
         });
     }
 
+    const validate = () => {
+        const errorsList = {};
+
+        if (!formValue.email) {
+            errorsList.email = 'Введите email';
+        }
+
+        if (!formValue.password || formValue.password.length < 8) {
+            errorsList.password = 'Пароль должен быть не менее 8 символов';
+        }
+
+        return errorsList;
+    };
+
     const handleSubmit = (e) => {
-        const { email, password } = formValue;
+        // const {  email, password } = formValue; 
         e.preventDefault();
-        if (!email && !password) return;
-        handleRegister(formValue);
+        const newErrors = validate();
+        setErrors(newErrors);
     }
 
     return (
@@ -40,10 +56,10 @@ const Login = ({handleRegister}) => {
                     className="authTemplate__input"
                     id="email"
                     name="email"
-                    required
+                    placeholder="test@mail.ru"
                 />
             </label>
-            <div className='authTemplate__line'></div>
+            <span className="authTemplate__error">{errors.email}</span>
             <label className="authTemplate__input-container" htmlFor="regPass">
             <span className='authTemplate__placeholder'>Пароль</span>
                 <input
@@ -53,12 +69,10 @@ const Login = ({handleRegister}) => {
                     className="authTemplate__input"
                     id="password"
                     name="password"
-                    minLength="8"
-                    maxLength="10"
-                    required
+                    placeholder="12345678"
                 />
             </label>
-            <div className='authTemplate__line'></div>
+            <span className="authTemplate__error">{errors.password}</span>
         </AuthTemplate>
     );
 

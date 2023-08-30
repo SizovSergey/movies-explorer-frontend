@@ -1,14 +1,16 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
-import Preloader from '../Preloader/Preloader';
 
-const Register = ({ handleRegister }) => {
 
-    const [formValue, setFormValue] = React.useState({
+const Register = () => {
+
+    const [formValue, setFormValue] = React.useState ({
         userName: '',
         email: '',
         password: ''
-    })
+    });
+
+    const [errors, setErrors] = React.useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,11 +21,30 @@ const Register = ({ handleRegister }) => {
         });
     }
 
+    const validate = () => {
+        const errorsList= {};
+
+        if (!formValue.userName) {
+            errorsList.userName = 'Введите имя';
+        }
+
+        if (!formValue.email) {
+            errorsList.email = 'Введите email';
+        }
+
+        if (!formValue.password || formValue.password.length < 8) {
+            errorsList.password = 'Пароль должен быть не менее 8 символов';
+        }
+
+        return errorsList;
+    };
+
     const handleSubmit = (e) => {
-        const { email, password } = formValue;
+        // const { userName, email, password } = formValue; 
         e.preventDefault();
-        if (!email && !password) return;
-        handleRegister(formValue);
+        const newErrors = validate();
+        console.log('ошибки:', newErrors);
+        setErrors(newErrors);
     }
 
     return (
@@ -40,13 +61,13 @@ const Register = ({ handleRegister }) => {
                     value={formValue.userName}
                     type="text"
                     className="authTemplate__input"
-                    id="email"
-                    name="userName"
-                    required
+                    id="userName"
+                    name="userName"  
+                    placeholder="Ваше имя..."            
                 />
             </label>
-            <div className='authTemplate__line'></div>
-            <label className="authTemplate__input-container" htmlFor="regEmail">
+           <span className="authTemplate__error">{errors.userName}</span>
+            <label className="authTemplate__input-container" htmlFor="email">
                 <span className='authTemplate__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
@@ -55,11 +76,11 @@ const Register = ({ handleRegister }) => {
                     className="authTemplate__input"
                     id="email"
                     name="email"
-                    required
+                    placeholder="test@email.ru" 
                 />
             </label>
-            <div className='authTemplate__line'></div>
-            <label className="authTemplate__input-container" htmlFor="regPass">
+           <span className="authTemplate__error">{errors.email}</span>
+            <label className="authTemplate__input-container" htmlFor="password">
                 <span className='authTemplate__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
@@ -68,13 +89,10 @@ const Register = ({ handleRegister }) => {
                     className="authTemplate__input"
                     id="password"
                     name="password"
-                    minLength="8"
-                    maxLength="10"
-                    required
+                    placeholder="12345678"  
                 />
             </label>
-            <div className='authTemplate__line'></div>
-            <span className='authTemplate__error'>Что-то пошло не так...</span>
+            <span className="authTemplate__error">{errors.password}</span>
         </AuthTemplate>
     );
 

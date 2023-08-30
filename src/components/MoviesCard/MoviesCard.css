@@ -43,6 +43,10 @@
     border-radius: 50%;
 }
 
+.movies-card__button-like:hover {
+    opacity: 0.7;
+}
+
 .movies-card__button-unlike {
     width: 24px;
     height: 24px;
@@ -55,6 +59,10 @@
     border-radius: 50%;
 }
 
+.movies-card__button-unlike:hover {
+    opacity: 0.7;
+}
+
 .movies-card__button-delete {
     width: 24px;
     height: 24px;
@@ -65,6 +73,10 @@
     object-fit: cover;
     border: none;
     border-radius: 50%;
+}
+
+.movies-card__button-delete:hover {
+    opacity: 0.7;
 }
 
 .movies-card__line {
@@ -89,8 +101,6 @@
         width: 339px;
         height: 190px;
     }
-
-
 }
 
 @media screen and (max-width: 400px) {
