@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.header__main-theme {
+.main__blue-theme {
     background-color: #073042;
 }
 
@@ -22,7 +22,6 @@
 
 .header__link {
     color: #fff;
-    text-align: right;
     font-family: 'Inter', Arial, sans-serif;
     font-size: 12px;
     font-style: normal;
@@ -35,7 +34,10 @@
     opacity: 0.7;
 }
 
-.header__button-login {
+.header__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 76px;
     height: 32px;
     border-radius: 3px;
@@ -43,16 +45,9 @@
     transition: opacity .2s ease;
     cursor: pointer;
     border: 0;
-    font-family: Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
+    color: black;
 }
 
-.header__button-login:hover {
-    opacity: 0.7;
-}
 
 .header__container_auth {
     display: flex;
@@ -60,7 +55,7 @@
     align-items: center;
 }
 
-.header__button_profile {
+.header__button-profile {
     display: inline-flex;
     justify-content: flex-end;
     align-items: center;
@@ -80,15 +75,15 @@
     transition: opacity .2s ease;
 }
 
-.header__button_profile:hover {
+.header__button-profile:hover {
     opacity: 0.7;
 }
 
-.header__button_profile-white {
+.header__button-profile-white {
     background-color: #fff;
 }
 
-.header__button_profile-container {
+.header__icon-container {
     display: flex;
     background-color: #F5F5F5;
     border-radius: 50%;
@@ -98,7 +93,7 @@
     align-items: center;
 }
 
-.header__button_burger {
+.header__button-burger {
     background: none;
     background-image: url('../../images/Burger__icon.svg');
     width: 44px;
@@ -109,17 +104,17 @@
     display: none;
 }
 
-.header__button_white {
+.header__button-white {
     background-image: url('../../images/Burger__icon-white.svg');
 }
 
 
 @media screen and (max-width: 768px) {
-    .header__button_profile {
+    .header__button-profile {
         display: none;
     }
 
-    .header__button_burger {
+    .header__button-burger {
         display: block;
     }
 

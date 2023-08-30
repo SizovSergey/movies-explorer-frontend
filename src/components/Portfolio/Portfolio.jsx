@@ -8,8 +8,7 @@ const Portfolio = () => {
                 <h2 className='portfolio__title'>Портфолио</h2>
                 <ul className="portfolio__list">
                     <li className="portfolio__list-element">
-                        <a className='portfolio__link' href='https://github.com/SizovSergey/how-to-learn' target='_blank' rel='noreferrer'>Статичный сайт</a><
-                        /li>
+                        <a className='portfolio__link' href='https://github.com/SizovSergey/how-to-learn' target='_blank' rel='noreferrer'>Статичный сайт</a></li>
                     <li className="portfolio__list-element">
                         <a className='portfolio__link' href='https://github.com/SizovSergey/russian-travel' target='_blank' rel='noreferrer'>Адаптивный сайт</a>
                     </li>

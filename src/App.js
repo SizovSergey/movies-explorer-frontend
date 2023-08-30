@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="page">
-    
+    {/* Не совсем понятно что имеется ввиду про 'из main следует вытянуть header и footer на каждой отдельной странице' */}
       <Routes>
           <Route path="/signin" element = {<Login />}/>
           <Route path="/signup" element = {<Register />}/>

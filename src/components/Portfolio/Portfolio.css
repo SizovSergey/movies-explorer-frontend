@@ -35,7 +35,6 @@
 }
 
 .portfolio__list li:before {
-    content: "↗";
     color: #000;
     font-family: 'Inter', Arial, sans-serif;
     font-size: 30px;
@@ -44,9 +43,9 @@
     line-height: 60px;
     letter-spacing: -1.2px;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     right: 0;
-    transform: translateY(-50%);
+    transform: translateY(-50%); */
 }
 
 .portfolio__list-element:last-child {
@@ -63,7 +62,23 @@
     line-height: 50px;
     letter-spacing: -1.2px;
     margin: 0;
+    display: inline-block;
 }
+
+.portfolio__link:before {
+    content: "↗";
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 97.5%; 
+    transform: translateY(-50%);
+    transition: left 0.3s ease; 
+}
+
+.portfolio__link:hover{
+    opacity: 0.7;
+}
+
 
 @media screen and (max-width: 768px) {
     .portfolio__container {

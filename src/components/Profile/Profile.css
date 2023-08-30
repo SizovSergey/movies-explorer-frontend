@@ -26,18 +26,11 @@
     margin: 0;
 }
 
-.profile__line {
-    margin-top: 16px;
-    border-bottom: 1px solid #E8E8E8;
-    max-width: 100%;
-}
-
 .profile__form {
     margin: 123px auto;
 }
 
 .profile__input {
-    flex: 1;
     color: #000;
     font-family: Inter;
     font-size: 11px;
@@ -45,8 +38,17 @@
     font-weight: 400;
     line-height: normal;
     text-align: right;
-    border: 0;
-    width: 377px;
+    width: 410px;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.profile__input:focus {
+    border-color: #00b7ff;
     outline: 0;
 }
 
@@ -67,6 +69,24 @@
     margin-top: 0px;
 }
 
+.profile__placeholder::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 20%;
+    left: 2px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: top 0.3s, font-size 0.3s, color 0.3s;
+  }
+  
+  .profile__input:focus + .profile__placeholder::before,
+  .profile__input:not(:placeholder-shown) + .profile__placeholder::before {
+   
+    font-size: 11px;
+    color: #00b7ff;
+  }
+
 .profile__button-container {
     display: flex;
     flex-direction: column;
@@ -86,6 +106,16 @@
     text-decoration: none;
     margin: 16px 0 0 0;
     cursor: pointer;
+}
+
+.profile__error {
+    color: #FF004C;
+    text-align: center;
+    font-family: Inter;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .profile__logout {
@@ -143,13 +173,17 @@
     .profile__input {
         font-size: 11px;
         font-weight: 400;
-        width: 233px;
+        width: 260px;
     }
 
     .profile__placeholder {
         font-size: 10px;
         font-weight: 400;
         color: #A0A0A0;
+    }
+
+    .profile__save-button {
+        width: 260px;
     }
 
 }

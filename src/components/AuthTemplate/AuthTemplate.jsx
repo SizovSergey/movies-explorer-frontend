@@ -4,14 +4,14 @@ import headerLogo from "../../images/header__logo.svg";
 
 const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
     return (
-        <div className='authTemplate'>
+        <main className='authTemplate'>
             <div className='authTemplate__container'>
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
                 <h1 className='authTemplate__title'>{title}</h1>
                 <form onSubmit={handleSubmit} className='authTemplate__form'>
-                    <div className='form__contant'>
+                    <div className='authTemplate__form-contant'>
                     {children}
                     </div>
                     <div className='authTemplate__footer'>
@@ -26,7 +26,7 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                 </form>
             </div>
 
-        </div>
+        </main>
     );
 }
 

@@ -8,13 +8,13 @@ import Footer from "../Footer/Footer";
 const Movies = ({ isLogin }) => {
 
     return (
-        <section className='movies'>
+        <main className='movies'>
             <Header isLogin={isLogin} />
             <SearchForm />
             <MoviesCardList movies={movies} />
             <button className='movies__button-more'>Eщё</button>
             <Footer />
-        </section>
+        </main>
     );
 }
 

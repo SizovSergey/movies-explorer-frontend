@@ -7,12 +7,12 @@ import Footer from "../Footer/Footer";
 
 const SavedMovies = ({ isLogin }) => {
     return (
-        <section className='saved-movies'>
+        <main className='saved-movies'>
             <Header isLogin={isLogin} />
             <SearchForm />
             <MoviesCardList movies={movies} />
             <Footer />
-        </section>
+        </main>
     );
 }
 

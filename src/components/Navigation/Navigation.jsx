@@ -10,7 +10,7 @@ const Navigation = ({ loggedIn }) => {
       {loggedIn ? (
         <>
           <div className='navigation__movies'>
-            <Link to='/movies' className={location.pathname === '/movies' ? 'navigation__movies-link_active'
+            <Link to='/movies' className={location.pathname === '/movies' ? 'navigation__movies-link-active'
               :
               location.pathname === '/main' ?
                 `navigation__movies-link navigation__movies-link_white`
@@ -20,7 +20,7 @@ const Navigation = ({ loggedIn }) => {
             >
               Фильмы
             </Link>
-            <Link to='/saved-movies' className={location.pathname === '/saved-movies' ? 'navigation__movies-link_active'
+            <Link to='/saved-movies' className={location.pathname === '/saved-movies' ? 'navigation__movies-link-active'
               :
               location.pathname === '/main' ?
                 `navigation__movies-link navigation__movies-link_white`

@@ -22,6 +22,12 @@
     font-weight: 500;
     line-height: normal;
     outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #00b7ff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .search-form__button {

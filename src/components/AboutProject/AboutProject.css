@@ -76,9 +76,8 @@
 }
 
 
-.about-project__timeline-green {
+.about-project__working-time{
     min-height: 36px;
-    background-color: #2BE080;
     color: #000;
     text-align: center;
     font-family: 'Inter', Arial, sans-serif;
@@ -88,16 +87,12 @@
     line-height: 34px;
 }
 
-.about-project__timeline-grey {
-    min-height: 36px;
+.about-project__green-color {
+    background-color: #2BE080;
+}
+
+.about-project__grey-color {
     background-color: #F2F2F2;
-    color: #000;
-    text-align: center;
-    font-family: 'Inter', Arial, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 34px;
 }
 
 .about-project__timeline-title {
@@ -134,7 +129,7 @@
 }
 
 @media screen and (max-width: 460px) {
-    .about-project__timeline-green {
+    .about-project__working-time {
         font-size: 11px;
     }
 
@@ -144,10 +139,6 @@
 
     .about-project__timeline-phase {
         gap: 8px;
-    }
-
-    .about-project__timeline-grey {
-        font-size: 11px;
     }
 
     .about-project__timeline-title {

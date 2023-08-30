@@ -21,12 +21,12 @@ const Profile = ({ isLogin }) => {
   }
 
   return (
-    <section className='profile'>
+    <main className='profile'>
       <Header isLogin={isLogin} />
       <div className='profile__container'>
         <h2 className='profile__title'>Привет, Виталий!</h2>
         <form className='profile__form'>
-          <label className='profile__placeholder'>Имя
+          <label className='profile__placeholder' data-placeholder="Имя">
             <input value={name} 
             onChange={handleChangeName} 
             type="text" 
@@ -35,21 +35,20 @@ const Profile = ({ isLogin }) => {
             name="name" 
             minLength="2" 
             maxLength="40"
-            defaultValue={'Виталий'}
-            disabled
+            placeholder="Виталий" 
+            disabled={!showSaveBtn}
             required 
               />
           </label>
-          <div className='profile__line'></div>
-          <label className='profile__placeholder'>Email
+          <label className='profile__placeholder' data-placeholder="Email">
             <input value={email} 
             onChange={handleChangeDescription} 
             type="email" 
             className="profile__input" 
             id="email" 
             name="email"
-            defaultValue={'pochta@yandex.ru'}
-            disabled
+            placeholder="pochta@yandex.ru" 
+            disabled={!showSaveBtn}
             required />
           </label>
         </form>
@@ -64,7 +63,7 @@ const Profile = ({ isLogin }) => {
             </div>)
         }
       </div>
-    </section>
+    </main>
   );
 }
 
