@@ -12,13 +12,11 @@ const Main = ({isLogin}) => {
 
     return (
         <main className='main'>
-            <Header isLogin = {isLogin}/>
             <Promo />
             <AboutProject />
             <Tech />
             <AboutMe />
             <Portfolio />
-            <Footer />
         </main> 
     );
 }

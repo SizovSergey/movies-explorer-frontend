@@ -1,9 +1,12 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ handleloggedIn }) => {
 
-    const [formValue, setFormValue] = React.useState ({
+    const navigate = useNavigate();
+
+    const [formValue, setFormValue] = React.useState({
         email: '',
         password: ''
     });
@@ -38,6 +41,11 @@ const Login = () => {
         e.preventDefault();
         const newErrors = validate();
         setErrors(newErrors);
+        
+        if (Object.keys(newErrors).length === 0) {
+            handleloggedIn();
+            navigate('/movies');
+        }
     }
 
     return (
@@ -45,10 +53,10 @@ const Login = () => {
             title="Рады видеть!"
             name="login"
             buttonText="Войти"
-            handleSubmit = {handleSubmit}
+            handleSubmit={handleSubmit}
         >
             <label className="auth-template__input-container" htmlFor="regEmail">
-            <span className='auth-template__placeholder'>Email</span>
+                <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
                     value={formValue.email}
@@ -61,7 +69,7 @@ const Login = () => {
             </label>
             <span className="auth-template__error">{errors.email}</span>
             <label className="auth-template__input-container" htmlFor="regPass">
-            <span className='auth-template__placeholder'>Пароль</span>
+                <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
                     value={formValue.password}
