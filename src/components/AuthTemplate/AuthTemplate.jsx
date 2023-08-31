@@ -4,23 +4,23 @@ import headerLogo from "../../images/header__logo.svg";
 
 const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
     return (
-        <main className='authTemplate'>
-            <div className='authTemplate__container'>
+        <main className='auth-template'>
+            <div className='auth-template__container'>
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
-                <h1 className='authTemplate__title'>{title}</h1>
-                <form onSubmit={handleSubmit} className='authTemplate__form'>
-                    <div className='authTemplate__form-contant'>
+                <h1 className='auth-template__title'>{title}</h1>
+                <form onSubmit={handleSubmit} className='auth-template__form'>
+                    <div className='auth-template__form-contant'>
                     {children}
                     </div>
-                    <div className='authTemplate__footer'>
-                        <button className="authTemplate__button" type='submit'>{buttonText}</button >
+                    <div className='auth-template__footer'>
+                        <button className="auth-template__button" type='submit'>{buttonText}</button >
                         {name === 'register' &&
-                            <p className='authTemplate__text'>Уже зарегистрированы? <Link to="/signin" className="authTemplate__link">Войти</Link></p>
+                            <p className='auth-template__text'>Уже зарегистрированы? <Link to="/signin" className="auth-template__link">Войти</Link></p>
                         }
                         {name === 'login' &&
-                            <p className='authTemplate__text'>Ещё не зарегистрированы? <Link to="/signup" className="authTemplate__link">Регистрация</Link></p>
+                            <p className='auth-template__text'>Ещё не зарегистрированы? <Link to="/signup" className="auth-template__link">Регистрация</Link></p>
                         }
                     </div>
                 </form>

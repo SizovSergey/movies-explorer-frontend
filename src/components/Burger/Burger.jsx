@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link,useLocation } from 'react-router-dom';
 
-const Burger = ({ onClose }) => {
+const Burger = ({ onClose, loggedIn}) => {
 
     const location = useLocation();
 
     return (
+    <>
+    {loggedIn && 
         <div className='burger'>
-          
+         
             <div className='burger__container'>
             <button type='button' className='burger__button_close' onClick={() => onClose()} />
                 <nav className="burger__menu">
@@ -29,6 +31,8 @@ const Burger = ({ onClose }) => {
                 </div>
             </div>
         </div>
+         }
+        </>
     );
 };
 

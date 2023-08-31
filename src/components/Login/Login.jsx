@@ -47,32 +47,32 @@ const Login = () => {
             buttonText="Войти"
             handleSubmit = {handleSubmit}
         >
-            <label className="authTemplate__input-container" htmlFor="regEmail">
-            <span className='authTemplate__placeholder'>Email</span>
+            <label className="auth-template__input-container" htmlFor="regEmail">
+            <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
                     value={formValue.email}
                     type="email"
-                    className="authTemplate__input"
+                    className="auth-template__input"
                     id="email"
                     name="email"
                     placeholder="test@mail.ru"
                 />
             </label>
-            <span className="authTemplate__error">{errors.email}</span>
-            <label className="authTemplate__input-container" htmlFor="regPass">
-            <span className='authTemplate__placeholder'>Пароль</span>
+            <span className="auth-template__error">{errors.email}</span>
+            <label className="auth-template__input-container" htmlFor="regPass">
+            <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
                     value={formValue.password}
                     type="password"
-                    className="authTemplate__input"
+                    className="auth-template__input"
                     id="password"
                     name="password"
                     placeholder="12345678"
                 />
             </label>
-            <span className="authTemplate__error">{errors.password}</span>
+            <span className="auth-template__error">{errors.password}</span>
         </AuthTemplate>
     );
 
