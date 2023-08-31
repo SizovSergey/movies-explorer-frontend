@@ -37,7 +37,7 @@ const Header = ({ isLogin }) => {
                         </button>
                     </Link>
                 ) : (
-                    <div className='header__container_auth'>
+                    <div className='header__container-auth'>
                         <Link to='/signup' className='header__link'>Регистрация</Link>
                         <Link to='/signin' className='header__link header__button'>Войти</Link>
                     </div>

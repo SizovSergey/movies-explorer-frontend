@@ -69,8 +69,8 @@
     .FilterCheckbox {
         justify-content: flex-start;
         flex-direction: row-reverse;
-        margin-top: 14px;
-        gap: 14px;
+        margin-top: 31px;
+        gap: 17px;
     }
 
 }
@@ -79,7 +79,7 @@
     .FilterCheckbox {
         justify-content: center;
         gap: 13px;
-        margin-top: 40px;
+        margin-top: 43px;
     }
 
     .FilterCheckbox__label {

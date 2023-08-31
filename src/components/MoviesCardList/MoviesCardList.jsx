@@ -10,7 +10,7 @@ const MoviesCardList = ({ movies }) => {
         : movies;
 
     return (
-        <section className='MoviesCardList'>
+        <section className={location.pathname === '/saved-movies' ? `movies-card-list movies-card-list_savepage` : 'movies-card-list'}>
             {filteredMovies.map((movie) => (
                 <MoviesCard
                     key={movie.id}

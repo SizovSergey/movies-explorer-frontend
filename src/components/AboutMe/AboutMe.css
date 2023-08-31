@@ -124,7 +124,7 @@
 
     .about-me__photo {
         width: 255px;
-        height: 307px;
+        height: 316px;
     }
 
     .about-me__link {
@@ -132,7 +132,7 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .about-me__student-info {
         display: grid;
         grid-template-columns: auto;
@@ -169,6 +169,7 @@
 
     .about-me__photo {
         margin-top: 60px;
+        width: 292px;
     }
 
     .about-me__info {

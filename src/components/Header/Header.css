@@ -49,7 +49,7 @@
 }
 
 
-.header__container_auth {
+.header__container-auth {
     display: flex;
     gap: 30px;
     align-items: center;
@@ -126,6 +126,20 @@
 @media screen and (max-width: 320px) {
 
     .header__container {
-        padding: 18px 18px 18px;
+        padding: 16px 14px 18px;
+    }
+
+    .header__container-auth {
+        gap: 14px;
+    }
+
+    .header__button {
+        width: 54px;
+        height: 26px;
+        font-size: 10px;
+    }
+
+    .header__link {
+        font-size: 10px;
     }
 }

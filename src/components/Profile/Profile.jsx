@@ -24,7 +24,7 @@ const Profile = ({ isLogin }) => {
     <main className='profile'>
       <Header isLogin={isLogin} />
       <div className='profile__container'>
-        <h2 className='profile__title'>Привет, Виталий!</h2>
+        <h1 className='profile__title'>Привет, Виталий!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
             <input value={name} 
