@@ -1,0 +1,145 @@
+.tech {
+    background-color: #F5F5F5;
+    width: 100%;
+}
+
+.main__techs-container {
+    padding: 100px 70px;
+    max-width: calc(1280px - 140px);
+    margin: 0 auto;
+}
+
+.main__techs-title {
+    color: #000;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    padding-bottom: 23px;
+    margin: 0;
+    max-width: 1280px;
+    border-bottom: 1px solid #000000;
+}
+
+.main__techs-technology {
+    color: #000;
+    text-align: center;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+    max-width: 600px;
+    margin: 90px auto 0;
+}
+
+.main__techs-cours {
+    color: #000;
+    text-align: center;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.56px;
+    margin: 26px auto 0;
+    max-width: 460px;
+}
+
+.main__techs-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    margin: 100px 10px 0;
+}
+
+.main__techs-list-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    min-height: 60px;
+    border-radius: 10px;
+    background-color: #E8E8E8;
+    color: #000;
+    text-align: center;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+@media screen and (max-width: 768px) {
+    .main__techs-container {
+        padding: 90px 50px 90px;
+    }
+
+    .main__techs-technology {
+        margin-top: 78px;
+    }
+
+    .main__techs-cours {
+        font-size: 12px;
+        letter-spacing: -0.48px;
+        margin: 20px auto 0;
+    }
+
+    .main__techs-list {
+        margin-top: 83px;
+    }
+
+    .main__techs-list-element {
+        font-size: 12px;
+        min-height: 57px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main__techs-list {
+        display: grid;
+        grid-template-columns: repeat(2, 84px);
+        grid-gap: 10px;
+        margin-top: 45px;
+    }
+
+    .main__techs-technology {
+        font-size: 30px;
+        letter-spacing: -1.2px;
+    }
+}
+
+
+@media screen and (max-width: 320px) {
+    .main__techs-container {
+        padding: 69px 18px 70px;
+    }
+
+    .main__techs-technology {
+        margin-top: 49px;
+    }
+
+    .main__techs-title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        padding-bottom: 28px;
+
+    }
+
+    .main__techs-cours {
+        font-size: 11px;
+        letter-spacing: -0.44px;
+        margin: 11px auto 0;
+    }
+
+    .main__techs-list-element {
+        font-size: 12px;
+    }
+}
