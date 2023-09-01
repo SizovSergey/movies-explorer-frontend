@@ -4,6 +4,7 @@
     align-items: center;
     box-sizing: border-box;
     padding-top: 70px;
+    padding-bottom: 70px;
     min-height: 100vh;
 }
 
@@ -12,6 +13,7 @@
     display: flex;
     max-width: 396px;
     align-items: flex-start;
+    justify-content: center;
     flex: 1;
 }
 
@@ -138,12 +140,21 @@ input:focus {
     margin-top: auto;
     flex-direction: column;
     gap: 16px;
-    padding-bottom: 70px;
+    align-self: flex-end;
+}
+
+@media screen and (max-width: 1279px) {
+    .auth-template {
+        padding-top: 230px;
+        padding-bottom: 232px;
+    }
+
 }
 
 @media screen and (max-width: 440px) {
     .auth-template {
-        padding: 60px 30px 0;
+        padding-top: 56px;
+        padding-bottom: 30px;
     }
 
     .auth-template__container {

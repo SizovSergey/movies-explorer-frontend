@@ -4,10 +4,12 @@ const FilterCheckbox = () => {
     return (
         <div className='FilterCheckbox'>
             <label className="FilterCheckbox__container">
-                <input className="FilterCheckbox__checkbox" type="checkbox" />
+                <input className="FilterCheckbox__checkbox" 
+                type="checkbox"
+                id='FilterCheckbox' />
                 <span className="FilterCheckbox__slider"></span>
             </label>
-            <p className='FilterCheckbox__label'>Короткометражки</p>
+            <label className='FilterCheckbox__label' htmlFor='FilterCheckbox'>Короткометражки</label>
         </div>
     );
 }

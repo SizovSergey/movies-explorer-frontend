@@ -19,7 +19,7 @@ const Header = ({ isLogin }) => {
     const location = useLocation();
 
     return (
-            <header className={location.pathname === '/main' ? 'header main__blue-theme' : 'header'}>
+            <header className={location.pathname === '/main' ? 'header header_blue-theme' : 'header'}>
                 <div className='header__container'>
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
@@ -42,7 +42,7 @@ const Header = ({ isLogin }) => {
                         <Link to='/signin' className='header__link header__button'>Войти</Link>
                     </div>
                 )}
-                {!isBurgerOpen && isLogin ? (
+                {!isBurgerOpen && isLogin  ? (
                      <button className={location.pathname === '/main' ? `header__button-burger header__button-white` : `header__button-burger`} onClick={handleBurgerClick} />
                 ) : <Burger onClose={closeBurger} loggedIn={isLogin}/>
                 }

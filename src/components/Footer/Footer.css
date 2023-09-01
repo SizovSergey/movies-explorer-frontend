@@ -7,7 +7,7 @@
 
 .footer__container {
     padding: 80px 70px 0;
-    max-width: 1280px;
+    max-width: calc(1280px - 140px);
     margin: 0 auto;
 }
 
@@ -93,7 +93,7 @@
     .footer__links {
         flex-direction: column;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
         margin: 0;
     }
 

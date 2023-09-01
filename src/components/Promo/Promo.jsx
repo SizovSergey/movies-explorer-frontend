@@ -3,8 +3,8 @@ import promoLogo from '../../images/landing-logo.png'
 
 const Promo = () => {
     return (
-
-        <div className='promo'>
+        <>
+        <section className='promo'>
             <div className="promo__container">
                 <div className='promo__title-container'>
                     <h1 className="promo__title">Учебный проект студента факультета Веб&#8209;разработки.</h1>
@@ -13,8 +13,8 @@ const Promo = () => {
                 </div>
                 <img src={promoLogo} className="promo__logo" alt="логотип компоненты Promo" />
             </div>
-        </div>
-
+        </section>
+        </>
     );
 }
 

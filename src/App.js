@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/main" element={<constants.mainPage loggedIn={loggedIn} />} />
         <Route path="/signin" element={<Login handleloggedIn={handleloggedIn}/>} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="/signup" element={<Register handleloggedIn={handleloggedIn}/>} />
         <Route path="/profile" element={<constants.profilePage loggedIn={loggedIn} />} />
         <Route path="/movies" element={<constants.moviesPage loggedIn={loggedIn} />} />
         <Route path="/saved-movies" element={<constants.savedMoviesPage loggedIn={loggedIn} />} />

@@ -2,14 +2,14 @@
     width: 100%;
 }
 
-.main__blue-theme {
+.header_blue-theme {
     background-color: #073042;
 }
 
 .header__container {
     display: flex;
     flex-direction: row;
-    max-width: 1280px;
+    max-width: calc(1280px - 140px);
     margin: 0 auto;
     padding: 18px 70px 18px;
 }
@@ -121,12 +121,16 @@
     .header__container {
         padding: 18px 30px 18px;
     }
+
+    .header__button-burger {
+        width: 51px;
+    }
 }
 
 @media screen and (max-width: 320px) {
 
     .header__container {
-        padding: 16px 14px 18px;
+        padding: 18px 16px 18px;
     }
 
     .header__container-auth {
@@ -141,5 +145,10 @@
 
     .header__link {
         font-size: 10px;
+    }
+
+    .header__button-burger {
+        width: 44px;
+        margin-right: 8px;
     }
 }

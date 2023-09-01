@@ -6,7 +6,7 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
     return (
         <main className='auth-template'>
             <div className='auth-template__container'>
-                <Link to="/" className="header__link">
+                <Link to="/" className="auth-template__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
                 <h1 className='auth-template__title'>{title}</h1>

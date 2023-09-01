@@ -1,8 +1,11 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
+import { useNavigate } from "react-router-dom";
 
 
-const Register = () => {
+const Register = ({handleloggedIn}) => {
+
+    const navigate = useNavigate();
 
     const [formValue, setFormValue] = React.useState ({
         userName: '',
@@ -45,6 +48,11 @@ const Register = () => {
         const newErrors = validate();
         console.log('ошибки:', newErrors);
         setErrors(newErrors);
+        
+        if (Object.keys(newErrors).length === 0) {
+            handleloggedIn();
+            navigate('/movies');
+        }
     }
 
     return (

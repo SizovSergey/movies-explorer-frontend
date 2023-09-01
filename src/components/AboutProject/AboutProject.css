@@ -4,7 +4,7 @@
 
 .about-project__container {
     padding: 110px 70px;
-    max-width: 1280px;
+    max-width: calc(1280px - 140px);
     margin: 0 auto;
 }
 

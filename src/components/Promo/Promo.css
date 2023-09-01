@@ -1,6 +1,7 @@
 .promo {
     background-color: #073042;
     min-height: 524px;
+    width: 100%;
 }
 
 .promo__title {
@@ -40,7 +41,7 @@
     grid-template-columns: auto auto;
     justify-items: end;
     justify-content: space-between;
-    max-width: 1280px;
+    max-width: calc(1280px - 140px);
     min-height: 100%;
     margin: 0 auto;
     grid-template-areas: "content logo";

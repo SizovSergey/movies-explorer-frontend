@@ -19,6 +19,7 @@
         padding: 70px 30px 10px;
         grid-template-columns: repeat(auto-fill, minmax(min-content, 339px));
         grid-row-gap: 30px;
+        grid-column-gap: 30px;
     }
 
     .movies-card-list_savepage {
@@ -30,5 +31,6 @@
     .movies-card-list {
         padding: 40px 10px 10px;
         grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+        grid-row-gap: 32px;
     }
 }

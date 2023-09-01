@@ -26,40 +26,41 @@ const Profile = ({ isLogin }) => {
         <h1 className='profile__title'>Привет, Виталий!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
-            <input value={name}
-              onChange={handleChangeName}
-              type="text"
-              className="profile__input"
-              id="name"
-              name="name"
-              minLength="2"
-              maxLength="40"
-              placeholder="Виталий"
-              disabled={!showSaveBtn}
-              required
-            />
+            <input value={name} 
+            onChange={handleChangeName} 
+            type="text" 
+            className="profile__input" 
+            id="name" 
+            name="name" 
+            minLength="2" 
+            maxLength="40"
+            placeholder="Виталий" 
+            disabled={!showSaveBtn}
+            required 
+              />
           </label>
           <label className='profile__placeholder' data-placeholder="Email">
-            <input value={email}
-              onChange={handleChangeDescription}
-              type="email"
-              className="profile__input"
-              id="email"
-              name="email"
-              placeholder="pochta@yandex.ru"
-              disabled={!showSaveBtn}
-              required />
+            <input value={email} 
+            onChange={handleChangeDescription} 
+            type="email" 
+            className="profile__input" 
+            id="email" 
+            name="email"
+            placeholder="pochta@yandex.ru" 
+            disabled={!showSaveBtn}
+            required />
           </label>
-          {!showSaveBtn ?
-            (<div className='profile__button-container'>
-              <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
-              <Link to="/" className="profile__link profile__logout">Выйти из аккаунта</Link>
-            </div>) : (
-              <div className='profile__button-container'>
-                <button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>
-              </div>)
-          }
         </form>
+
+        {!showSaveBtn ?
+          (<div className='profile__button-container'>
+            <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
+            <Link to="/" className="profile__link profile__logout">Выйти из аккаунта</Link>
+          </div>) : (
+          <div className='profile__button-container'>
+            <button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>
+            </div>)
+        }
       </div>
     </main>
   );
