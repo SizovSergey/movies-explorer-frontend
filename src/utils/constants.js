@@ -20,10 +20,10 @@ import Footer from "../components/Footer/Footer";
     </>
 );
 
-const moviesPage = ({ loggedIn }) => (
+const moviesPage = ({ loggedIn, movies, onSearch}) => (
     <>
         <Header isLogin={loggedIn} />
-        <Movies isLogin={loggedIn} />
+        <Movies isLogin={loggedIn} movies={movies} onSearch={onSearch}/>
         <Footer />
     </>
 );

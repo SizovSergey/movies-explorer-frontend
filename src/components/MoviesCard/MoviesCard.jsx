@@ -21,10 +21,10 @@ const MoviesCard = ({ movie }) => {
 
     return (
         <div className='movies-card'>
-            <img className='movies-card__image' src={process.env.PUBLIC_URL + movie.image} alt={movie.name} />
+            <img className='movies-card__image' src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU} />
             <div className='movies-card__container'>
                 <h3 className='movies-card__title'>
-                    {movie.name}
+                    {movie.nameRU}
                 </h3>
                 { location.pathname === '/movies' &&
                 <button className={!IsFavorit ? `movies-card__button-like` : 'movies-card__button-unlike'} aria-label="Поставить класс фильму" onClick={handleLikeClick} />
