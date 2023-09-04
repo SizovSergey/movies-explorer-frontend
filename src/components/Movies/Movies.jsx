@@ -1,43 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
-import { filterMoviesByText, filterMoviesByShort } from '../../utils/utils';
+import { filterMoviesByText } from '../../utils/utils';
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [searchText, setSearchText] = useState('');
-  const [isShort, setIsShort] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [searchText, setSearchText] = React.useState('');
+  const [isShort, setIsShort] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setError] = React.useState(false)
 
-
-  useEffect(() => {
-    const storedMovies = JSON.parse(localStorage.getItem('movies'));
-    const storedSearchText = localStorage.getItem('searchText');
+  React.useEffect(() => {
+    const storedMovies = localStorage.getItem('movies');
+    const storedfilteredMovies = JSON.parse(localStorage.getItem('filteredMovies'));
+    const storedSearchText = localStorage.getItem('searchText') || '';
     const storedIsShort = localStorage.getItem('isShort');
 
-    if (storedMovies) {
-      setMovies(storedMovies);
-    }
+    setMovies(storedMovies);
+    setFilteredMovies(storedfilteredMovies);
+    setSearchText(storedSearchText);
+    setIsShort(storedIsShort);
 
-    if (storedSearchText) {
-      setSearchText(storedSearchText);
-    }
-
-    if (storedIsShort) {
-      setIsShort(storedIsShort === 'true');
-    }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('movies', JSON.stringify(movies));
-    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-    localStorage.setItem('searchText', searchText);
+  React.useEffect(() => {
     localStorage.setItem('isShort', isShort);
-  }, [movies, filteredMovies, searchText, isShort]);
-  
+  }, [searchText, isShort]);
 
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -49,36 +40,37 @@ const Movies = () => {
 
   const handleSearch = () => {
     setIsLoading(true);
-  
+
     getMovies()
       .then((allMovies) => {
+        const filteredByText = filterMoviesByText(allMovies, searchText, isShort);
+
+        localStorage.setItem('movies', JSON.stringify(allMovies));
+        localStorage.setItem('filteredMovies', JSON.stringify(filteredByText));
 
         setMovies(allMovies);
-  
-        const filteredByText = filterMoviesByText(allMovies, searchText);
-        const filteredByShort = filterMoviesByShort(filteredByText, isShort);
-  
-        setFilteredMovies(filteredByShort);
+        setFilteredMovies(filteredByText);
         setIsLoading(false);
+        setError(false);
       })
       .catch((err) => {
-        console.error(err.message);
+        setError(true);
         setIsLoading(false);
       });
   };
-  
+
   const handleSearchButtonClick = () => {
     if (searchText) {
       handleSearch();
     }
   };
 
-
   return (
     <main className="movies">
-      {console.log(filteredMovies)}
+
+      {console.log(isShort)}
       <SearchForm
-        inputValue={searchText} 
+        inputValue={searchText}
         onSearch={handleSearchButtonClick}
         onInputChange={handleSearchInputChange}
         onCheckboxChange={handleShortCheckboxChange}
@@ -86,7 +78,11 @@ const Movies = () => {
       {isLoading ? (
         <Preloader />
       ) : (
-        <MoviesCardList movies={filteredMovies} />
+        isError ? (
+          <p className='movies__error'>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>
+        ) : (
+          <MoviesCardList movies={filteredMovies} />
+        )
       )}
       <button className="movies__button-more">Eщё</button>
     </main>

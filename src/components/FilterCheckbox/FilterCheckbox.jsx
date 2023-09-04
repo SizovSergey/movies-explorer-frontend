@@ -1,8 +1,8 @@
 import React from 'react';
 
 const FilterCheckbox = ({ onCheckboxChange }) => {
-  const handleCheckboxChange = (e) => {
-    onCheckboxChange(e.target.checked);
+  const handleCheckboxChange = () => {
+    onCheckboxChange();
   };
 
   return (

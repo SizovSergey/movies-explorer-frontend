@@ -1,10 +1,10 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const SearchForm = ({ onSearch, inputValue, onInputChange }) => {
+
+const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('searchingText', inputValue);
     onSearch(inputValue);
   };
 
@@ -25,7 +25,7 @@ const SearchForm = ({ onSearch, inputValue, onInputChange }) => {
           </button>
         </form>
       </div>
-      <FilterCheckbox />
+      <FilterCheckbox onCheckboxChange={onCheckboxChange}/>
     </div>
   );
 };
