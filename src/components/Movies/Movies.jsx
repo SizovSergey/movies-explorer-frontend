@@ -1,47 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import getMovies from '../../utils/MoviesApi';
+import Preloader from '../Preloader/Preloader';
+import { filterMoviesByText, filterMoviesByShort } from '../../utils/utils';
+
+const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [isShort, setIsShort] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
 
+  useEffect(() => {
+    const storedMovies = JSON.parse(localStorage.getItem('movies'));
+    const storedSearchText = localStorage.getItem('searchText');
+    const storedIsShort = localStorage.getItem('isShort');
 
-const Movies = ({}) => {
+    if (storedMovies) {
+      setMovies(storedMovies);
+    }
 
-    const [movies, setMovies] = React.useState([]);
-    const [searchingMovies, setsearchingMovies] = React.useState([]);
-    const [searchText, setSearchText] = React.useState('');
+    if (storedSearchText) {
+      setSearchText(storedSearchText);
+    }
+
+    if (storedIsShort) {
+      setIsShort(storedIsShort === 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('movies', JSON.stringify(movies));
+    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+    localStorage.setItem('searchText', searchText);
+    localStorage.setItem('isShort', isShort);
+  }, [movies, filteredMovies, searchText, isShort]);
   
-    React.useEffect(() => {
-      const text = localStorage.getItem('serchingText');
-        Promise.all([
-          getMovies()
-        ])
-          .then(([movies]) => {
-            const allMovies = movies.map(movie => movie);
-            let searchingMovies = allMovies.filter((movie) => {
-                return movie.nameRU.toLowerCase().includes(text.toLowerCase());
-              })
-              searchingMovies = localStorage.setItem('searchingMovies');
-            console.log(text)
-            setMovies(searchingMovies);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+
+  const handleSearchInputChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleShortCheckboxChange = () => {
+    setIsShort(!isShort);
+  };
+
+  const handleSearch = () => {
+    setIsLoading(true);
   
-    }, [searchText])
+    getMovies()
+      .then((allMovies) => {
 
-    const handleSearch = (text) => {
-        setSearchText(text);
-      }
+        setMovies(allMovies);
+  
+        const filteredByText = filterMoviesByText(allMovies, searchText);
+        const filteredByShort = filterMoviesByShort(filteredByText, isShort);
+  
+        setFilteredMovies(filteredByShort);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        setIsLoading(false);
+      });
+  };
+  
+  const handleSearchButtonClick = () => {
+    if (searchText) {
+      handleSearch();
+    }
+  };
 
-    return (
-        <main className='movies'>
-            <SearchForm movies={movies} onSearch={handleSearch}/>
-            <MoviesCardList movies={movies} />
-            <button className='movies__button-more'>Eщё</button>
-        </main>
-    );
-}
+
+  return (
+    <main className="movies">
+      {console.log(filteredMovies)}
+      <SearchForm
+        inputValue={searchText} 
+        onSearch={handleSearchButtonClick}
+        onInputChange={handleSearchInputChange}
+        onCheckboxChange={handleShortCheckboxChange}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList movies={filteredMovies} />
+      )}
+      <button className="movies__button-more">Eщё</button>
+    </main>
+  );
+};
 
 export default Movies;
