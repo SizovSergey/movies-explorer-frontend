@@ -14,9 +14,8 @@ function App() {
   const [isInfoTooltipPopupOpen, setInfoTooltipPopup] = React.useState(false);
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = React.useState({
-    "name": '',
-    "email": '',
-    "_id" : ''
+    name: '',
+    email: '',
   });
 
   React.useEffect(() => {
@@ -56,7 +55,9 @@ function App() {
       getProfile(jwt)
         .then( res => {
           setLoggedIn(true);
-          setCurrentUser(res.name,res.email)
+          setCurrentUser(
+            {name:res.name,
+            email:res.email})
           navigate('/main');
         })
         .catch(console.log);
@@ -71,7 +72,7 @@ function App() {
 
   return (
     <div className="page">
-      {console.log(loggedIn)}
+      {console.log(currentUser)}
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
           <Route path="/signin" element={<Login handlelogin={handleLogin} />} />

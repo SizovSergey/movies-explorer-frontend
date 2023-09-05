@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 const Profile = ({ handleSignOut }) => {
@@ -24,6 +23,7 @@ const Profile = ({ handleSignOut }) => {
 
   return (
     <main className='profile'>
+      {console.log(currentUser)}
       <div className='profile__container'>
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form'>
@@ -50,7 +50,7 @@ const Profile = ({ handleSignOut }) => {
               id="email"
               name="email"
               placeholder="pochta@yandex.ru"
-              defaultValue={currentUser.email}
+              defaultValue='ffff'
               disabled={!showSaveBtn}
               required />
           </label>
