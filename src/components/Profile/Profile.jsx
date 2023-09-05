@@ -37,7 +37,7 @@ const Profile = ({ handleSignOut }) => {
               minLength="2"
               maxLength="40"
               placeholder="Виталий"
-              defaultValue={currentUser.name}
+              value={currentUser.name}
               disabled={!showSaveBtn}
               required
             />
@@ -50,7 +50,7 @@ const Profile = ({ handleSignOut }) => {
               id="email"
               name="email"
               placeholder="pochta@yandex.ru"
-              defaultValue='ffff'
+              value={currentUser.email}
               disabled={!showSaveBtn}
               required />
           </label>
