@@ -5,7 +5,7 @@ import SavedMovies from "../components/SavedMovies/SavedMovies";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
-export const mainPage = ({ loggedIn }) => (
+export const MainPage = ({ loggedIn }) => (
     <>
         <Header loggedIn={loggedIn} />
         <Main />

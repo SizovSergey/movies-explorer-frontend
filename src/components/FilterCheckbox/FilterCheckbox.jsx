@@ -4,7 +4,7 @@ const FilterCheckbox = ({ onCheckboxChange, onCheckboxFlag }) => {
   
 
   const handleCheckboxChange = () => {
-    onCheckboxChange(); // Вызываем колбэк с новым значением
+    onCheckboxChange(); 
   };
 
   return (

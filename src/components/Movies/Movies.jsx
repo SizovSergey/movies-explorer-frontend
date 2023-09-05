@@ -24,6 +24,7 @@ const Movies = () => {
     setSearchText(storedSearchText);
     setIsShort(storedIsShort);
 
+    
   }, []);
 
   React.useEffect(() => {
@@ -62,8 +63,8 @@ const Movies = () => {
 
   const handleSearchButtonClick = () => {
     if (searchText === '') {
-      console.log('введите текст')
-      setFilteredMovies([])
+      setSearchText('введите текст')
+  
 
     }
     handleSearch();

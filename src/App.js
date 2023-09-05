@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import NotFound from "./components/NotFound/NotFound";
-import { mainPage, profilePage, moviesPage, savedMoviesPage } from './utils/constants';
+import { MainPage, profilePage, moviesPage, savedMoviesPage } from './utils/constants';
 import { CurrentUserContext } from '../src/context/CurrentUserContext';
 import { authorize, deleteMovies, getProfile, getSaveMovies, register, saveMovies, updateProfile } from '../src/utils/MainApi.js'
 import ProtectedRoute from './components/protectedRoute';
@@ -88,11 +88,7 @@ function App() {
           <Route path="/signin" element={<Login handlelogin={handleLogin} />} />
           <Route path="/signup" element={<Register handleRegister={handleRegister} />} />
 
-          <Route path="/main" element=
-            {<ProtectedRoute
-              element={mainPage}
-              loggedIn={loggedIn}
-            />} />
+          <Route path="/main" element = {<MainPage loggedIn={loggedIn}/>} />
 
           <Route path="/profile"
             element={<ProtectedRoute
@@ -111,7 +107,7 @@ function App() {
               element={savedMoviesPage}
               loggedIn={loggedIn} />} />
 
-          <Route path="/" element={loggedIn ? <Navigate to="/main" replace /> : <Navigate to="/signin" replace />} />
+          <Route path="/" element={<Navigate to="/main" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CurrentUserContext.Provider>
