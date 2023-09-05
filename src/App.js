@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import NotFound from "./components/NotFound/NotFound";
@@ -10,17 +10,16 @@ import ProtectedRoute from './components/protectedRoute';
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState();
   const [isInfoTooltipPopupOpen, setInfoTooltipPopup] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
     email: '',
   });
 
-  React.useEffect(() => {
-    checkToken();
-  }, [])
+
 
   const handleRegister = (name, email, password) => {
     register(name, email, password)
@@ -36,43 +35,54 @@ function App() {
   const handleLogin = (email, password) => {
     authorize(email, password)
       .then(data => {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-          setLoggedIn(true);
-          navigate('/main', { replace: true });
-        }
+
+        localStorage.setItem('token', data.token);
+        setLoggedIn(true);
+        navigate('/main', { replace: true });
+
       })
       .catch(err => {
-        setInfoTooltipPopup(true);
         console.log(err);
       });
   }
 
   const checkToken = () => {
-    const jwt = localStorage.getItem("token");
-
+   const currentPath = location.pathname
+    const jwt = localStorage.getItem('token');
     if (jwt) {
       getProfile(jwt)
-        .then( res => {
+        .then(res => {
           setLoggedIn(true);
+          navigate(currentPath);
           setCurrentUser(
-            {name:res.name,
-            email:res.email})
-          navigate('/main');
+            {
+              name: res.name,
+              email: res.email
+            })
+
         })
         .catch(console.log);
     }
   }
 
+  React.useEffect(() => {
+    checkToken();
+  }, []);
+
   const handleSignOut = () => {
     setLoggedIn(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('isShort');
+    localStorage.removeItem('searchText');
     navigate('/sign-in', { replace: true })
+
   }
 
   return (
     <div className="page">
-      {console.log(currentUser)}
+      {console.log(loggedIn)}
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
           <Route path="/signin" element={<Login handlelogin={handleLogin} />} />
