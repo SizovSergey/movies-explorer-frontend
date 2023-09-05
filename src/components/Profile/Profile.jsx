@@ -28,7 +28,7 @@ const Profile = ({ handleSignOut }) => {
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
-            <input value={name}
+            <input 
               onChange={handleChangeName}
               type="text"
               className="profile__input"
@@ -43,7 +43,7 @@ const Profile = ({ handleSignOut }) => {
             />
           </label>
           <label className='profile__placeholder' data-placeholder="Email">
-            <input value={email}
+            <input 
               onChange={handleChangeDescription}
               type="email"
               className="profile__input"
