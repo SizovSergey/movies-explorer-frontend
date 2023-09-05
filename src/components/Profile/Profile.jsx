@@ -5,8 +5,8 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 const Profile = ({ handleSignOut }) => {
 
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [name, setName] = React.useState(currentUser.name);
+  const [email, setEmail] = React.useState(currentUser.email);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
 
   const handleButtonClick = () => {
@@ -28,7 +28,7 @@ const Profile = ({ handleSignOut }) => {
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
-            <input 
+            <input value={name}
               onChange={handleChangeName}
               type="text"
               className="profile__input"
@@ -37,20 +37,18 @@ const Profile = ({ handleSignOut }) => {
               minLength="2"
               maxLength="40"
               placeholder="Виталий"
-              value={currentUser.name}
               disabled={!showSaveBtn}
               required
             />
           </label>
           <label className='profile__placeholder' data-placeholder="Email">
-            <input 
+            <input value={email}
               onChange={handleChangeDescription}
               type="email"
               className="profile__input"
               id="email"
               name="email"
               placeholder="pochta@yandex.ru"
-              value={currentUser.email}
               disabled={!showSaveBtn}
               required />
           </label>
