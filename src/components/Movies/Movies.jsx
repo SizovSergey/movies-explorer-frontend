@@ -17,7 +17,7 @@ const Movies = () => {
     const storedMovies = localStorage.getItem('movies');
     const storedfilteredMovies = JSON.parse(localStorage.getItem('filteredMovies'));
     const storedSearchText = localStorage.getItem('searchText') || '';
-    const storedIsShort = localStorage.getItem('isShort');
+    const storedIsShort = localStorage.getItem('isShort') === 'true';
 
     setMovies(storedMovies);
     setFilteredMovies(storedfilteredMovies);
@@ -28,6 +28,7 @@ const Movies = () => {
 
   React.useEffect(() => {
     localStorage.setItem('isShort', isShort);
+    localStorage.setItem('searchText', searchText);
   }, [searchText, isShort]);
 
   const handleSearchInputChange = (e) => {
@@ -43,8 +44,8 @@ const Movies = () => {
 
     getMovies()
       .then((allMovies) => {
-        const filteredByText = filterMoviesByText(allMovies, searchText, isShort);
 
+        const filteredByText = filterMoviesByText(allMovies, searchText, isShort);
         localStorage.setItem('movies', JSON.stringify(allMovies));
         localStorage.setItem('filteredMovies', JSON.stringify(filteredByText));
 
@@ -60,20 +61,24 @@ const Movies = () => {
   };
 
   const handleSearchButtonClick = () => {
-    if (searchText) {
-      handleSearch();
+    if (searchText === '') {
+      console.log('введите текст')
+      setFilteredMovies([])
+
     }
+    handleSearch();
   };
 
   return (
     <main className="movies">
 
-      {console.log(isShort)}
+      {console.log(filteredMovies)}
       <SearchForm
         inputValue={searchText}
         onSearch={handleSearchButtonClick}
         onInputChange={handleSearchInputChange}
         onCheckboxChange={handleShortCheckboxChange}
+        onCheckboxFlag={isShort}
       />
       {isLoading ? (
         <Preloader />

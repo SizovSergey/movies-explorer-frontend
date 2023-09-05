@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-const Profile = ({ isLogin }) => {
+const Profile = ({ handleSignOut }) => {
 
+  const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
@@ -23,7 +25,7 @@ const Profile = ({ isLogin }) => {
   return (
     <main className='profile'>
       <div className='profile__container'>
-        <h1 className='profile__title'>Привет, Виталий!</h1>
+        <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
             <input value={name}
@@ -35,6 +37,7 @@ const Profile = ({ isLogin }) => {
               minLength="2"
               maxLength="40"
               placeholder="Виталий"
+              defaultValue={currentUser.name}
               disabled={!showSaveBtn}
               required
             />
@@ -47,13 +50,14 @@ const Profile = ({ isLogin }) => {
               id="email"
               name="email"
               placeholder="pochta@yandex.ru"
+              defaultValue={currentUser.email}
               disabled={!showSaveBtn}
               required />
           </label>
           {!showSaveBtn ?
             (<div className='profile__button-container'>
-              <a className='profile__link' onClick={handleButtonClick}>Редактировать</a>
-              <Link to="/" className="profile__link profile__logout">Выйти из аккаунта</Link>
+              <Link className='profile__link' onClick={handleButtonClick}>Редактировать</Link>
+              <Link to="/" onClick={handleSignOut} className="profile__link profile__logout">Выйти из аккаунта</Link>
             </div>) : (
               <div className='profile__button-container'>
                 <button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>

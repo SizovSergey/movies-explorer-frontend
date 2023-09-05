@@ -2,9 +2,9 @@ import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 
 
-const Register = () => {
+const Register = ({ handleRegister }) => {
 
-    const [formValue, setFormValue] = React.useState ({
+    const [formValue, setFormValue] = React.useState({
         userName: '',
         email: '',
         password: ''
@@ -22,7 +22,7 @@ const Register = () => {
     }
 
     const validate = () => {
-        const errorsList= {};
+        const errorsList = {};
 
         if (!formValue.userName) {
             errorsList.userName = 'Введите имя';
@@ -39,12 +39,16 @@ const Register = () => {
         return errorsList;
     };
 
+
     const handleSubmit = (e) => {
-        // const { userName, email, password } = formValue; 
+        const { userName, email, password } = formValue;
         e.preventDefault();
         const newErrors = validate();
-        console.log('ошибки:', newErrors);
         setErrors(newErrors);
+        if (Object.keys(newErrors).length === 0) {
+            if (!email && !password) return;
+            handleRegister(userName, email, password);
+        }
     }
 
     return (
@@ -62,11 +66,11 @@ const Register = () => {
                     type="text"
                     className="auth-template__input"
                     id="userName"
-                    name="userName"  
-                    placeholder="Ваше имя..."            
+                    name="userName"
+                    placeholder="Ваше имя..."
                 />
             </label>
-           <span className="auth-template__error">{errors.userName}</span>
+            <span className="auth-template__error">{errors.userName}</span>
             <label className="auth-template__input-container" htmlFor="email">
                 <span className='auth-template__placeholder'>Email</span>
                 <input
@@ -76,10 +80,10 @@ const Register = () => {
                     className="auth-template__input"
                     id="email"
                     name="email"
-                    placeholder="test@email.ru" 
+                    placeholder="test@email.ru"
                 />
             </label>
-           <span className="auth-template__error">{errors.email}</span>
+            <span className="auth-template__error">{errors.email}</span>
             <label className="auth-template__input-container" htmlFor="password">
                 <span className='auth-template__placeholder'>Пароль</span>
                 <input
@@ -89,7 +93,7 @@ const Register = () => {
                     className="auth-template__input"
                     id="password"
                     name="password"
-                    placeholder="12345678"  
+                    placeholder="12345678"
                 />
             </label>
             <span className="auth-template__error">{errors.password}</span>

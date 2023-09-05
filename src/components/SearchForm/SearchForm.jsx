@@ -2,7 +2,8 @@ import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
-const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange }) => {
+const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onCheckboxFlag }) => {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(inputValue);
@@ -25,7 +26,7 @@ const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange }) =
           </button>
         </form>
       </div>
-      <FilterCheckbox onCheckboxChange={onCheckboxChange}/>
+      <FilterCheckbox onCheckboxChange={onCheckboxChange} onCheckboxFlag  = {onCheckboxFlag}/>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React from 'react';
 
-const FilterCheckbox = ({ onCheckboxChange }) => {
+const FilterCheckbox = ({ onCheckboxChange, onCheckboxFlag }) => {
+  
+
   const handleCheckboxChange = () => {
-    onCheckboxChange();
+    onCheckboxChange(); // Вызываем колбэк с новым значением
   };
 
   return (
@@ -12,6 +14,7 @@ const FilterCheckbox = ({ onCheckboxChange }) => {
           className="FilterCheckbox__checkbox"
           type="checkbox"
           onChange={handleCheckboxChange}
+          checked={onCheckboxFlag}
         />
         <span className="FilterCheckbox__slider"></span>
       </label>

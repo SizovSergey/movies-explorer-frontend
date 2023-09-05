@@ -5,40 +5,35 @@ import SavedMovies from "../components/SavedMovies/SavedMovies";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
- const mainPage = ({ loggedIn }) => (
+export const mainPage = ({ loggedIn }) => (
     <>
-        <Header isLogin={loggedIn} />
+        <Header loggedIn={loggedIn} />
         <Main />
         <Footer />
     </>
 );
 
- const profilePage = ({ loggedIn }) => (
+export const profilePage = ({ loggedIn, handleSignOut }) => (
     <>
-        <Header isLogin={loggedIn} />
-        <Profile />
+        <Header loggedIn={loggedIn} />
+        <Profile  handleSignOut={handleSignOut} />
     </>
 );
 
-const moviesPage = ({ loggedIn }) => (
+export const moviesPage = ({ loggedIn }) => (
     <>
-        <Header isLogin={loggedIn} />
-        <Movies isLogin={loggedIn} />
+        <Header loggedIn={loggedIn} />
+        <Movies loggedIn={loggedIn} />
         <Footer />
     </>
 );
 
- const savedMoviesPage = ({ loggedIn }) => (
+ export const savedMoviesPage = ({ loggedIn }) => (
     <>
-        <Header isLogin={loggedIn} />
-        <SavedMovies isLogin={loggedIn} />
+        <Header loggedIn={loggedIn} />
+        <SavedMovies loggedIn={loggedIn} />
         <Footer />
     </>
 );
 
-export default {
-    mainPage,
-    profilePage,
-    moviesPage,
-    savedMoviesPage
-}
+

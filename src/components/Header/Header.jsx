@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 import Burger from '../Burger/Burger';
 import headerLogo from '../../images/header__logo.svg';
 
-const Header = ({ isLogin }) => {
+const Header = ({ loggedIn }) => {
 
     const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
 
@@ -24,8 +24,8 @@ const Header = ({ isLogin }) => {
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
-                <Navigation loggedIn={isLogin} />
-                {isLogin ? (
+                <Navigation loggedIn={loggedIn} />
+                {loggedIn ? (
                     <Link to='/profile'>
                         <button className={location.pathname === '/main' ? 'header__button-profile' : `header__button-profile header__button-profile-white`}>
                             Аккаунт
@@ -42,9 +42,9 @@ const Header = ({ isLogin }) => {
                         <Link to='/signin' className='header__link header__button'>Войти</Link>
                     </div>
                 )}
-                {!isBurgerOpen && isLogin ? (
+                {!isBurgerOpen && loggedIn ? (
                      <button className={location.pathname === '/main' ? `header__button-burger header__button-white` : `header__button-burger`} onClick={handleBurgerClick} />
-                ) : <Burger onClose={closeBurger} loggedIn={isLogin}/>
+                ) : <Burger onClose={closeBurger} loggedIn={loggedIn}/>
                 }
                 </div>
             </header>

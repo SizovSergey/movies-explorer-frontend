@@ -2,7 +2,7 @@ import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ handleloggedIn }) => {
+const Login = ({ handlelogin }) => {
 
     const navigate = useNavigate();
 
@@ -37,13 +37,13 @@ const Login = ({ handleloggedIn }) => {
     };
 
     const handleSubmit = (e) => {
-        // const {  email, password } = formValue; 
+        const {  email, password } = formValue; 
         e.preventDefault();
         const newErrors = validate();
         setErrors(newErrors);
         
         if (Object.keys(newErrors).length === 0) {
-            handleloggedIn();
+            handlelogin(email,password);
             navigate('/movies');
         }
     }
