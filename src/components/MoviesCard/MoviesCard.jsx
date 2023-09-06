@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 const MoviesCard = ({ movie }) => {
 
     const [IsFavorit, setIsFavorit] = React.useState(false);
+    const [isVideoVisible, setVideoVisible] = React.useState(false);
 
     const location = useLocation();
 
@@ -18,10 +19,14 @@ const MoviesCard = ({ movie }) => {
         }
       };
 
+      const toggleVideoVisible = () => {
+        setVideoVisible(!isVideoVisible);
+      }
+
 
     return (
         <div className='movies-card'>
-            <img className='movies-card__image' src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU} />
+            <img className='movies-card__image' src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU} onClick={toggleVideoVisible} />
             <div className='movies-card__container'>
                 <h3 className='movies-card__title'>
                     {movie.nameRU}

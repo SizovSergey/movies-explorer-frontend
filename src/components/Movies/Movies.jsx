@@ -5,13 +5,12 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText } from '../../utils/utils';
 
-const Movies = () => {
+const Movies = ({isLoading, setIsLoading}) => {
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [searchText, setSearchText] = React.useState('');
   const [isShort, setIsShort] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setError] = React.useState(false)
+  const [isError, setError] = React.useState(false);
 
   React.useEffect(() => {
     const storedMovies = localStorage.getItem('movies');

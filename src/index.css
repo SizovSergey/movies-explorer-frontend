@@ -19,6 +19,7 @@
 @import url('./components/Profile/Profile.css');
 @import url('./components/AuthTemplate/AuthTemplate.css');
 @import url('./components/NotFound/NotFound.css');
+@import url('./components/InfoPopup/InfoPopup.css');
 
 body {
     margin: 0;

@@ -30,7 +30,6 @@ const checkResponse = (res) => {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       })
@@ -40,7 +39,6 @@ const checkResponse = (res) => {
     export const getProfile = (token) => {
       return request('/users/me', {
         method: 'GET',
-        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -53,8 +51,9 @@ const checkResponse = (res) => {
         return request(`/users/me`, {
           method: 'PATCH',
           headers: {
+            'Accept': 'application/json',
             "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
           },
           body: JSON.stringify({name,email})
         })

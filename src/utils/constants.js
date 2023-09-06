@@ -13,17 +13,25 @@ export const MainPage = ({ loggedIn }) => (
     </>
 );
 
-export const profilePage = ({ loggedIn, handleSignOut }) => (
+export const profilePage = ({ loggedIn, handleSignOut, handleUpdateProfile }) => (
     <>
         <Header loggedIn={loggedIn} />
-        <Profile  handleSignOut={handleSignOut} />
+        <Profile  
+        handleSignOut={handleSignOut}
+        handleUpdateProfile={handleUpdateProfile}
+        loggedIn={loggedIn}
+        />
     </>
 );
 
-export const moviesPage = ({ loggedIn }) => (
+export const moviesPage = ({ loggedIn, isLoading, setIsLoading }) => (
     <>
         <Header loggedIn={loggedIn} />
-        <Movies loggedIn={loggedIn} />
+        <Movies 
+        loggedIn={loggedIn}
+        isLoading ={isLoading}
+        setIsLoading={setIsLoading}
+        />
         <Footer />
     </>
 );

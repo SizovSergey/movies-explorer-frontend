@@ -2,23 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-const Profile = ({ handleSignOut }) => {
+const Profile = ({ handleSignOut, handleUpdateProfile }) => {
 
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState(currentUser.name);
-  const [email, setEmail] = React.useState(currentUser.email);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
+  const [isInputChanged, setIsInputChanged] = React.useState(false);
+  const [formValue, setFormValue] = React.useState({
+    name: currentUser.name,
+    email: currentUser.email
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+
+    if (formValue.name === currentUser.name && formValue.email === currentUser.email) {
+      setIsInputChanged(true);
+    }
+    
+  }
 
   const handleButtonClick = () => {
     setShowSaveBtn(!showSaveBtn);
   };
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  }
-
-  const handleChangeDescription = (e) => {
-    setEmail(e.target.value);
+  const handleSubmit = (e) => {
+    const { name, email } = formValue;
+    e.preventDefault();
+    handleUpdateProfile(name, email);
   }
 
   return (
@@ -28,8 +43,9 @@ const Profile = ({ handleSignOut }) => {
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form'>
           <label className='profile__placeholder' data-placeholder="Имя">
-            <input value={name}
-              onChange={handleChangeName}
+            <input
+              value={formValue.name}
+              onChange={handleChange}
               type="text"
               className="profile__input"
               id="name"
@@ -42,8 +58,8 @@ const Profile = ({ handleSignOut }) => {
             />
           </label>
           <label className='profile__placeholder' data-placeholder="Email">
-            <input value={email}
-              onChange={handleChangeDescription}
+            <input value={formValue.email}
+              onChange={handleChange}
               type="email"
               className="profile__input"
               id="email"
@@ -58,7 +74,12 @@ const Profile = ({ handleSignOut }) => {
               <Link to="/" onClick={handleSignOut} className="profile__link profile__logout">Выйти из аккаунта</Link>
             </div>) : (
               <div className='profile__button-container'>
-                <button className='profile__save-button' onClick={handleButtonClick}>Сохранить</button>
+                <button className='profile__save-button'
+                  type='submit'
+                  disabled={!isInputChanged} 
+                  onClick={handleSubmit}>
+                  Сохранить
+                </button>
               </div>)
           }
         </form>
