@@ -10,7 +10,7 @@ const InfoPopup = ({ isOpen, onClose, message, PopupFlag }) => {
     return (
         <div className={`info-popup ${isOpen ? "info-popup_opened" : ""}`}>
             <div className={`info-popup__container`}>
-                <img src={!PopupFlag ? succesImg : errorImg} alt={!PopupFlag ? 'ошибка' : 'успешно'} className='info-popup__icon' />
+                <img src={!PopupFlag ? errorImg : succesImg} alt={!PopupFlag ? 'ошибка' : 'успешно'} className='info-popup__icon' />
                 <p className='info-popup__text'>{message}</p>
                 <button className="info-popup__close-button"
                     type="button"

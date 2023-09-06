@@ -1,21 +1,23 @@
 .profile {
+    flex-direction: column;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .profile__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
+    padding-top: 72px;
+    padding-bottom: 70px;
     flex: 1;
 }
 
 .profile__title {
     color: #000;
     text-align: center;
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -29,7 +31,6 @@
 
 .profile__input {
     color: #000;
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -87,15 +88,12 @@
 .profile__button-container {
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
-    margin-top: 100px;
+    margin: 205px 0 0;
 }
-
 
 .profile__link {
     color: #000;
     text-align: center;
-    font-family: Inter;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -108,7 +106,6 @@
 .profile__error {
     color: #FF004C;
     text-align: center;
-    font-family: Inter;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -135,7 +132,6 @@
     min-height: 45px;
     color: #FFF;
     text-align: center;
-    font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -155,22 +151,26 @@ button.profile__save-button[disabled] {
 
 @media screen and (max-width: 768px) {
     .profile__container {
-        padding: 230px auto 269px;
+        padding: 230px 0 269px;
     }
 
     .profile__form {
-        margin: 95px 0 0;
+        margin: 95px auto;
+    }
+
+    .profile__button-container {
+        margin: 105px 0 0;
     }
 
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 440px) {
     .profile__container {
         padding: 65px 30px 40px;
     }
 
     .profile__form {
-        margin: 79px 0 0;
+        margin: 79px auto;
     }
 
     .profile__input {
@@ -187,6 +187,14 @@ button.profile__save-button[disabled] {
 
     .profile__save-button {
         width: 260px;
+    }
+
+    .profile__button-container {
+        margin: 288px 0 0;
+    }
+
+    .profile__link {
+        font-size: 12px;
     }
 
 }

@@ -5,7 +5,7 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText } from '../../utils/utils';
 
-const Movies = ({isLoading, setIsLoading}) => {
+const Movies = ({ isLoading, setIsLoading, setInfoPopup, setMessagePopup, setPopupFlag }) => {
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [searchText, setSearchText] = React.useState('');
@@ -16,20 +16,14 @@ const Movies = ({isLoading, setIsLoading}) => {
     const storedMovies = localStorage.getItem('movies');
     const storedfilteredMovies = JSON.parse(localStorage.getItem('filteredMovies'));
     const storedSearchText = localStorage.getItem('searchText') || '';
-    const storedIsShort = localStorage.getItem('isShort') === 'true';
+    const storedIsShort = JSON.parse(localStorage.getItem('isShort')) || false;
 
     setMovies(storedMovies);
     setFilteredMovies(storedfilteredMovies);
     setSearchText(storedSearchText);
     setIsShort(storedIsShort);
 
-    
   }, []);
-
-  React.useEffect(() => {
-    localStorage.setItem('isShort', isShort);
-    localStorage.setItem('searchText', searchText);
-  }, [searchText, isShort]);
 
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -41,7 +35,8 @@ const Movies = ({isLoading, setIsLoading}) => {
 
   const handleSearch = () => {
     setIsLoading(true);
-
+    localStorage.setItem('searchText', searchText);
+    localStorage.setItem('isShort', isShort);
     getMovies()
       .then((allMovies) => {
 
@@ -61,10 +56,12 @@ const Movies = ({isLoading, setIsLoading}) => {
   };
 
   const handleSearchButtonClick = () => {
-    if (searchText === '') {
-      setSearchText('введите текст')
-  
-
+    if (searchText.length === 0) {
+       setSearchText('введите ключевое слово');
+       setInfoPopup(true);
+       setMessagePopup('введите ключевое слово');
+       setPopupFlag(true);
+       return
     }
     handleSearch();
   };

@@ -16,27 +16,30 @@ export const MainPage = ({ loggedIn }) => (
 export const profilePage = ({ loggedIn, handleSignOut, handleUpdateProfile }) => (
     <>
         <Header loggedIn={loggedIn} />
-        <Profile  
-        handleSignOut={handleSignOut}
-        handleUpdateProfile={handleUpdateProfile}
-        loggedIn={loggedIn}
+        <Profile
+            handleSignOut={handleSignOut}
+            handleUpdateProfile={handleUpdateProfile}
+            loggedIn={loggedIn}
         />
     </>
 );
 
-export const moviesPage = ({ loggedIn, isLoading, setIsLoading }) => (
+export const moviesPage = ({ loggedIn, isLoading, setIsLoading, setInfoPopup, setMessagePopup, setPopupFlag }) => (
     <>
         <Header loggedIn={loggedIn} />
-        <Movies 
-        loggedIn={loggedIn}
-        isLoading ={isLoading}
-        setIsLoading={setIsLoading}
+        <Movies
+            loggedIn={loggedIn}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            setInfoPopup={setInfoPopup}
+            setMessagePopup={setMessagePopup}
+            setPopupFlag={setPopupFlag}
         />
         <Footer />
     </>
 );
 
- export const savedMoviesPage = ({ loggedIn }) => (
+export const savedMoviesPage = ({ loggedIn }) => (
     <>
         <Header loggedIn={loggedIn} />
         <SavedMovies loggedIn={loggedIn} />

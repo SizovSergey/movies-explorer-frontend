@@ -26,7 +26,7 @@ const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onC
           </button>
         </form>
       </div>
-      <FilterCheckbox onCheckboxChange={onCheckboxChange} onCheckboxFlag  = {onCheckboxFlag}/>
+      <FilterCheckbox onCheckboxChange={onCheckboxChange} onCheckboxFlag={onCheckboxFlag}/>
     </div>
   );
 };

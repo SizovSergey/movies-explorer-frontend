@@ -62,7 +62,7 @@ function App() {
       .catch(error => {
         setInfoPopup(true);
         setMessagePopup('При обновлении профиля произошла ошибка.');
-        setInfoPopup(true);
+        setPopupFlag(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -166,6 +166,9 @@ function App() {
               loggedIn={loggedIn}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
+              onOpenPopup={setInfoPopup}
+              onMessagePopup={setMessagePopup}
+              onPopupFlag={setPopupFlag}
             />}
           />
 
