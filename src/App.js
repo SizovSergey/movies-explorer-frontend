@@ -23,6 +23,12 @@ function App() {
     email: '',
   });
 
+  const openInfoPopup = (text,flag) => {
+    setInfoPopup(true);
+    setMessagePopup(text);
+    setPopupFlag(flag)
+  }
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,14 +61,10 @@ function App() {
     updateProfile(name, email)
       .then((res) => {
         setCurrentUser({name:res.name, email:res.email})
-        setInfoPopup(true)
-        setMessagePopup('Профиль успешно отредактирован!');
-        setPopupFlag(false);
+        openInfoPopup('Профиль успешно отредактирован!',false);
       })
       .catch(error => {
-        setInfoPopup(true);
-        setMessagePopup('При обновлении профиля произошла ошибка.');
-        setPopupFlag(true);
+        openInfoPopup('При обновлении профиля произошла ошибка.',true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -166,9 +168,7 @@ function App() {
               loggedIn={loggedIn}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              onOpenPopup={setInfoPopup}
-              onMessagePopup={setMessagePopup}
-              onPopupFlag={setPopupFlag}
+              openInfoPopup={openInfoPopup}
             />}
           />
 

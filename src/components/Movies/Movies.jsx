@@ -5,7 +5,7 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText } from '../../utils/utils';
 
-const Movies = ({ isLoading, setIsLoading, setInfoPopup, setMessagePopup, setPopupFlag }) => {
+const Movies = ({ isLoading, setIsLoading, openInfoPopup }) => {
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [searchText, setSearchText] = React.useState('');
@@ -58,9 +58,8 @@ const Movies = ({ isLoading, setIsLoading, setInfoPopup, setMessagePopup, setPop
   const handleSearchButtonClick = () => {
     if (searchText.length === 0) {
        setSearchText('введите ключевое слово');
-       setInfoPopup(true);
-       setMessagePopup('введите ключевое слово');
-       setPopupFlag(true);
+       openInfoPopup('введите ключевое слово',false)
+       setFilteredMovies([]);
        return
     }
     handleSearch();

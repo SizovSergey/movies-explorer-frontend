@@ -24,16 +24,14 @@ export const profilePage = ({ loggedIn, handleSignOut, handleUpdateProfile }) =>
     </>
 );
 
-export const moviesPage = ({ loggedIn, isLoading, setIsLoading, setInfoPopup, setMessagePopup, setPopupFlag }) => (
+export const moviesPage = ({ loggedIn, isLoading, setIsLoading, openInfoPopup }) => (
     <>
         <Header loggedIn={loggedIn} />
         <Movies
             loggedIn={loggedIn}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
-            setInfoPopup={setInfoPopup}
-            setMessagePopup={setMessagePopup}
-            setPopupFlag={setPopupFlag}
+            openInfoPopup={openInfoPopup}
         />
         <Footer />
     </>
