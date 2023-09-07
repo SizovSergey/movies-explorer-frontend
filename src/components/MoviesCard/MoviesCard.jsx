@@ -1,41 +1,45 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
-const MoviesCard = ({ movie, handleSaveMovie , handleDeleteMovie }) => {
+const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
 
-    const [IsFavorit, setIsFavorit] = React.useState(false);
+    const [IsFavorit, setIsFavorit] = React.useState(
+        localStorage.getItem(`IsFavorit_${movie.id}`) === "true");
     const [isVideoVisible, setVideoVisible] = React.useState(false);
 
     const location = useLocation();
 
     const handleLikeClick = () => {
         setIsFavorit(true);
+        localStorage.setItem(`IsFavorit_${movie.id}`, "true");
         handleSaveMovie(movie);
     }
 
     const handleDeleteClick = () => {
         handleDeleteMovie(movie);
+        localStorage.setItem(`IsFavorit_${movie.id}`, "false");
         setIsFavorit(false);
-      };
+    };
 
-      const toggleVideoVisible = () => {
-        setVideoVisible(!isVideoVisible);
-      }
-
+    const handleDeleteSaveMovieClick = () => {
+        handleDeleteMovie(movie);
+        setIsFavorit(true);
+    };
 
     return (
         <div className='movies-card'>
-             {console.log(movie)}
-            <img className='movies-card__image' src={location.pathname === '/saved-movies' ? `${movie.image}` :`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU} onClick={toggleVideoVisible} />
+            <Link to={movie.trailerLink} target='_blank' rel='noreferrer'>
+                <img className='movies-card__image' src={location.pathname === '/saved-movies' ? `${movie.image}` : `https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRU}  />
+            </Link>
             <div className='movies-card__container'>
                 <h3 className='movies-card__title'>
                     {movie.nameRU}
                 </h3>
-                { location.pathname === '/movies' &&
-                <button className={!IsFavorit ? `movies-card__button-like` : 'movies-card__button-unlike'} aria-label="Поставить класс фильму" onClick={ !IsFavorit ? handleLikeClick : handleDeleteClick} />
+                {location.pathname === '/movies' &&
+                    <button className={!IsFavorit ? `movies-card__button-like` : 'movies-card__button-unlike'} aria-label="Поставить класс фильму" onClick={!IsFavorit ? handleLikeClick : handleDeleteClick} />
                 }
-                { location.pathname === '/saved-movies' &&
-                <button className='movies-card__button-delete' aria-label="Удалить фильм" onClick={handleDeleteClick} />
+                {location.pathname === '/saved-movies' &&
+                    <button className='movies-card__button-delete' aria-label="Удалить фильм" onClick={handleDeleteSaveMovieClick} />
                 }
             </div>
             <div className='movies-card__line'></div>

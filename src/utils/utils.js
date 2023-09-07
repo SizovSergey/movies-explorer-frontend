@@ -9,9 +9,16 @@ export const filterMoviesByText = (movies, searchText, checked) => {
       lowercaseNameEN.includes(lowercaseQuery);
 
     if (checked) {
-      return textMatch && movie.duration <= 40;
-    }
-
+      return textMatch.filter((movie) => movie.duration <= 40);
+    } 
     return textMatch;
   });
+};
+
+export const filterMoviesByCheckbox = (movies, checked) => {
+  if (checked) {
+    return movies.filter((movie) => movie.duration <= 40);
+  } else {
+    return movies;
+  }
 };

@@ -93,7 +93,7 @@ function App() {
   const handleDeleteMovie = (movie) => {
     deleteMovies(movie._id)
       .then((movie) => {
-        const isAlreadyDeleted = savedMovies.filter(item => movie._id !== item.id);
+        const isAlreadyDeleted = savedMovies.filter(item => movie._id !== item._id);
         setSavedMovies(isAlreadyDeleted)
       })
       .catch((error) => {
@@ -151,7 +151,8 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem('token');
     localStorage.removeItem('movies');
-    localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('searchingMovies');
+    localStorage.removeItem('fountedMovies');
     localStorage.removeItem('isShort');
     localStorage.removeItem('searchText');
     navigate('/sign-in', { replace: true })
@@ -160,7 +161,6 @@ function App() {
 
   return (
     <div className="page">
-      {console.log(isPopupFlag)}
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
           <Route path="/signin" element={<Login handlelogin={handleLogin} />} />
