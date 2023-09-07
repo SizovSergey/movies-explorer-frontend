@@ -5,7 +5,7 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText } from '../../utils/utils';
 
-const Movies = ({ isLoading, setIsLoading, openInfoPopup }) => {
+const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [searchText, setSearchText] = React.useState('');
@@ -82,7 +82,7 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup }) => {
         isError ? (
           <p className='movies__error'>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>
         ) : (
-          <MoviesCardList movies={filteredMovies} />
+          <MoviesCardList movies={filteredMovies} handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
         )
       )}
       <button className="movies__button-more">Eщё</button>

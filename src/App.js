@@ -13,7 +13,7 @@ import ProtectedRoute from './components/protectedRoute';
 function App() {
   const [loggedIn, setLoggedIn] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isSavedMovies, setSavedMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [serchingSavedMovies, setserchingSavedMovies] = React.useState([]);
   const [isInfoPopupOpen, setInfoPopup] = React.useState(false);
   const [messagePopup, setMessagePopup] = React.useState('');
@@ -23,7 +23,7 @@ function App() {
     email: '',
   });
 
-  const openInfoPopup = (text,flag) => {
+  const openInfoPopup = (text, flag) => {
     setInfoPopup(true);
     setMessagePopup(text);
     setPopupFlag(flag)
@@ -45,10 +45,11 @@ function App() {
       ])
         .then(([userInfo, savedMovies]) => {
           setCurrentUser({
-              name: userInfo.name,
-              email: userInfo.email
-            });
+            name: userInfo.name,
+            email: userInfo.email
+          });
           setSavedMovies(savedMovies);
+          localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         })
         .catch((err) => {
           console.log(err.message);
@@ -60,21 +61,23 @@ function App() {
     setIsLoading(true);
     updateProfile(name, email)
       .then((res) => {
-        setCurrentUser({name:res.name, email:res.email})
-        openInfoPopup('Профиль успешно отредактирован!',false);
+        setCurrentUser({ name: res.name, email: res.email })
+        openInfoPopup('Профиль успешно отредактирован!', false);
       })
       .catch(error => {
-        openInfoPopup('При обновлении профиля произошла ошибка.',true);
+        openInfoPopup('При обновлении профиля произошла ошибка.', true);
       })
       .finally(() => {
         setIsLoading(false);
       })
   }
 
-  const handleKlassMovie = (movie) => {
-    saveMovies(movie)
+  const handleSaveMovie = (movie) => {
+    const isAlreadySaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
+    if (!isAlreadySaved) {
+      saveMovies(movie)
       .then((movie) => {
-        const newMovie = [movie, ...isSavedMovies];
+        const newMovie = [movie, ...savedMovies];
         setSavedMovies(newMovie);
         setserchingSavedMovies(newMovie);
       })
@@ -84,8 +87,19 @@ function App() {
         setPopupFlag(true);
         setInfoPopup(true);
       });
+    }
   };
 
+  const handleDeleteMovie = (movie) => {
+    deleteMovies(movie._id)
+      .then((movie) => {
+        const isAlreadyDeleted = savedMovies.filter(item => movie._id !== item.id);
+        setSavedMovies(isAlreadyDeleted)
+      })
+      .catch((error) => {
+        openInfoPopup('При удаление фильма произошла ошибка', true)
+      })
+  }
 
   const handleRegister = (name, email, password) => {
     register(name, email, password)
@@ -169,13 +183,22 @@ function App() {
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               openInfoPopup={openInfoPopup}
+              handleSaveMovie={handleSaveMovie}
+              handleDeleteMovie={handleDeleteMovie}
             />}
           />
 
           <Route path="/saved-movies"
             element={<ProtectedRoute
               element={savedMoviesPage}
-              loggedIn={loggedIn} />} />
+              loggedIn={loggedIn}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
+              setserchingSavedMovies={setserchingSavedMovies}
+              handleDeleteMovie={handleDeleteMovie}
+            />} />
 
           <Route path="/" element={<Navigate to="/main" replace />} />
           <Route path="*" element={<NotFound />} />
@@ -183,12 +206,12 @@ function App() {
       </CurrentUserContext.Provider>
 
       <InfoPopup
-          isOpen={isInfoPopupOpen}
-          onClose={closeInfoPopup}
-          loggedIn={loggedIn}
-          message={messagePopup}
-          PopupFlag ={isPopupFlag}
-        />
+        isOpen={isInfoPopupOpen}
+        onClose={closeInfoPopup}
+        loggedIn={loggedIn}
+        message={messagePopup}
+        PopupFlag={isPopupFlag}
+      />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-const MoviesCardList = ({ movies }) => {
+const MoviesCardList = ({ movies, handleSaveMovie, handleDeleteMovie }) => {
   const location = useLocation();
 
   return (
@@ -13,6 +13,8 @@ const MoviesCardList = ({ movies }) => {
             <MoviesCard
               key={movie.id}
               movie={movie}
+              handleSaveMovie={handleSaveMovie}
+              handleDeleteMovie={handleDeleteMovie}
             />
           )
         })}

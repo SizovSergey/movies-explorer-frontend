@@ -1,11 +1,16 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import { useLocation } from 'react-router-dom';
 
+const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onCheckboxFlag, onSavedSearch }) => {
 
-const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onCheckboxFlag }) => {
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (location.pathname === '/saved-movies') {
+      return onSavedSearch(inputValue)
+    }   
     onSearch(inputValue);
   };
 
