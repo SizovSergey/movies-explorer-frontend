@@ -24,7 +24,7 @@ export const profilePage = ({ loggedIn, handleSignOut, handleUpdateProfile }) =>
     </>
 );
 
-export const moviesPage = ({ loggedIn, isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie }) => (
+export const moviesPage = ({ loggedIn, isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie, savedMovies }) => (
     <>
         <Header loggedIn={loggedIn} />
         <Movies
@@ -34,6 +34,7 @@ export const moviesPage = ({ loggedIn, isLoading, setIsLoading, openInfoPopup, h
             openInfoPopup={openInfoPopup}
             handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
         />
         <Footer />
     </>

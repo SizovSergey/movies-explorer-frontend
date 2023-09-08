@@ -5,7 +5,7 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
-const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
+const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie, savedMovies }) => {
   const [movies, setMovies] = React.useState([]);
   const [searchingMovies, setSearchingMovies] = React.useState([]);
   const [foundedMovies, setFoundedMovies] = React.useState([]);
@@ -26,7 +26,17 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
     setSearchText(storedSearchText);
     setIsShort(storedIsShort);
 
+    if (searchingMovies) {
+      setSearchingMovies(searchLikedMovie(searchingMovies, savedMovies));
+    }
   }, []);
+
+  const searchLikedMovie = (movies, saveMovies) => (
+    movies.map(movie => ({
+        ...movie,
+        liked: saveMovies.some(saveMovies => saveMovies.movieId === movie.id)
+    }))
+);
 
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -51,8 +61,9 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
       .then((allMovies) => {
         
         const filteredByText = filterMoviesByText(allMovies, searchText, isShort);
-        setSearchingMovies(isShort ? filterMoviesByCheckbox(filteredByText) : filteredByText)
         setFoundedMovies(filteredByText);
+        setSearchingMovies(isShort ? filterMoviesByCheckbox(filteredByText) : filteredByText)
+        
         setMovies(allMovies);
         setIsLoading(false);
         localStorage.setItem('movies', JSON.stringify(allMovies));

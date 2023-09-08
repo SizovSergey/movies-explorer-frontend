@@ -26,6 +26,16 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
         setIsFavorit(true);
     };
 
+    const convertDurationToHoursAndMinutes = (duration) => {
+        const hours = Math.floor(duration / 60);
+        const remainingMinutes = duration % 60;
+        if (hours > 0) {
+            return `${hours}ч${remainingMinutes}м`;
+        } else {
+            return `${remainingMinutes}м`;
+        }
+    }
+
     return (
         <div className='movies-card'>
             <Link to={movie.trailerLink} target='_blank' rel='noreferrer'>
@@ -43,7 +53,7 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
                 }
             </div>
             <div className='movies-card__line'></div>
-            <p className='movies-card__duration'>{movie.duration}</p>
+            <p className='movies-card__duration'>{convertDurationToHoursAndMinutes(movie.duration)}</p>
         </div>
     );
 }
