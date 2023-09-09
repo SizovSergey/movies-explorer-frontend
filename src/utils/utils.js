@@ -1,4 +1,4 @@
-export const filterMoviesByText = (movies, searchText, checked) => {
+export const filterMoviesByText = (movies, searchText) => {
   return movies.filter((movie) => {
     const lowercaseQuery = searchText.toLowerCase();
     const lowercaseNameRU = movie.nameRU.toLowerCase();
@@ -8,12 +8,9 @@ export const filterMoviesByText = (movies, searchText, checked) => {
       lowercaseNameRU.includes(lowercaseQuery) ||
       lowercaseNameEN.includes(lowercaseQuery);
 
-    if (checked) {
-      return textMatch.filter((movie) => movie.duration <= 40);
-    } 
     return textMatch;
   });
-};
+}; 
 
 export const filterMoviesByCheckbox = (movies, checked) => {
   if (checked) {
