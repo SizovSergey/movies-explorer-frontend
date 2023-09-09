@@ -8,81 +8,57 @@ import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
 const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setSavedMovies, setserchingSavedMovies, handleDeleteMovie }) => {
 
-    const [searchText, setSearchText] = React.useState('');
+    const [searchTextSavedMovie, setSearchTextSavedMovie] = React.useState('');
     const [shortSavedMovies, setShortSavedMovies] = React.useState([]);
-    const [isSavedMovieShort, seSavedMovieShort] = React.useState(false);
-    const [isError, setError] = React.useState(false);
+    const [isSavedMovieShort, setSavedMovieShort] = React.useState(false);
 
     React.useEffect(() => {
         setSavedMovies(savedMovies);
     }, []);
 
-    const filterMovies = (text) => {
-        const storedMovies = JSON.parse(localStorage.getItem('userMovies'));
-        const filteredMovies = filterMoviesByText(storedMovies, text);
-        if(filteredMovies.length === 0) {
-          return openInfoPopup('Ничего не найдено', false);
-        }
-       return filteredMovies;
-      };
 
-    const handleSearch = (text, short) => {
+    const handleSearchSavedPage = (text, short) => {
         setIsLoading(true);
-        getSaveMovies()
-          .then((allMovies) => {
-            setSavedMovies(allMovies);
-            localStorage.setItem('userMovies', JSON.stringify(savedMovies));
-      
-            setSavedMovies(prevSearchingMovies => {
-              const filter = filterMovies(text, short);
+              const filter = filterMoviesByText(savedMovies,text);
+              setSavedMovies(filter);
               if (short) {
                 setShortSavedMovies(filterMoviesByCheckbox(filter, short));
-                });
               }
-              return filter;
-            });
-          })
-          .catch((err) => {
-            setIsLoading(false);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
+              setIsLoading(false);
       };
     
     
-      const handleSearchInputChange = (e) => {
-        setSearchText(e.target.value);
+      const handleSearchInputChangeSavedPage = (e) => {
+        setSearchTextSavedMovie(e.target.value);
       };
     
       const handleShortCheckboxChange = () => {
-        setIsShort(!isSavedMovieShort);
+        setSavedMovieShort(!isSavedMovieShort);
         if (!isSavedMovieShort) {
           const updatedShortMovies = filterMoviesByCheckbox(savedMovies, !isSavedMovieShort);
           setShortSavedMovies(updatedShortMovies);
         } else {
-          handleSearch(searchText, !isSavedMovieShort);
+            handleSearchSavedPage(searchTextSavedMovie, !isSavedMovieShort);
         }
       };
 
-    const handleSearcSavedhButtonClick = () => {
-        if (searchText.length === 0) {
-            setSearchText('введите ключевое слово');
-            openInfoPopup('введите ключевое слово', false)
+    const handleSearcSavedhButtonClick = (text) => {
+        if (setSearchTextSavedMovie.length === 0) {
+            setSearchTextSavedMovie('введите ключевое слово');
             setserchingSavedMovies([]);
             return
         }
-        handleSearch();
+        handleSearchSavedPage(searchTextSavedMovie, isSavedMovieShort);
     };
 
     return (
         <main className='saved-movies'>
             <SearchForm
-                onSavedSearch={handleSearcSavedhButtonClick} />
+                handleSearcSavedhButtonClick={handleSearcSavedhButtonClick} onSaveMovieTextChange={handleSearchInputChangeSavedPage} />
             {isLoading ? (
                 <Preloader />) :
                 (<MoviesCardList
-                    movies={savedMovies}
+                    movies={isSavedMovieShort ? shortSavedMovies :savedMovies}
                     handleDeleteMovie={handleDeleteMovie}
                 />)
             }

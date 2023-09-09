@@ -1,10 +1,15 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-const FilterCheckbox = ({ onCheckboxChange, onCheckboxFlag }) => {
-  
+const FilterCheckbox = ({ onCheckboxChange, onCheckboxFlag, handleShortCheckboxChange }) => {
+
+  const location = useLocation();
 
   const handleCheckboxChange = () => {
-    onCheckboxChange(); 
+    if (location.pathname === '/saved-movies') {
+      return handleShortCheckboxChange()
+    }
+    onCheckboxChange();
   };
 
   return (

@@ -2,14 +2,14 @@ import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useLocation } from 'react-router-dom';
 
-const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onCheckboxFlag, onSavedSearch }) => {
+const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onCheckboxFlag, handleSearcSavedhButtonClick, onSaveMovieTextChange, handleShortCheckboxChange }) => {
 
   const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (location.pathname === '/saved-movies') {
-      return onSavedSearch(inputValue)
+      return handleSearcSavedhButtonClick(inputValue)
     }   
     onSearch(inputValue);
   };
@@ -24,14 +24,14 @@ const SearchForm = ({ onSearch, inputValue, onInputChange, onCheckboxChange, onC
             placeholder="Фильм"
             name="searchText"
             value={inputValue}
-            onChange={onInputChange} 
+            onChange={location.pathname === '/saved-movies' ? onSaveMovieTextChange : onInputChange} 
           />
           <button type="submit" className="search-form__button">
             Найти
           </button>
         </form>
       </div>
-      <FilterCheckbox onCheckboxChange={onCheckboxChange} onCheckboxFlag={onCheckboxFlag}/>
+      <FilterCheckbox onCheckboxChange={onCheckboxChange} onCheckboxFlag={onCheckboxFlag} handleShortCheckboxChange={handleShortCheckboxChange}/>
     </div>
   );
 };

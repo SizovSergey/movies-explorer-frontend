@@ -11,7 +11,7 @@ const MoviesCardList = ({ movies, handleSaveMovie, handleDeleteMovie }) => {
         movies.map((movie) => {
           return (
             <MoviesCard
-              key={location.pathname === '/saved-movies' ? movie.movieId : movie.id}
+              key={location.pathname === '/saved-movies' ? movie._id : movie.id}
               movie={movie}
               handleSaveMovie={handleSaveMovie}
               handleDeleteMovie={handleDeleteMovie}
