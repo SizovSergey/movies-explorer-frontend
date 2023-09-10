@@ -1,54 +1,19 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
+import { useFormWithValidation } from '../../hooks/usevalidation';
 
 
 const Register = ({ handleRegister }) => {
 
-    const [formValue, setFormValue] = React.useState({
-        userName: '',
-        email: '',
-        password: ''
-    });
-
-    const [errors, setErrors] = React.useState({});
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setFormValue({
-            ...formValue,
-            [name]: value
-        });
-    }
-
-    const validate = () => {
-        const errorsList = {};
-
-        if (!formValue.userName) {
-            errorsList.userName = 'Введите имя';
-        }
-
-        if (!formValue.email) {
-            errorsList.email = 'Введите email';
-        }
-
-        if (!formValue.password || formValue.password.length < 8) {
-            errorsList.password = 'Пароль должен быть не менее 8 символов';
-        }
-
-        return errorsList;
-    };
-
-
+    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  
     const handleSubmit = (e) => {
-        const { userName, email, password } = formValue;
-        e.preventDefault();
-        const newErrors = validate();
-        setErrors(newErrors);
-        if (Object.keys(newErrors).length === 0) {
-            if (!email && !password) return;
-            handleRegister(userName, email, password);
-        }
+      e.preventDefault();
+      const { userName, email, password } = values;
+      if (isValid) {
+        handleRegister(userName, email, password);
+        resetForm()
+      }
     }
 
     return (
@@ -57,12 +22,13 @@ const Register = ({ handleRegister }) => {
             name="register"
             buttonText="Зарегистрироваться"
             handleSubmit={handleSubmit}
+            isValid={!isValid}
         >
             <label className="auth-template__input-container" htmlFor="userName">
                 <span className='auth-template__placeholder'>Имя</span>
                 <input
                     onChange={handleChange}
-                    value={formValue.userName}
+                    value={values.userName || ''}
                     type="text"
                     className="auth-template__input"
                     id="userName"
@@ -75,7 +41,7 @@ const Register = ({ handleRegister }) => {
                 <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
-                    value={formValue.email}
+                    value={values.email || ''}
                     type="email"
                     className="auth-template__input"
                     id="email"
@@ -88,7 +54,7 @@ const Register = ({ handleRegister }) => {
                 <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
-                    value={formValue.password}
+                    value={values.password || ''}
                     type="password"
                     className="auth-template__input"
                     id="password"

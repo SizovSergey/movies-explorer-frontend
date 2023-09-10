@@ -1,4 +1,6 @@
 
+const token = localStorage.getItem("token");
+
 const checkResponse = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
@@ -7,9 +9,6 @@ const checkResponse = (res) => {
     const url = `https://api.ssgdiplom.nomoreparties.co${endpoint}`;
     return fetch(url, options).then(checkResponse);
   }
-
-  const token = localStorage.getItem("token");
-
 
   export const register = ( name, email, password) => {
     return request('/signup', {
@@ -36,13 +35,13 @@ const checkResponse = (res) => {
   
     };
   
-    export const getProfile = (token) => {
+    export const getProfile = (jwt) => {
       return request('/users/me', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${jwt}`,
         },
       })
     };
@@ -64,7 +63,7 @@ const checkResponse = (res) => {
           method: 'POST',
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify({
             country: movie.country,
@@ -82,12 +81,12 @@ const checkResponse = (res) => {
         })
       }
   
-      export const getSaveMovies = () => {
+      export const getSaveMovies = (jwt) => {
         return request(`/movies`, {
           method: 'GET',
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${jwt}`,
           },
         })
       }
@@ -97,7 +96,7 @@ const checkResponse = (res) => {
           method: 'DELETE',
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
         })
       }

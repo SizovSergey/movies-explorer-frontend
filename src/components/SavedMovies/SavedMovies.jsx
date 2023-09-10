@@ -1,7 +1,6 @@
 import React from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-import movies from '../../utils/movies';
 import { getSaveMovies } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
@@ -13,34 +12,42 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
     const [isSavedMovieShort, setSavedMovieShort] = React.useState(false);
 
     React.useEffect(() => {
-        setSavedMovies(savedMovies);
-    }, []);
+        const jwt = localStorage.getItem('token');
+            getSaveMovies(jwt)
+            .then((savedMovies) => {
+              setSavedMovies(savedMovies);
+              localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+      }, [])
 
 
     const handleSearchSavedPage = (text, short) => {
         setIsLoading(true);
-              const filter = filterMoviesByText(savedMovies,text);
-              setSavedMovies(filter);
-              if (short) {
-                setShortSavedMovies(filterMoviesByCheckbox(filter, short));
-              }
-              setIsLoading(false);
-      };
-    
-    
-      const handleSearchInputChangeSavedPage = (e) => {
+        const filter = filterMoviesByText(savedMovies, text);
+        setSavedMovies(filter);
+        if (short) {
+            setShortSavedMovies(filterMoviesByCheckbox(filter, short));
+        }
+        setIsLoading(false);
+    };
+
+
+    const handleSearchInputChangeSavedPage = (e) => {
         setSearchTextSavedMovie(e.target.value);
-      };
-    
-      const handleShortCheckboxChange = () => {
+    };
+
+    const handleShortCheckboxChange = () => {
         setSavedMovieShort(!isSavedMovieShort);
         if (!isSavedMovieShort) {
-          const updatedShortMovies = filterMoviesByCheckbox(savedMovies, !isSavedMovieShort);
-          setShortSavedMovies(updatedShortMovies);
+            const updatedShortMovies = filterMoviesByCheckbox(savedMovies, !isSavedMovieShort);
+            setShortSavedMovies(updatedShortMovies);
         } else {
             handleSearchSavedPage(searchTextSavedMovie, !isSavedMovieShort);
         }
-      };
+    };
 
     const handleSearcSavedhButtonClick = (text) => {
         if (setSearchTextSavedMovie.length === 0) {
@@ -54,11 +61,13 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
     return (
         <main className='saved-movies'>
             <SearchForm
-                handleSearcSavedhButtonClick={handleSearcSavedhButtonClick} onSaveMovieTextChange={handleSearchInputChangeSavedPage} />
+                handleSearcSavedhButtonClick={handleSearcSavedhButtonClick}
+                onSaveMovieTextChange={handleSearchInputChangeSavedPage}
+                handleShortCheckboxChange={handleShortCheckboxChange} />
             {isLoading ? (
                 <Preloader />) :
                 (<MoviesCardList
-                    movies={isSavedMovieShort ? shortSavedMovies :savedMovies}
+                    movies={isSavedMovieShort ? shortSavedMovies : savedMovies}
                     handleDeleteMovie={handleDeleteMovie}
                 />)
             }

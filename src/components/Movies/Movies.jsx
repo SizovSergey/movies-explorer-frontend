@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import getMovies from '../../utils/MoviesApi';
@@ -6,14 +6,14 @@ import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
 const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie, savedMovies }) => {
-  const [movies, setMovies] = React.useState([]);
-  const [searchingMovies, setSearchingMovies] = React.useState([]);
-  const [shortMovies, setshortMovies] = React.useState([]);
-  const [searchText, setSearchText] = React.useState('');
-  const [isShort, setIsShort] = React.useState(false);
+  const [movies, setMovies] = useState([]);
+  const [searchingMovies, setSearchingMovies] = useState([]);
+  const [shortMovies, setShortMovies] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [isShort, setIsShort] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(0);
 
-
-  React.useEffect(() => {
+  useEffect(() => {
     const storedMovies = JSON.parse(localStorage.getItem('movies')) || [];
     const storedSearchingMovies = JSON.parse(localStorage.getItem('searchingMovies')) || [];
     const storedShortMovies = JSON.parse(localStorage.getItem('shortMovies')) || [];
@@ -22,31 +22,43 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
 
     setMovies(storedMovies);
     setSearchingMovies(storedSearchingMovies);
-    setshortMovies(storedShortMovies);
+    setShortMovies(storedShortMovies);
     setSearchText(storedSearchText);
     setIsShort(storedIsShort);
-
-    // if (searchingMovies) {
-    //   setSearchingMovies(searchLikedMovie(searchingMovies, savedMovies));
-    // }
   }, []);
 
-  //   const searchLikedMovie = (movies, saveMovies) => (
-  //     movies.map(movie => ({
-  //         ...movie,
-  //         liked: saveMovies.some(saveMovies => saveMovies.movieId === movie.id)
-  //     }))
-  // );
+  const handleResize = () => {
+    if (window.innerWidth >= 1140) {
+      setVisibleCards(16);
+    } else if (window.innerWidth >= 850) {
+      setVisibleCards(12);
+    } else if (window.innerWidth >= 756) {
+      setVisibleCards(2);
+    } else {
+      setVisibleCards(1);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (window.innerWidth >= 1140) {
+      setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+    }else if (window.innerWidth >= 850) {
+      setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
+    }else if (window.innerWidth >= 756) {
+      setVisibleCards(prevVisibleCards => prevVisibleCards + 2);
+    } else {
+      setVisibleCards(prevVisibleCards => prevVisibleCards + 5);
+    }
+  };
 
   const filterMovies = (text) => {
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
     const filteredMovies = filterMoviesByText(storedMovies, text);
-    if(filteredMovies.length === 0) {
-      return openInfoPopup('Ничего не найдено', false);
+    if (filteredMovies.length === 0) {
+      openInfoPopup('Ничего не найдено', false);
     }
-   return filteredMovies;
+    return filteredMovies;
   };
-
 
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -58,23 +70,23 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
     if (!isShort) {
       const updatedShortMovies = filterMoviesByCheckbox(searchingMovies, !isShort);
       localStorage.setItem('shortMovies', JSON.stringify(updatedShortMovies));
-      setshortMovies(updatedShortMovies);
+      setShortMovies(updatedShortMovies);
     } else {
       handleSearch(searchText, !isShort);
     }
   };
-  
+
   const handleSearch = (text, short) => {
     setIsLoading(true);
     getMovies()
       .then((allMovies) => {
         setMovies(allMovies);
         localStorage.setItem('movies', JSON.stringify(allMovies));
-  
+
         setSearchingMovies(prevSearchingMovies => {
           const filter = filterMovies(text, short);
           if (short) {
-            setshortMovies(prevShortMovies => {
+            setShortMovies(prevShortMovies => {
               localStorage.setItem('shortMovies', JSON.stringify(prevShortMovies));
               return filterMoviesByCheckbox(filter, short);
             });
@@ -91,7 +103,6 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
         setIsLoading(false);
       });
   };
-  
 
   const handleSearchButtonClick = () => {
     if (searchText.length === 0) {
@@ -100,13 +111,20 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
       setSearchingMovies([]);
       return;
     }
+    handleResize();
     handleSearch(searchText, isShort);
   };
 
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <main className="movies">
-      {console.log(searchingMovies)}
-      {console.log(shortMovies)}
       <SearchForm
         inputValue={searchText}
         onSearch={handleSearchButtonClick}
@@ -117,9 +135,13 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
       {isLoading ? (
         <Preloader />
       ) : (
-        <MoviesCardList movies={isShort ? shortMovies : searchingMovies} handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
+        <MoviesCardList movies={isShort ? shortMovies.slice(0, visibleCards) : searchingMovies.slice(0, visibleCards)} handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
       )}
-      <button className="movies__button-more">Eщё</button>
+      {visibleCards < (isShort ? shortMovies : searchingMovies).length && (
+        <button className="movies__button-more" onClick={handleLoadMore}>
+          Ещё
+        </button>
+      )}
     </main>
   );
 };

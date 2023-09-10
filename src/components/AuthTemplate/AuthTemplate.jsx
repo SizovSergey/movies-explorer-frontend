@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import headerLogo from "../../images/header__logo.svg";
 
-const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
+const AuthTemplate = ({ title, name, children, buttonText, handleSubmit, isValid }) => {
     return (
         <main className='auth-template'>
             <div className='auth-template__container'>
@@ -10,12 +10,12 @@ const AuthTemplate = ({ title, name, children, buttonText, handleSubmit }) => {
                     <img src={headerLogo} alt="Логотип" className="logo" />
                 </Link>
                 <h1 className='auth-template__title'>{title}</h1>
-                <form onSubmit={handleSubmit} className='auth-template__form'>
+                <form onSubmit={handleSubmit} className='auth-template__form' noValidate>
                     <div className='auth-template__form-contant'>
                     {children}
                     </div>
                     <div className='auth-template__footer'>
-                        <button className="auth-template__button" type='submit'>{buttonText}</button >
+                        <button className="auth-template__button" type='submit' disabled={isValid} >{buttonText}</button >
                         {name === 'register' &&
                             <p className='auth-template__text'>Уже зарегистрированы? <Link to="/signin" className="auth-template__link">Войти</Link></p>
                         }

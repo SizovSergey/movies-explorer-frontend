@@ -5,7 +5,7 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
 
     const [IsFavorit, setIsFavorit] = React.useState(
         localStorage.getItem(`IsFavorit_${movie.id}`) === "true");
-    const [isVideoVisible, setVideoVisible] = React.useState(false);
+
 
     const location = useLocation();
 
@@ -16,6 +16,7 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
     }
 
     const handleDeleteClick = () => {
+        console.log(movie)
         handleDeleteMovie(movie);
         localStorage.setItem(`IsFavorit_${movie.id}`, "false");
         setIsFavorit(false);

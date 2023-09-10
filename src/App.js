@@ -14,7 +14,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [serchingSavedMovies, setserchingSavedMovies] = React.useState([]);
   const [isInfoPopupOpen, setInfoPopup] = React.useState(false);
   const [messagePopup, setMessagePopup] = React.useState('');
   const [isPopupFlag, setPopupFlag] = React.useState(false);
@@ -22,6 +21,7 @@ function App() {
     name: '',
     email: '',
   });
+
 
   const openInfoPopup = (text, flag) => {
     setInfoPopup(true);
@@ -35,27 +35,6 @@ function App() {
   const closeInfoPopup = () => {
     setInfoPopup(false)
   }
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem('token');
-    if (loggedIn) {
-      Promise.all([
-        getProfile(jwt),
-        getSaveMovies()
-      ])
-        .then(([userInfo, savedMovies]) => {
-          setCurrentUser({
-            name: userInfo.name,
-            email: userInfo.email
-          });
-          setSavedMovies(savedMovies);
-          localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-  }, [loggedIn])
 
   const handleUpdateProfile = (name, email) => {
     setIsLoading(true);
@@ -73,32 +52,42 @@ function App() {
   }
 
   const handleSaveMovie = (movie) => {
-    const isAlreadySaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
+    const isAlreadySaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
     if (!isAlreadySaved) {
       saveMovies(movie)
-      .then((movie) => {
-        const newMovie = [movie, ...savedMovies];
-        setSavedMovies(newMovie);
-        setserchingSavedMovies(newMovie);
-      })
-      .catch((error) => {
-        console.log(error);
-        setMessagePopup(`Ошибка создания карточки: ${error}`);
-        setPopupFlag(true);
-        setInfoPopup(true);
-      });
+        .then((movie) => {
+          const newMovie = [movie, ...savedMovies];
+          setSavedMovies(newMovie);
+        })
+        .catch((error) => {
+          console.log(error);
+          openInfoPopup('Фильм не удалось сохранить', false);
+        });
     }
   };
 
   const handleDeleteMovie = (movie) => {
-    deleteMovies(movie._id)
-      .then((movie) => {
-        const isAlreadyDeleted = savedMovies.filter(item => movie._id !== item._id);
-        setSavedMovies(isAlreadyDeleted)
-      })
-      .catch((error) => {
-        openInfoPopup('При удаление фильма произошла ошибка', true)
-      })
+    const isAlreadyToDeleted = savedMovies.some((item) => item.movieId === movie.id);
+
+    if (isAlreadyToDeleted) {
+      const idToDelete = savedMovies.find((item) => item.movieId === movie.id)._id;
+
+      deleteMovies(idToDelete)
+        .then(() => {
+          setSavedMovies(savedMovies.filter(item => item._id !== idToDelete));
+        })
+        .catch((error) => {
+          openInfoPopup('При удалении фильма произошла ошибка', false);
+        });
+    } else {
+      deleteMovies(movie._id)
+        .then(() => {
+          setSavedMovies(savedMovies.filter(item => item._id !== movie._id));
+        })
+        .catch((error) => {
+          openInfoPopup('При удалении фильма произошла ошибка', false);
+        });
+    }
   }
 
   const handleRegister = (name, email, password) => {
@@ -117,8 +106,7 @@ function App() {
       .then(data => {
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
-        navigate('/main', { replace: true });
-
+        navigate('/movies', { replace: true });
       })
       .catch(err => {
         console.log(err);
@@ -126,8 +114,8 @@ function App() {
   }
 
   const checkToken = () => {
-    const currentPath = location.pathname;
     const jwt = localStorage.getItem('token');
+    const currentPath = location.pathname;
     if (jwt) {
       getProfile(jwt)
         .then(res => {
@@ -139,25 +127,23 @@ function App() {
               email: res.email
             })
         })
-        .catch(console.log);
+        .catch(err => {
+          console.log(err);
+        });
     }
+  }
+
+  const handleSignOut = () => {
+    localStorage.clear();
+    setLoggedIn(false);
+    setCurrentUser({});
+    setSavedMovies([]);
+    navigate('/', { replace: true })
   }
 
   React.useEffect(() => {
     checkToken();
   }, []);
-
-  const handleSignOut = () => {
-    setLoggedIn(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('movies');
-    localStorage.removeItem('searchingMovies');
-    localStorage.removeItem('fountedMovies');
-    localStorage.removeItem('isShort');
-    localStorage.removeItem('searchText');
-    navigate('/sign-in', { replace: true })
-
-  }
 
   return (
     <div className="page">
@@ -196,7 +182,6 @@ function App() {
               setIsLoading={setIsLoading}
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
-              setserchingSavedMovies={setserchingSavedMovies}
               handleDeleteMovie={handleDeleteMovie}
             />} />
 

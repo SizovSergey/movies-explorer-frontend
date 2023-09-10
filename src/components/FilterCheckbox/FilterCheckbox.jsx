@@ -6,10 +6,11 @@ const FilterCheckbox = ({ onCheckboxChange, onCheckboxFlag, handleShortCheckboxC
   const location = useLocation();
 
   const handleCheckboxChange = () => {
-    if (location.pathname === '/saved-movies') {
-      return handleShortCheckboxChange()
+    if (location.pathname === '/saved-movies' && handleShortCheckboxChange) {
+      handleShortCheckboxChange(); 
+    } else if (onCheckboxChange) {
+      onCheckboxChange();  
     }
-    onCheckboxChange();
   };
 
   return (
