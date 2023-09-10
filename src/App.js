@@ -67,12 +67,13 @@ function App() {
   };
 
   const handleDeleteMovie = (movie) => {
+    const jwt = localStorage.getItem('token');
     const isAlreadyToDeleted = savedMovies.some((item) => item.movieId === movie.id);
 
     if (isAlreadyToDeleted) {
       const idToDelete = savedMovies.find((item) => item.movieId === movie.id)._id;
 
-      deleteMovies(idToDelete)
+      deleteMovies(idToDelete,jwt)
         .then(() => {
           setSavedMovies(savedMovies.filter(item => item._id !== idToDelete));
         })
@@ -80,7 +81,7 @@ function App() {
           openInfoPopup('При удалении фильма произошла ошибка', false);
         });
     } else {
-      deleteMovies(movie._id)
+      deleteMovies(movie._id,jwt)
         .then(() => {
           setSavedMovies(savedMovies.filter(item => item._id !== movie._id));
         })

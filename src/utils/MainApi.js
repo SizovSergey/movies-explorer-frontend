@@ -91,12 +91,12 @@ const checkResponse = (res) => {
         })
       }
   
-      export const deleteMovies = (id) => {
+      export const deleteMovies = (id,jwt) => {
         return request(`/movies/${id}`, {
           method: 'DELETE',
           headers: {
             "Content-type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Bearer ${jwt}`,
           },
         })
       }

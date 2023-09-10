@@ -1,49 +1,87 @@
+import { useState, useCallback, useEffect } from "react";
 
-import { useState, useCallback } from 'react';
-
-export function useFormWithValidation() {
+export function useForm() {
   const [values, setValues] = useState({});
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    setValues({ ...values, [name]: value });
+  };
+
+  return { values, handleChange, setValues };
+}
+export function useFormWithValidation() {
+  const [values, setValues] = useState({
+    userName: '',
+    email: '',
+    password: ''
+  });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+
+  console.log(values)
   const handleChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    setValues({...values, [name]: value});
+    setValues({ ...values, [name]: value });
+
+
+
+    let errorMessage = "";
 
     if (name === 'email') {
       const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      if (!emailPattern.test(value) && value) {
-        setErrors({...errors, [name]: 'Введите корректный email'});
-      } else {
-        setErrors({...errors, [name]: ''});
+      if (!value) {
+        errorMessage = 'Это обязательное поле';
+        setIsValid(false)
+      }
+      else if (!emailPattern.test(value) && value) {
+        errorMessage = 'Введите корректный email';
+        setIsValid(false)
       }
     }
 
     if (name === 'userName') {
-      const namePattern = /^[а-яА-ЯёЁ\s-]+$/;
+      const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
       if (!value) {
-        setErrors({...errors, [name]: 'Это обязательное поле'});
-      } else if (!namePattern.test(value)) {
-        setErrors({...errors, [name]: 'Имя должно содержать только кириллицу'});
-      } else if (value.length < 3) {
-        setErrors({...errors, [name]: 'Имя должно содержать более 2 символов'});
-      } else {
-        setErrors({...errors, [name]: ''});
+        errorMessage = 'Это обязательное поле';
+        setIsValid(false)
       }
-    }
-    
-    if (name === 'password') {
-      if (value.length < 8 && value) {
-        setErrors({...errors, [name]: 'Пароль должен содержать минимум 8 символов'});
-      } else {
-        setErrors({...errors, [name]: ''});
+      else if (!namePattern.test(value)) {
+        errorMessage = 'Имя содержит недопустимый символ';
+        setIsValid(false)
+      } else if (value.length < 3) {
+        errorMessage = 'Имя должно содержать более 2 символов';
+        setIsValid(false)
+      }else if (value.length > 16 && value) {
+        errorMessage = 'Максимальная длина имени 16 символов';
+        setIsValid(false)
       }
     }
 
-    setIsValid(target.closest("form").checkValidity());
+    if (name === 'password') {
+      if (!value) {
+        errorMessage = 'Это обязательное поле';
+        setIsValid(false)
+      }
+      else if (value.length < 8 && value) {
+        errorMessage = 'Пароль должен содержать минимум 8 символов';
+        setIsValid(false)
+      }
+    }
+
+    setErrors({ ...errors, [name]: errorMessage });
   };
+
+  useEffect(() => {
+    setIsValid(
+      Object.values(errors).every((error) => !error) && values.email && values.password  
+    );
+  }, [values, errors]);
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -56,4 +94,3 @@ export function useFormWithValidation() {
 
   return { values, handleChange, errors, isValid, resetForm };
 }
-

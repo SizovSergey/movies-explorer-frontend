@@ -72,7 +72,7 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
       localStorage.setItem('shortMovies', JSON.stringify(updatedShortMovies));
       setShortMovies(updatedShortMovies);
     } else {
-      handleSearch(searchText, !isShort);
+     return searchingMovies;
     }
   };
 

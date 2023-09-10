@@ -8,13 +8,13 @@ const Register = ({ handleRegister }) => {
     const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   
     const handleSubmit = (e) => {
-      e.preventDefault();
-      const { userName, email, password } = values;
-      if (isValid) {
-        handleRegister(userName, email, password);
-        resetForm()
-      }
-    }
+        e.preventDefault();
+        const { userName, email, password } = values;
+        if (isValid) {
+          handleRegister(userName, email, password);
+          resetForm();
+        }
+      };
 
     return (
         <AuthTemplate
@@ -22,8 +22,9 @@ const Register = ({ handleRegister }) => {
             name="register"
             buttonText="Зарегистрироваться"
             handleSubmit={handleSubmit}
-            isValid={!isValid}
+            isValid={isValid}
         >
+            {console.log(isValid)}
             <label className="auth-template__input-container" htmlFor="userName">
                 <span className='auth-template__placeholder'>Имя</span>
                 <input

@@ -3,22 +3,18 @@ import { useLocation, Link } from 'react-router-dom';
 
 const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
 
-    const [IsFavorit, setIsFavorit] = React.useState(
-        localStorage.getItem(`IsFavorit_${movie.id}`) === "true");
+    const [IsFavorit, setIsFavorit] = React.useState(false);
 
 
     const location = useLocation();
 
     const handleLikeClick = () => {
         setIsFavorit(true);
-        localStorage.setItem(`IsFavorit_${movie.id}`, "true");
         handleSaveMovie(movie);
     }
 
     const handleDeleteClick = () => {
-        console.log(movie)
         handleDeleteMovie(movie);
-        localStorage.setItem(`IsFavorit_${movie.id}`, "false");
         setIsFavorit(false);
     };
 
@@ -36,6 +32,16 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
             return `${remainingMinutes}м`;
         }
     }
+
+    React.useEffect(() => {
+        const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        if (savedMovies) {
+          const isMovieSaved = savedMovies.some((savedMovie) => (
+            savedMovie.movieId === movie.id || savedMovie._id === movie._id
+          ));
+          setIsFavorit(isMovieSaved);
+        }
+      }, []);
 
     return (
         <div className='movies-card'>
