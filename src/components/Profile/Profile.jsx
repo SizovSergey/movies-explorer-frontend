@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { patterns } from '../../utils/utils';
-import {useFormWithValidation} from '../../hooks/useValidation';
+import {useFormWithValidation} from '../../hooks/usevalidation';
 
 
 const Profile = ({ handleSignOut, handleUpdateProfile }) => {
