@@ -58,12 +58,12 @@ const checkResponse = (res) => {
         })
       }
 
-      export const saveMovies = (movie) => {
+      export const saveMovies = (movie,jwt) => {
         return request(`/movies`, {
           method: 'POST',
           headers: {
             "Content-type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Bearer ${jwt}`,
           },
           body: JSON.stringify({
             country: movie.country,

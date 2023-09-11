@@ -52,9 +52,10 @@ function App() {
   }
 
   const handleSaveMovie = (movie) => {
+    const jwt = localStorage.getItem('token');
     const isAlreadySaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
     if (!isAlreadySaved) {
-      saveMovies(movie)
+      saveMovies(movie,jwt)
         .then((movie) => {
           const newMovie = [movie, ...savedMovies];
           setSavedMovies(newMovie);
