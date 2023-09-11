@@ -15,13 +15,13 @@ export const useFormWithValidation = () => {
   };
 
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false, ) => {
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    []
   );
 
-  return { values, handleChange, resetForm, errors, isValid, setValues };
+  return { values, handleChange, resetForm, errors, isValid };
 };

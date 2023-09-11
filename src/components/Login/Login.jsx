@@ -1,19 +1,19 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useFormWithValidation } from '../../hooks/usevalidation';
-import { patterns } from '../../utils/utils';
-import validator from 'validator';
+import { emailPattern } from '../../utils/utils';
+
 
 
 const Login = ({ handlelogin }) => {
 
-    const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-    const isEmailValid = validator.isEmail(values.logEmail);
+    const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation({});
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { logEmail, logPass } = values;
-        if (isValid && isEmailValid) {
-        handlelogin( logEmail, logPass);
+        if (isValid) {
+        handlelogin( values.logEmail, values.logPass);
         resetForm();
         }
       };
@@ -31,12 +31,13 @@ const Login = ({ handlelogin }) => {
                 <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
-                    value={values.logEmail}
+                    value={values.logEmail || ''}
                     type="email"
                     className="auth-template__input"
                     id="logEmail"
                     name="logEmail"
                     placeholder="test@mail.ru"
+                    pattern={emailPattern}
                     required
                 />
             </label>
@@ -45,7 +46,7 @@ const Login = ({ handlelogin }) => {
                 <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
-                    value={values.logPass}
+                    value={values.logPass || ''}
                     type="password"
                     className="auth-template__input"
                     id="logPass"

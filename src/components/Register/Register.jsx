@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useFormWithValidation } from '../../hooks/usevalidation';
-import { patterns } from '../../utils/utils';
+import { emailPattern, namePattern } from '../../utils/utils';
 
 
 const Register = ({ handleRegister }) => {
@@ -26,7 +26,6 @@ const Register = ({ handleRegister }) => {
             isValid={isValid}
             formName ='registr'
         >
-            {console.log(values)}
             <label className="auth-template__input-container" htmlFor="RegUserName">
                 <span className='auth-template__placeholder'>Имя</span>
                 <input
@@ -37,7 +36,7 @@ const Register = ({ handleRegister }) => {
                     id="RegUserName"
                     name="RegUserName"
                     placeholder="Ваше имя..."
-                    pattern={patterns.name}
+                    pattern={namePattern}
                     minLength={2}
                     maxLength={16}
                     required
@@ -54,7 +53,7 @@ const Register = ({ handleRegister }) => {
                     id="RegEmail"
                     name="RegEmail"
                     placeholder="test@email.ru"
-                    pattern={patterns.email}
+                    pattern={emailPattern}
                     required
                 />
             </label>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { patterns } from '../../utils/utils';
 import {useFormWithValidation} from '../../hooks/usevalidation';
+import { emailPattern, namePattern } from '../../utils/utils';
 
 
 const Profile = ({ handleSignOut, handleUpdateProfile }) => {
@@ -51,7 +51,7 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
               name="profileName"
               minLength="2"
               maxLength="40"
-              pattern={patterns.name}
+              pattern={namePattern}
               placeholder="Имя"
               disabled={!showSaveBtn}
               required
@@ -65,7 +65,7 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
               className="profile__input"
               id="profileEmail"
               name="profileEmail"
-              pattern={patterns.email}
+              pattern={emailPattern}
               placeholder="pochta@yandex.ru"
               disabled={!showSaveBtn}
               required />
