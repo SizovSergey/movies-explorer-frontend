@@ -7,7 +7,7 @@ const ProtectedRoute = ({ element: Component, ...props }) => {
     return <Preloader />;
   }
   return (
-   props.loggedIn ? <Component {...props} /> : <Navigate to='/signin' replace />
+   props.loggedIn ? <Component {...props} /> : <Navigate to='/' replace />
   );
 }
 export default ProtectedRoute;

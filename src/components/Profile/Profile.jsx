@@ -10,14 +10,14 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
   
-  const { values, handleChange, resetForm, errors, isValid, setValues} = useFormWithValidation();
+  const { values, handleChange, errors, isValid, setValues} = useFormWithValidation();
 
 
   const handleSubmit = (e) => {
       e.preventDefault();
       const { profileEmail, profileName } = values;
         handleUpdateProfile( profileName, profileEmail);
-      resetForm();
+    
       setShowSaveBtn(false);
     };
 
@@ -38,6 +38,7 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
 
   return (
     <main className='profile'>
+      {console.log(currentUser)}
       <div className='profile__container'>
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
         <form className='profile__form' onSubmit={handleSubmit}>
