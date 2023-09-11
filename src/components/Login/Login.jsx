@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
-import {useFormWithValidation} from '../../hooks/useValidation.js'
+import { useFormWithValidation } from '../../hooks/usevalidation';
 import { patterns } from '../../utils/utils';
 
 
