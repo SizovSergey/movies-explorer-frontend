@@ -2,16 +2,17 @@ import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useFormWithValidation } from '../../hooks/usevalidation';
 import { patterns } from '../../utils/utils';
+import validator from 'validator';
 
 
 const Login = ({ handlelogin }) => {
 
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-
+    const isEmailValid = validator.isEmail(values.logEmail);
     const handleSubmit = (e) => {
         e.preventDefault();
         const { logEmail, logPass } = values;
-        if (isValid) {
+        if (isValid && isEmailValid) {
         handlelogin( logEmail, logPass);
         resetForm();
         }
@@ -36,7 +37,6 @@ const Login = ({ handlelogin }) => {
                     id="logEmail"
                     name="logEmail"
                     placeholder="test@mail.ru"
-                    pattern={patterns.email}
                     required
                 />
             </label>

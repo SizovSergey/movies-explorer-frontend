@@ -8,15 +8,23 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie }) => {
 
     const location = useLocation();
 
-    const handleLikeClick = () => {
-        setIsFavorit(true);
-        handleSaveMovie(movie);
-    }
+    const handleLikeClick = async () => {
+        try {
+          await handleSaveMovie(movie);
+          setIsFavorit(true);
+        } catch (error) {
+          console.error('Произошла ошибка при сохранении фильма:', error);
+        }
+      }
 
-    const handleDeleteClick = () => {
-        handleDeleteMovie(movie);
-        setIsFavorit(false);
-    };
+    const handleDeleteClick = async () => {
+        try {
+          await handleDeleteMovie(movie);
+          setIsFavorit(false);
+        } catch (error) {
+          console.error('Произошла ошибка при удаление фильма:', error);
+        }
+      }
 
     const handleDeleteSaveMovieClick = () => {
         handleDeleteMovie(movie);
