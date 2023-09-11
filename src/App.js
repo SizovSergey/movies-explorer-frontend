@@ -6,7 +6,7 @@ import NotFound from "./components/NotFound/NotFound";
 import InfoPopup from './components/InfoPopup/InfoPopup';
 import { MainPage, profilePage, moviesPage, savedMoviesPage } from './utils/constants';
 import { CurrentUserContext } from '../src/context/CurrentUserContext';
-import { authorize, deleteMovies, getProfile, getSaveMovies, register, saveMovies, updateProfile } from '../src/utils/MainApi.js'
+import { authorize, deleteMovies, getProfile, register, saveMovies, updateProfile } from '../src/utils/MainApi.js'
 import ProtectedRoute from './components/protectedRoute';
 
 
@@ -41,10 +41,10 @@ function App() {
     updateProfile(name, email)
       .then((res) => {
         setCurrentUser({ name: res.name, email: res.email })
-        openInfoPopup('Профиль успешно отредактирован!', false);
+        openInfoPopup('Профиль успешно отредактирован!', true);
       })
       .catch(error => {
-        openInfoPopup('При обновлении профиля произошла ошибка.', true);
+        openInfoPopup('При обновлении профиля произошла ошибка.', false);
       })
       .finally(() => {
         setIsLoading(false);
@@ -73,7 +73,7 @@ function App() {
     if (isAlreadyToDeleted) {
       const idToDelete = savedMovies.find((item) => item.movieId === movie.id)._id;
 
-      deleteMovies(idToDelete,jwt)
+      deleteMovies(idToDelete, jwt)
         .then(() => {
           setSavedMovies(savedMovies.filter(item => item._id !== idToDelete));
         })
@@ -81,7 +81,7 @@ function App() {
           openInfoPopup('При удалении фильма произошла ошибка', false);
         });
     } else {
-      deleteMovies(movie._id,jwt)
+      deleteMovies(movie._id, jwt)
         .then(() => {
           setSavedMovies(savedMovies.filter(item => item._id !== movie._id));
         })
@@ -96,10 +96,9 @@ function App() {
       .then(() => {
         handleLogin(email, password)
       })
-      .catch(err => {
-        console.log(err)
+      .catch(error => {
+        openInfoPopup(`При регистрации пользователя произошла ошибка.${error}`, false);
       })
-      .finally(() => setInfoPopup(true));
   }
 
   const handleLogin = (email, password) => {
@@ -109,8 +108,8 @@ function App() {
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        openInfoPopup(`При авторизации произошла ошибка.${error}`, false);
       });
   }
 
@@ -184,6 +183,7 @@ function App() {
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
               handleDeleteMovie={handleDeleteMovie}
+              openInfoPopup={openInfoPopup}
             />} />
 
           <Route path="/" element={<Navigate to="/main" replace />} />

@@ -5,7 +5,7 @@
 
 .portfolio__container {
     padding: 0px 70px 100px;
-    max-width: 1280px;
+    max-width: calc(1280px - 140px);
     margin: 0 auto;
 }
 

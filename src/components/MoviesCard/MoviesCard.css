@@ -108,4 +108,8 @@
         width: 300px;
         height: 168px;
     }
+
+    .movies-card__title {
+        font-size: 12px;
+    }
 }

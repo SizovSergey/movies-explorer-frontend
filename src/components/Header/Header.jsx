@@ -19,7 +19,7 @@ const Header = ({ loggedIn }) => {
     const location = useLocation();
 
     return (
-            <header className={location.pathname === '/main' ? 'header main__blue-theme' : 'header'}>
+            <header className={location.pathname === '/main' ? 'header header_blue-theme' : 'header'}>
                 <div className='header__container'>
                 <Link to="/" className="header__link">
                     <img src={headerLogo} alt="Логотип" className="logo" />

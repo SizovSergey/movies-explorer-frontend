@@ -7,6 +7,7 @@
     background-color: rgba(0, 0, 0, .5);
     transition: right 0.3s ease-in-out;
     z-index: 1;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .burger__container {
@@ -51,7 +52,6 @@
     border: none;
     cursor: pointer;
     color: #000;
-    font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

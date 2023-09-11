@@ -5,7 +5,7 @@ import { getSaveMovies } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
-const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setSavedMovies, setserchingSavedMovies, handleDeleteMovie }) => {
+const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, savedMovies, setSavedMovies, handleDeleteMovie }) => {
 
     const [searchTextSavedMovie, setSearchTextSavedMovie] = React.useState('');
     const [shortSavedMovies, setShortSavedMovies] = React.useState([]);
@@ -23,8 +23,11 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
             });
       }, [])
 
+      const handleSomeEvent = (text,flag) => {
+        openInfoPopup(text, flag);
+      }
 
-    const handleSearchSavedPage = (text, short) => {
+      const handleSearchSavedPage = (text, short) => {
         setIsLoading(true);
         const filter = filterMoviesByText(savedMovies, text);
         setSavedMovies(filter);
@@ -39,6 +42,7 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
         setSearchTextSavedMovie(e.target.value);
     };
 
+
     const handleShortCheckboxChange = () => {
         setSavedMovieShort(!isSavedMovieShort);
         if (!isSavedMovieShort) {
@@ -49,10 +53,10 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
         }
     };
 
-    const handleSearcSavedhButtonClick = (text) => {
+    const handleSearcSavedhButtonClick = () => {  
         if (setSearchTextSavedMovie.length === 0) {
             setSearchTextSavedMovie('введите ключевое слово');
-            setserchingSavedMovies([]);
+            handleSomeEvent('введите ключевое слово', false)
             return
         }
         handleSearchSavedPage(searchTextSavedMovie, isSavedMovieShort);
@@ -64,8 +68,8 @@ const SavedMovies = ({ isLoading, setIsLoading, openInfoPopup, savedMovies, setS
                 handleSearcSavedhButtonClick={handleSearcSavedhButtonClick}
                 onSaveMovieTextChange={handleSearchInputChangeSavedPage}
                 handleShortCheckboxChange={handleShortCheckboxChange} />
-            {isLoading ? (
-                <Preloader />) :
+            {isLoading ? 
+            (<Preloader />) :
                 (<MoviesCardList
                     movies={isSavedMovieShort ? shortSavedMovies : savedMovies}
                     handleDeleteMovie={handleDeleteMovie}

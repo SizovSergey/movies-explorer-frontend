@@ -105,11 +105,14 @@
 
 .profile__error {
     color: #FF004C;
-    text-align: center;
+    text-align: start;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    max-width: 390px;
+    width: 390px;
+    display: flex;
 }
 
 .profile__logout {

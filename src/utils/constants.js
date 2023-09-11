@@ -40,7 +40,7 @@ export const moviesPage = ({ loggedIn, isLoading, setIsLoading, openInfoPopup, h
     </>
 );
 
-export const savedMoviesPage = ({ loggedIn, isLoading, setIsLoading, savedMovies, setSavedMovies, setserchingSavedMovies, handleDeleteMovie}) => (
+export const savedMoviesPage = ({ loggedIn, isLoading, setIsLoading, savedMovies, setSavedMovies, setserchingSavedMovies, handleDeleteMovie,openInfoPopup}) => (
     <>
         <Header loggedIn={loggedIn} />
         <SavedMovies
@@ -51,6 +51,7 @@ export const savedMoviesPage = ({ loggedIn, isLoading, setIsLoading, savedMovies
             setSavedMovies={setSavedMovies}
             setserchingSavedMovies={setserchingSavedMovies}
             handleDeleteMovie={handleDeleteMovie}
+            openInfoPopup={openInfoPopup}
         />
         <Footer />
     </>

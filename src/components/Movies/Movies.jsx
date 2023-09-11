@@ -5,13 +5,15 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
-const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handleDeleteMovie, savedMovies }) => {
+const Movies = ({ openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
   const [movies, setMovies] = useState([]);
   const [searchingMovies, setSearchingMovies] = useState([]);
   const [shortMovies, setShortMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [isShort, setIsShort] = useState(false);
   const [visibleCards, setVisibleCards] = useState(0);
+
+  const [isLoading , setIsLoading] = useState(false)
 
   useEffect(() => {
     const storedMovies = JSON.parse(localStorage.getItem('movies')) || [];
@@ -27,15 +29,19 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
     setIsShort(storedIsShort);
   }, []);
 
+  const handleSomeEvent = (text,flag) => {
+    openInfoPopup(text, flag);
+  }
+
   const handleResize = () => {
     if (window.innerWidth >= 1140) {
       setVisibleCards(16);
     } else if (window.innerWidth >= 850) {
       setVisibleCards(12);
     } else if (window.innerWidth >= 756) {
-      setVisibleCards(2);
+      setVisibleCards(8);
     } else {
-      setVisibleCards(1);
+      setVisibleCards(5);
     }
   };
 
@@ -55,7 +61,7 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
     const filteredMovies = filterMoviesByText(storedMovies, text);
     if (filteredMovies.length === 0) {
-      openInfoPopup('Ничего не найдено', false);
+      handleSomeEvent('Ничего не найдено', false);
     }
     return filteredMovies;
   };
@@ -69,8 +75,11 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
     localStorage.setItem('isShort', !isShort);
     if (!isShort) {
       const updatedShortMovies = filterMoviesByCheckbox(searchingMovies, !isShort);
-      localStorage.setItem('shortMovies', JSON.stringify(updatedShortMovies));
-      setShortMovies(updatedShortMovies);
+    if (updatedShortMovies.length === 0) {
+      handleSomeEvent('Ничего не найдено', false);
+    }
+    localStorage.setItem('shortMovies', JSON.stringify(updatedShortMovies));
+    setShortMovies(updatedShortMovies);
     } else {
      return searchingMovies;
     }
@@ -107,7 +116,7 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
   const handleSearchButtonClick = () => {
     if (searchText.length === 0) {
       setSearchText('введите ключевое слово');
-      openInfoPopup('введите ключевое слово', false);
+      handleSomeEvent('введите ключевое слово', false);
       setSearchingMovies([]);
       return;
     }
@@ -116,34 +125,37 @@ const Movies = ({ isLoading, setIsLoading, openInfoPopup, handleSaveMovie, handl
   };
 
   useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    const timer = setTimeout(() => {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, 500); 
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <main className="movies">
-      <SearchForm
-        inputValue={searchText}
-        onSearch={handleSearchButtonClick}
-        onInputChange={handleSearchInputChange}
-        onCheckboxChange={handleShortCheckboxChange}
-        onCheckboxFlag={isShort}
-      />
-      {isLoading ? (
-        <Preloader />
-      ) : (
+    <SearchForm
+      inputValue={searchText}
+      onSearch={handleSearchButtonClick}
+      onInputChange={handleSearchInputChange}
+      onCheckboxChange={handleShortCheckboxChange}
+      onCheckboxFlag={isShort}
+    />
+    {isLoading ? (
+      <Preloader />
+    ) : (
         <MoviesCardList movies={isShort ? shortMovies.slice(0, visibleCards) : searchingMovies.slice(0, visibleCards)} handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
-      )}
-      {visibleCards < (isShort ? shortMovies : searchingMovies).length && (
-        <button className="movies__button-more" onClick={handleLoadMore}>
-          Ещё
-        </button>
-      )}
-    </main>
-  );
+    )}
+    {visibleCards < (isShort ? shortMovies : searchingMovies).length && (
+      <button className="movies__button-more" onClick={handleLoadMore}>
+        Ещё
+      </button>
+    )}
+  </main>
+);
 };
 
 export default Movies;

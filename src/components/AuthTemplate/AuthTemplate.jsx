@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import headerLogo from "../../images/header__logo.svg";
 
 
-const AuthTemplate = ({ title, name, children, buttonText, handleSubmit, isValid }) => {
+const AuthTemplate = ({ title, name, formName, children, buttonText, handleSubmit, isValid }) => {
     return (
         <main className='auth-template'>
             <div className='auth-template__container'>
                 <Link to="/" className="header__link">
-                    <img src={headerLogo} alt="Логотип" className="logo" />
+                    <img src={headerLogo} alt="Логотип" className="logo" id={`form-${formName}`} name={`form-${formName}`}/>
                 </Link>
                 <h1 className='auth-template__title'>{title}</h1>
-                <form onSubmit={handleSubmit} className='auth-template__form'>
+                <form onSubmit={handleSubmit} className='auth-template__form' >
                     <div className='auth-template__form-contant'>
                     {children}
                     </div>

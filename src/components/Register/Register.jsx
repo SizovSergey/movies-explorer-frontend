@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
-import { useFormWithValidation } from '../../hooks/usevalidation';
+import { useFormWithValidation } from '../../hooks/useValidation';
+import { patterns } from '../../utils/utils';
 
 
 const Register = ({ handleRegister }) => {
@@ -9,9 +10,9 @@ const Register = ({ handleRegister }) => {
   
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { userName, email, password } = values;
+        const { RegUserName, RegEmail, RegPassword } = values;
         if (isValid) {
-          handleRegister(userName, email, password);
+          handleRegister(RegUserName, RegEmail, RegPassword);
           resetForm();
         }
       };
@@ -23,47 +24,57 @@ const Register = ({ handleRegister }) => {
             buttonText="Зарегистрироваться"
             handleSubmit={handleSubmit}
             isValid={isValid}
+            formName ='registr'
         >
-            {console.log(isValid)}
-            <label className="auth-template__input-container" htmlFor="userName">
+            {console.log(values)}
+            <label className="auth-template__input-container" htmlFor="RegUserName">
                 <span className='auth-template__placeholder'>Имя</span>
                 <input
                     onChange={handleChange}
-                    value={values.userName || ''}
+                    value={values.RegUserName || ''}
                     type="text"
                     className="auth-template__input"
-                    id="userName"
-                    name="userName"
+                    id="RegUserName"
+                    name="RegUserName"
                     placeholder="Ваше имя..."
+                    pattern={patterns.name}
+                    minLength={2}
+                    maxLength={16}
+                    required
                 />
             </label>
-            <span className="auth-template__error">{errors.userName}</span>
-            <label className="auth-template__input-container" htmlFor="email">
+            <span className="auth-template__error">{errors.RegUserName}</span>
+            <label className="auth-template__input-container" htmlFor="RegEmail">
                 <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
-                    value={values.email || ''}
+                    value={values.RegEmail || ''}
                     type="email"
                     className="auth-template__input"
-                    id="email"
-                    name="email"
+                    id="RegEmail"
+                    name="RegEmail"
                     placeholder="test@email.ru"
+                    pattern={patterns.email}
+                    required
                 />
             </label>
-            <span className="auth-template__error">{errors.email}</span>
-            <label className="auth-template__input-container" htmlFor="password">
+            <span className="auth-template__error">{errors.RegEmail}</span>
+            <label className="auth-template__input-container" htmlFor="RegPassword">
                 <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
-                    value={values.password || ''}
+                    value={values.RegPassword || ''}
                     type="password"
                     className="auth-template__input"
-                    id="password"
-                    name="password"
+                    id="RegPassword"
+                    name="RegPassword"
                     placeholder="12345678"
+                    maxLength={10}
+                    minLength={8}
+                    required
                 />
             </label>
-            <span className="auth-template__error">{errors.password}</span>
+            <span className="auth-template__error">{errors.RegPassword}</span>
         </AuthTemplate>
     );
 

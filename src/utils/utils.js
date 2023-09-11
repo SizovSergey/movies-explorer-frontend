@@ -19,3 +19,8 @@ export const filterMoviesByCheckbox = (movies, checked) => {
     return movies;
   }
 };
+
+export const patterns = {
+  name: '^[a-zA-Zа-яА-ЯёЁ\\s\\-]+$',
+  email: '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+};

@@ -1,18 +1,19 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
-import {useFormWithValidation} from '../../hooks/usevalidation'
+import {useFormWithValidation} from '../../hooks/useValidation.js'
+import { patterns } from '../../utils/utils';
 
 
 const Login = ({ handlelogin }) => {
 
-    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  
+    const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password } = values;
+        const { logEmail, logPass } = values;
         if (isValid) {
-        handlelogin( email, password);
-          resetForm();
+        handlelogin( logEmail, logPass);
+        resetForm();
         }
       };
 
@@ -23,33 +24,39 @@ const Login = ({ handlelogin }) => {
             buttonText="Войти"
             handleSubmit={handleSubmit}
             isValid={isValid}
+            formName = 'login'
         >
-            <label className="auth-template__input-container" htmlFor="regEmail">
+            <label className="auth-template__input-container" htmlFor="logEmail">
                 <span className='auth-template__placeholder'>Email</span>
                 <input
                     onChange={handleChange}
-                    value={values.email}
+                    value={values.logEmail}
                     type="email"
                     className="auth-template__input"
-                    id="email"
-                    name="email"
+                    id="logEmail"
+                    name="logEmail"
                     placeholder="test@mail.ru"
+                    pattern={patterns.email}
+                    required
                 />
             </label>
-            <span className="auth-template__error">{errors.email}</span>
-            <label className="auth-template__input-container" htmlFor="regPass">
+            <span className="auth-template__error">{errors.logEmail}</span>
+            <label className="auth-template__input-container" htmlFor="logPass">
                 <span className='auth-template__placeholder'>Пароль</span>
                 <input
                     onChange={handleChange}
-                    value={values.password}
+                    value={values.logPass}
                     type="password"
                     className="auth-template__input"
-                    id="password"
-                    name="password"
+                    id="logPass"
+                    name="logPass"
                     placeholder="12345678"
+                    minLength={8}
+                    maxLength={10}
+                    required
                 />
             </label>
-            <span className="auth-template__error">{errors.password}</span>
+            <span className="auth-template__error">{errors.logPass}</span>
         </AuthTemplate>
     );
 
