@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import {useFormWithValidation} from '../../hooks/usevalidation';
+import { useFormWithValidation } from '../../hooks/usevalidation';
 import { emailPattern, namePattern } from '../../utils/utils';
 
 
@@ -9,29 +9,31 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
 
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
-  
-  const { values, handleChange, errors, isValid, setValues} = useFormWithValidation();
+
+  const { values, handleChange, resetForm, errors, isValid, setValues } = useFormWithValidation();
 
 
   const handleSubmit = (e) => {
+   
       e.preventDefault();
       const { profileEmail, profileName } = values;
-        handleUpdateProfile( profileName, profileEmail);
-    
+      handleUpdateProfile(profileName, profileEmail);
+
       setShowSaveBtn(false);
-    };
+   
+  };
 
-    const compare = (!isValid || (currentUser.name === values.profileName && currentUser.email === values.profileEmail));
+  const compare = (!isValid || (currentUser.name === values.profileName && currentUser.email === values.profileEmail));
 
-    React.useEffect(() => {
-      setValues(prevValues => ({
-        ...prevValues,
-        profileName: currentUser.name,
-        profileEmail: currentUser.email
-      }));
-    }, [currentUser]);
+  React.useEffect(() => {
+    setValues(prevValues => ({
+      ...prevValues,
+      profileName: currentUser.name,
+      profileEmail: currentUser.email
+    }));
+  }, [currentUser]);
 
-    
+
   const handleButtonClick = () => {
     setShowSaveBtn(true);
   };
@@ -80,8 +82,8 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
               <div className='profile__button-container'>
                 <button className='profile__save-button'
                   type='submit'
-                  disabled={compare} 
-                 >
+                  disabled={compare}
+                >
                   Сохранить
                 </button>
               </div>)

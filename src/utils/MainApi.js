@@ -29,6 +29,7 @@ const checkResponse = (res) => {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       })
@@ -49,6 +50,7 @@ const checkResponse = (res) => {
     export const updateProfile = (name,email) => {
         return request(`/users/me`, {
           method: 'PATCH',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             "Content-type": "application/json",
