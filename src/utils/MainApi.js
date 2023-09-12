@@ -13,7 +13,6 @@ const checkResponse = (res) => {
   export const register = ( name, email, password) => {
     return request('/signup', {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -26,7 +25,7 @@ const checkResponse = (res) => {
   export const authorize = (email, password) => {
       return request('/signin', {
         method: 'POST',
-        credentials: 'include',
+
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -59,6 +58,7 @@ const checkResponse = (res) => {
           body: JSON.stringify({name,email})
         })
       }
+      
 
       export const saveMovies = (movie,jwt) => {
         return request(`/movies`, {
