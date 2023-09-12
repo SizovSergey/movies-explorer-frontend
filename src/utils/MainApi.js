@@ -6,13 +6,14 @@ const checkResponse = (res) => {
   }
   
   const request = (endpoint, options) => {
-    const url = `https://api.ssgdiplom.nomoreparties.co${endpoint}`;
+    const url = `http://api.ssgdiplom.nomoreparties.co${endpoint}`;
     return fetch(url, options).then(checkResponse);
   }
 
   export const register = ( name, email, password) => {
     return request('/signup', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -25,7 +26,7 @@ const checkResponse = (res) => {
   export const authorize = (email, password) => {
       return request('/signin', {
         method: 'POST',
-
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -38,6 +39,7 @@ const checkResponse = (res) => {
     export const getProfile = (jwt) => {
       return request('/users/me', {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -63,6 +65,7 @@ const checkResponse = (res) => {
       export const saveMovies = (movie,jwt) => {
         return request(`/movies`, {
           method: 'POST',
+          credentials: 'include',
           headers: {
             "Content-type": "application/json",
             "Authorization": `Bearer ${jwt}`,
@@ -86,6 +89,7 @@ const checkResponse = (res) => {
       export const getSaveMovies = (jwt) => {
         return request(`/movies`, {
           method: 'GET',
+          credentials: 'include',
           headers: {
             "Content-type": "application/json",
             "Authorization": `Bearer ${jwt}`,
@@ -96,6 +100,7 @@ const checkResponse = (res) => {
       export const deleteMovies = (id,jwt) => {
         return request(`/movies/${id}`, {
           method: 'DELETE',
+          credentials: 'include',
           headers: {
             "Content-type": "application/json",
             "Authorization": `Bearer ${jwt}`,
