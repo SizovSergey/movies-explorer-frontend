@@ -6,7 +6,7 @@ const checkResponse = (res) => {
   }
   
   const request = (endpoint, options) => {
-    const url = `http://api.ssgdiplom.nomoreparties.co${endpoint}`;
+    const url = `https://api.ssgdiplom.nomoreparties.co${endpoint}`;
     return fetch(url, options).then(checkResponse);
   }
 
