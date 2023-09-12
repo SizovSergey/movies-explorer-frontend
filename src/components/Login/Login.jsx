@@ -13,10 +13,9 @@ const Login = ({ handlelogin }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid) {
-        handlelogin( values.logEmail, values.logPass);
-        resetForm();
+            handlelogin(values.logEmail, values.logPass);
         }
-      };
+    };
 
     return (
         <AuthTemplate
@@ -25,7 +24,7 @@ const Login = ({ handlelogin }) => {
             buttonText="Войти"
             handleSubmit={handleSubmit}
             isValid={isValid}
-            formName = 'login'
+            formName='login'
         >
             <label className="auth-template__input-container" htmlFor="logEmail">
                 <span className='auth-template__placeholder'>Email</span>

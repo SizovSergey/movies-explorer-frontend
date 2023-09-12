@@ -5,7 +5,7 @@ import getMovies from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
-const Movies = ({ openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
+const Movies = ({ openInfoPopup, handleSaveMovie, handleDeleteMovie,savedMovies }) => {
   const [movies, setMovies] = useState([]);
   const [searchingMovies, setSearchingMovies] = useState([]);
   const [shortMovies, setShortMovies] = useState([]);
@@ -125,14 +125,14 @@ const Movies = ({ openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const handleResizeAndAddListener = () => {
       handleResize();
       window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, 500); 
-    return () => clearTimeout(timer);
+    };
+    handleResizeAndAddListener();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -147,7 +147,12 @@ const Movies = ({ openInfoPopup, handleSaveMovie, handleDeleteMovie }) => {
     {isLoading ? (
       <Preloader />
     ) : (
-        <MoviesCardList movies={isShort ? shortMovies.slice(0, visibleCards) : searchingMovies.slice(0, visibleCards)} handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
+        <MoviesCardList 
+        movies={isShort ? shortMovies.slice(0, visibleCards) : searchingMovies.slice(0, visibleCards)} 
+        handleSaveMovie={handleSaveMovie} 
+        handleDeleteMovie={handleDeleteMovie}
+        savedMovies={savedMovies}
+        />
     )}
     {visibleCards < (isShort ? shortMovies : searchingMovies).length && (
       <button className="movies__button-more" onClick={handleLoadMore}>

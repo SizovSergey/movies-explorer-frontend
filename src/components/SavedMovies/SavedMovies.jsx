@@ -5,7 +5,7 @@ import { getSaveMovies } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { filterMoviesByText, filterMoviesByCheckbox } from '../../utils/utils';
 
-const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, savedMovies, setSavedMovies, handleDeleteMovie }) => {
+const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, handleDeleteMovie, savedMovies, setSavedMovies }) => {
 
     const [searchTextSavedMovie, setSearchTextSavedMovie] = React.useState('');
     const [shortSavedMovies, setShortSavedMovies] = React.useState([]);
@@ -27,9 +27,18 @@ const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, savedMovies, setSav
         openInfoPopup(text, flag);
       }
 
+      const filterMovies = (text) => {
+        const storedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        const filteredMovies = filterMoviesByText(storedMovies, text);
+        if (filteredMovies.length === 0) {
+          handleSomeEvent('Ничего не найдено', false);
+        }
+        return filteredMovies;
+      };
+
       const handleSearchSavedPage = (text, short) => {
         setIsLoading(true);
-        const filter = filterMoviesByText(savedMovies, text);
+        const filter = filterMovies( text);
         setSavedMovies(filter);
         if (short) {
             setShortSavedMovies(filterMoviesByCheckbox(filter, short));
@@ -54,8 +63,7 @@ const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, savedMovies, setSav
     };
 
     const handleSearcSavedhButtonClick = () => {  
-        if (setSearchTextSavedMovie.length === 0) {
-            setSearchTextSavedMovie('введите ключевое слово');
+        if (searchTextSavedMovie.length === 0) {
             handleSomeEvent('введите ключевое слово', false)
             return
         }
@@ -73,6 +81,7 @@ const SavedMovies = ({ isLoading,setIsLoading,openInfoPopup, savedMovies, setSav
                 (<MoviesCardList
                     movies={isSavedMovieShort ? shortSavedMovies : savedMovies}
                     handleDeleteMovie={handleDeleteMovie}
+                    savedMovies={savedMovies}
                 />)
             }
         </main>

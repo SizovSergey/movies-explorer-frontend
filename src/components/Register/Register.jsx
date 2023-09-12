@@ -6,14 +6,13 @@ import { emailPattern, namePattern } from '../../utils/utils';
 
 const Register = ({ handleRegister }) => {
 
-    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+    const { values, handleChange, errors, isValid } = useFormWithValidation();
   
     const handleSubmit = (e) => {
         e.preventDefault();
         const { RegUserName, RegEmail, RegPassword } = values;
         if (isValid) {
           handleRegister(RegUserName, RegEmail, RegPassword);
-          resetForm();
         }
       };
 

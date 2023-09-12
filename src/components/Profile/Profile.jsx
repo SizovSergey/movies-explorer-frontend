@@ -10,20 +10,20 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
 
-  const { values, handleChange, resetForm, errors, isValid, setValues } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
 
 
   const handleSubmit = (e) => {
    
       e.preventDefault();
       const { profileEmail, profileName } = values;
+      if (isValid) {
       handleUpdateProfile(profileName, profileEmail);
-
       setShowSaveBtn(false);
-   
+      }
   };
 
-  const compare = (!isValid || (currentUser.name === values.profileName && currentUser.email === values.profileEmail));
+  const compare =  (currentUser.name === values.profileName && currentUser.email === values.profileEmail);
 
   React.useEffect(() => {
     setValues(prevValues => ({

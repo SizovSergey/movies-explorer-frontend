@@ -6,7 +6,7 @@ import NotFound from "./components/NotFound/NotFound";
 import InfoPopup from './components/InfoPopup/InfoPopup';
 import { MainPage, profilePage, moviesPage, savedMoviesPage } from './utils/constants';
 import { CurrentUserContext } from '../src/context/CurrentUserContext';
-import { authorize, deleteMovies, getProfile, register, saveMovies, updateProfile } from '../src/utils/MainApi.js'
+import { authorize, deleteMovies, getProfile, register, getSaveMovies, saveMovies, updateProfile } from '../src/utils/MainApi.js'
 import ProtectedRoute from './components/protectedRoute';
 
 
@@ -21,6 +21,7 @@ function App() {
     name: '',
     email: '',
   });
+
 
 
   const openInfoPopup = (text, flag) => {
@@ -55,12 +56,14 @@ function App() {
     const jwt = localStorage.getItem('token');
     const isAlreadySaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
     if (!isAlreadySaved) {
-      saveMovies(movie,jwt)
+      saveMovies(movie, jwt)
         .then((movie) => {
+
           const newMovie = [movie, ...savedMovies];
           setSavedMovies(newMovie);
         })
         .catch((error) => {
+
           console.log(error);
           openInfoPopup('Фильм не удалось сохранить', false);
         });
@@ -73,7 +76,6 @@ function App() {
 
     if (isAlreadyToDeleted) {
       const idToDelete = savedMovies.find((item) => item.movieId === movie.id)._id;
-
       deleteMovies(idToDelete, jwt)
         .then(() => {
           setSavedMovies(savedMovies.filter(item => item._id !== idToDelete));
@@ -143,6 +145,22 @@ function App() {
   }
 
   React.useEffect(() => {
+    const jwt = localStorage.getItem('token');
+    if (loggedIn) {
+      getProfile(jwt)
+        .then((res) => {
+          setCurrentUser({
+            name: res.name,
+            email: res.email
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, [loggedIn]);
+
+  React.useEffect(() => {
     checkToken();
   }, []);
 
@@ -150,8 +168,27 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route path="/signin" element={<Login handlelogin={handleLogin} />} />
-          <Route path="/signup" element={<Register handleRegister={handleRegister} />} />
+          
+          <Route
+            path="/signin"
+            element={
+              !loggedIn ? (
+                <Login handlelogin={handleLogin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              !loggedIn ? (
+                <Register handleRegister={handleRegister} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
 
           <Route path="/main" element={<MainPage loggedIn={loggedIn} />} />
 
@@ -172,6 +209,8 @@ function App() {
               openInfoPopup={openInfoPopup}
               handleSaveMovie={handleSaveMovie}
               handleDeleteMovie={handleDeleteMovie}
+              savedMovies={savedMovies}
+
             />}
           />
 
