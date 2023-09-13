@@ -1,13 +1,13 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useFormWithValidation } from '../../hooks/usevalidation';
-import { emailPattern } from '../../utils/utils';
+import { emailPattern } from '../../utils/constans';
 
 
 
 const Login = ({ handlelogin }) => {
 
-    const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation({});
+    const { values, handleChange, errors, isValid } = useFormWithValidation({});
 
 
     const handleSubmit = (e) => {

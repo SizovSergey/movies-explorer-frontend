@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthTemplate from "../AuthTemplate/AuthTemplate";
 import { useFormWithValidation } from '../../hooks/usevalidation';
-import { emailPattern, namePattern } from '../../utils/utils';
+import { emailPattern, namePattern } from '../../utils/constans';
 
 
 const Register = ({ handleRegister }) => {

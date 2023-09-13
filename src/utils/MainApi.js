@@ -1,12 +1,11 @@
-
-const token = localStorage.getItem("token");
+import { MYAPI,YANDEXAPI } from './constans';
 
 const checkResponse = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
   
   const request = (endpoint, options) => {
-    const url = `https://api.ssgdiplom.nomoreparties.co${endpoint}`;
+    const url = `${MYAPI}${endpoint}`;
     return fetch(url, options).then(checkResponse);
   }
 
@@ -73,9 +72,9 @@ const checkResponse = (res) => {
             duration: movie.duration,
             year: movie.year,
             description: movie.description,
-            image: `https://api.nomoreparties.co${movie.image.url}`,
+            image: `${YANDEXAPI}${movie.image.url}`,
             trailerLink: movie.trailerLink,
-            thumbnail: `https://api.nomoreparties.co${movie.image.formats.url}`,
+            thumbnail: `${YANDEXAPI}${movie.image.formats.url}`,
             movieId: movie.id,
             nameRU: movie.nameRU,
             nameEN: movie.nameEN,

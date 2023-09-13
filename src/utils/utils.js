@@ -1,3 +1,5 @@
+import { MOVIEDURATION } from'./constans';
+
 export const filterMoviesByText = (movies, searchText) => {
   return movies.filter((movie) => {
     const lowercaseQuery = searchText.toLowerCase();
@@ -14,12 +16,11 @@ export const filterMoviesByText = (movies, searchText) => {
 
 export const filterMoviesByCheckbox = (movies, checked) => {
   if (checked) {
-    return movies.filter((movie) => movie.duration <= 40);
+    return movies.filter((movie) => movie.duration <= MOVIEDURATION);
   } else {
     return movies;
   }
 };
 
 
-export const namePattern ='^[a-zA-Zа-яА-ЯёЁ\\s\\-]+$';
-export const emailPattern = "^[^\\s@]+@([^\\s@.,]+\\.)+[^\\s@.,]{2,}$";
+

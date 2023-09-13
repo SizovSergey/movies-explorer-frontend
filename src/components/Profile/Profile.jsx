@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/usevalidation';
-import { emailPattern, namePattern } from '../../utils/utils';
+import { emailPattern, namePattern } from '../../utils/constans';
 
 
 const Profile = ({ handleSignOut, handleUpdateProfile }) => {

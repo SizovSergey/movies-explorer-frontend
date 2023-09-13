@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import NotFound from "./components/NotFound/NotFound";
-import InfoPopup from './components/InfoPopup/InfoPopup';
-import { MainPage, profilePage, moviesPage, savedMoviesPage } from './utils/constants';
-import { CurrentUserContext } from '../src/context/CurrentUserContext';
-import { authorize, deleteMovies, getProfile, register, getSaveMovies, saveMovies, updateProfile } from '../src/utils/MainApi.js'
-import ProtectedRoute from './components/protectedRoute';
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import NotFound from "../NotFound/NotFound";
+import InfoPopup from '../InfoPopup/InfoPopup';
+import { MainPage, profilePage, moviesPage, savedMoviesPage } from '../../utils/routes';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { authorize, deleteMovies, getProfile, register, getSaveMovies, saveMovies, updateProfile } from '../../utils/MainApi.js'
+import ProtectedRoute from '../protectedRoute';
 
 
 function App() {
@@ -205,6 +205,7 @@ function App() {
           />
 
           <Route path="/main" element={<MainPage loggedIn={loggedIn} />} />
+          <Route path="/" element={<Navigate to="/main" replace />} />
 
           <Route path="/profile"
             element={<ProtectedRoute
@@ -240,8 +241,8 @@ function App() {
               openInfoPopup={openInfoPopup}
             />} />
 
-          <Route path="/" element={<Navigate to="/main" replace />} />
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </CurrentUserContext.Provider>
 
