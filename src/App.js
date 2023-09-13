@@ -162,6 +162,19 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
+    const jwt = localStorage.getItem('token');
+    if (loggedIn) {
+        getSaveMovies(jwt)
+        .then((res) => {
+          setSavedMovies(res);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, [loggedIn]);
+
+  React.useEffect(() => {
     checkToken();
   }, []);
 

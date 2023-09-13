@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie, savedMovies}) => {
-
+  
   const isLFavorit = savedMovies.some(item =>(item.movieId === movie.id));
   
   const location = useLocation();
@@ -11,10 +11,10 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie, savedMovies}) =
    handleSaveMovie(movie);
   }
   
-  const handleDeleteClick =  () => {
-     handleDeleteMovie(movie);
+  const handleDeleteClick = () => {
+    handleDeleteMovie(movie);
   }
-
+  
   const handleDeleteSaveMovieClick = () => {
     handleDeleteMovie(movie);
   };
@@ -29,9 +29,9 @@ const MoviesCard = ({ movie, handleSaveMovie, handleDeleteMovie, savedMovies}) =
     }
   };
 
+
   return (
     <div className='movies-card'>
-
       <Link to={movie.trailerLink} target='_blank' rel='noreferrer'>
         <img
           className='movies-card__image'
