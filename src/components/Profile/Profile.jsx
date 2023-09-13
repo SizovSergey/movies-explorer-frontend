@@ -43,7 +43,7 @@ const Profile = ({ handleSignOut, handleUpdateProfile }) => {
       {console.log(currentUser)}
       <div className='profile__container'>
         <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
-        <form className='profile__form' onSubmit={handleSubmit}>
+        <form className='profile__form' onSubmit={handleSubmit} noValidate>
           <label className='profile__placeholder' data-placeholder="Имя">
             <input
               value={values.profileName || ''}
