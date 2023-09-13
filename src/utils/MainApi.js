@@ -45,14 +45,14 @@ const checkResponse = (res) => {
       })
     };
 
-    export const updateProfile = (name,email) => {
+    export const updateProfile = (name,email,jwt) => {
         return request(`/users/me`, {
           method: 'PATCH',
           credentials: 'include',
           headers: {
             'Accept': 'application/json',
             "Content-type": "application/json",
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${jwt}`,
           },
           body: JSON.stringify({name,email})
         })

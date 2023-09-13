@@ -38,8 +38,9 @@ function App() {
   }
 
   const handleUpdateProfile = (name, email) => {
+    const jwt = localStorage.getItem('token');
     setIsLoading(true);
-    updateProfile(name, email)
+    updateProfile(name, email,jwt)
       .then((res) => {
         setCurrentUser({ name: res.name, email: res.email })
         openInfoPopup('Профиль успешно отредактирован!', true);
